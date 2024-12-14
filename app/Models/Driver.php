@@ -2,17 +2,29 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Driver extends Model
 {
     protected $guarded =[];
 
-    public function trucks()
+    protected $casts = [
+        'birth_date' => 'date',
+        'license_expiration_date' => 'date',
+    ];
+
+     public function getBirthDateAttribute($value)
     {
-        return $this->belongsToMany(Truck::class, 'truck_driver', 'driver_id', 'truck_id')
-                    ->withPivot('receipt_date', 'deliver_date');
+        return \Carbon\Carbon::parse($value)->toDateString();
     }
 
+    public function getLicenseExpirationDateAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->toDateString();
+    }
+
+    public function truckDeliverCards()
+    {
+        return $this->hasMany(TruckDeliverCard::class);
+    }
 }

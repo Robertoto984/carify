@@ -13,9 +13,9 @@ class Truck extends Model
         'fuel_type' => 'string',
     ];
 
-    public function drivers()
+    public function truckDeliverCards()
     {
-        return $this->belongsToMany(Driver::class, 'truck_driver', 'truck_id', 'driver_id')
-                    ->withPivot('receipt_date', 'deliver_date');
+        return $this->hasMany(TruckDeliverCard::class);
     }
+
 }

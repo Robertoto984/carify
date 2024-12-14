@@ -3,35 +3,40 @@
 namespace App\Services\Truck;
 
 use App\Models\Truck;
+use Carbon\Carbon;
 
 class AddTruckService
 {
-    public function store(array $vehiclesData)
+    public function store(array $trucksData)
     {
-        foreach ($vehiclesData['type'] as $index => $type) {
-            Truck::create([
-                'type' => $type,
-                'manufacturer' => $vehiclesData['manufacturer'][$index],
-                'plate_number' => $vehiclesData['plate_number'][$index],
-                'chassis_number' => $vehiclesData['chassis_number'][$index] ?? null,
-                'engine_number' => $vehiclesData['engine_number'][$index] ?? null,
-                'traffic_license_number' => $vehiclesData['traffic_license_number'][$index] ?? null,
-                'legal_status' => $vehiclesData['legal_status'][$index] ?? null,
-                'fuel_type' => $vehiclesData['fuel_type'][$index] ?? null,
-                'year' => $vehiclesData['year'][$index] ?? null,
-                'model' => $vehiclesData['model'][$index] ?? null,
-                'passengers_number' => $vehiclesData['passengers_number'][$index] ?? null,
-                'gross_weight' => $vehiclesData['gross_weight'][$index] ?? null,
-                'empty_weight' => $vehiclesData['empty_weight'][$index] ?? null,
-                'load' => $vehiclesData['load'][$index] ?? null,
-                'kilometer_number' => $vehiclesData['kilometer_number'][$index] ?? null,
-                'technical_status' => $vehiclesData['technical_status'][$index] ?? null,
-                'color' => $vehiclesData['color'][$index] ?? null,
-                'driver_id' => $vehiclesData['driver_id'][$index] ?? null,
-                'register' => $vehiclesData['register'][$index] ?? null,
-                'demarcation_date' => $vehiclesData['demarcation_date'][$index] ?? null,
-            ]);
-        }
+        foreach ($trucksData['type'] as $key => $type) {
+                $year = Carbon::createFromFormat('d/m/Y', $trucksData['year'][$key])->year;
+                $model = Carbon::createFromFormat('d/m/Y', $trucksData['model'][$key])->year;
+                $register = Carbon::createFromFormat('d/m/Y', $trucksData['register'][$key])->year;
+                $demarcation_date = Carbon::createFromFormat('d/m/Y', $trucksData['demarcation_date'][$key])->format('Y-m-d');
+                Truck::create([
+                    'type' => $type,
+                    'manufacturer' => $trucksData['manufacturer'][$key],
+                    'plate_number' => $trucksData['plate_number'][$key],
+                    'chassis_number' => $trucksData['chassis_number'][$key],
+                    'engine_number' => $trucksData['engine_number'][$key],
+                    'traffic_license_number' => $trucksData['traffic_license_number'][$key],
+                    'legal_status' => $trucksData['legal_status'][$key],
+                    'fuel_type' => $trucksData['fuel_type'][$key],
+                    'year' => $year,
+                    'model' => $model,
+                    'passengers_number' => $trucksData['passengers_number'][$key],
+                    'gross_weight' => $trucksData['gross_weight'][$key],
+                    'empty_weight' => $trucksData['empty_weight'][$key],
+                    'load' => $trucksData['load'][$key],
+                    'kilometer_number' => $trucksData['kilometer_number'][$key],
+                    'technical_status' => $trucksData['technical_status'][$key],
+                    'color' => $trucksData['color'][$key],
+                    'register' => $register,
+                    'demarcation_date' => $demarcation_date,
+                    'parts_description' => $trucksData['parts_description'] ?? null,
+                ]);
+            }
     }
 }
 

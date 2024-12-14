@@ -22,6 +22,23 @@
         <div class="col-md-12">
             <div class="card shadow">
                 <div class="card-body">
+                    @if(session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif
+
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     <table class="table datatables" id="dataTable-1">
                     <thead>
                         <tr>
@@ -38,32 +55,33 @@
                     </thead>
                     <tbody>
                         @foreach($drivers as $driver)
-                                <tr>
-                                    <td>{{ $driver->id }}</td>
-                                    <td>{{ $driver->first_name }}</td>
-                                    <td>{{ $driver->last_name }}</td>
-                                    <td>{{ $driver->birth_date }}</td>
-                                    <td>{{ $driver->phone }}</td>
-                                    <td>{{ $driver->address }}</td>
-                                    <td>{{ $driver->license_type }}</td>
-                                    <td>{{ $driver->license_expiration_date }}</td>
-                                    <td>
-                                        {{-- <a href="{{ route('drivers.edit', $driver->id) }}" class="btn btn-warning btn-sm"> --}}
-                                        <a href="" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-edit"></i> تعديل
-                                        </a>
+                            <tr>
+                                <td>{{ $driver->id }}</td>
+                                <td>{{ $driver->first_name }}</td>
+                                <td>{{ $driver->last_name }}</td>
+                                <td>{{ $driver->birth_date }}</td>
+                                <td>{{ $driver->phone }}</td>
+                                <td>{{ $driver->address }}</td>
+                                <td>{{ $driver->license_type }}</td>
+                                <td>{{ $driver->license_expiration_date }}</td>
+                                <td>
+                                    <a href="" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-edit"></i> تعديل
+                                    </a>
 
-                                        <button class="btn btn-danger btn-sm delete-driver" data-id="{{ $driver->id }}">
-                                            <i class="fa fa-trash"></i> حذف
-                                        </button>
-                                    </td>
-                                    <td>
-                                        @foreach($driver->trucks as $truck)
-                                            <p>{{ $truck->manufacturer }} {{ $truck->model }} (Plate: {{ $truck->plate_number }})</p>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                            @endforeach
+                                    <button class="btn btn-danger btn-sm delete-driver" data-id="{{ $driver->id }}">
+                                        <i class="fa fa-trash"></i> حذف
+                                    </button>
+                                </td>
+                                <td>
+                                    @foreach($driver->truckDeliverCards as $truckDeliverCard)
+                                        @if($truckDeliverCard->truck)
+                                            <p>{{ $truckDeliverCard->truck->manufacturer }} {{ $truckDeliverCard->truck->model }} (Plate: {{ $truckDeliverCard->truck->plate_number }})</p>
+                                        @endif
+                                    @endforeach
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                     </table>
                 </div>

@@ -13,14 +13,14 @@ class StoreDriverRequest extends FormRequest
 
     public function rules()
     {
-        return [
+         return [
             'first_name.*' => 'required|string|max:255',
             'last_name.*' => 'required|string|max:255',
-            'birth_date.*' => 'required|date_format:d/m/Y',
+            'birth_date.*' => 'required',
             'phone.*' => 'required|string|max:15',
             'address.*' => 'required|string|max:255',
             'license_type.*' => 'required|string',
-            'license_expiration_date.*' => 'required|date_format:d/m/Y',
+            'license_expiration_date.*' => 'required',
         ];
     }
 

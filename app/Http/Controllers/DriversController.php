@@ -18,7 +18,7 @@ class DriversController extends Controller
 
     public function index()
     {
-        $drivers = Driver::with('trucks')->get();
+        $drivers = Driver::with('truckDeliverCards.truck')->get();
         return view('drivers.index', compact('drivers'));
     }
 
@@ -31,8 +31,13 @@ class DriversController extends Controller
      
     public function store(StoreDriverRequest $request)
     {
-        $this->storeDriverService->storeDrivers($request->all());
+        try {
+            $driversData = $request->validated();
+            $this->storeDriverService->storeDrivers($driversData);
 
-        return redirect()->route('drivers.index')->with('success', 'تم إضافة سائق بنجاح');
+            return redirect()->route('drivers.index')->with('success', 'تم إضافة السائقين بنجاح.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'حدث خطأ أثناء إضافة السائقين: ' . $e->getMessage());
+        }
     }
 }

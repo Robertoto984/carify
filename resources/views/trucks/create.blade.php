@@ -5,6 +5,24 @@
         <h2 class="page-title mb-3">إضافة مركبة</h2>
         <div class="card shadow mb-4">
             <div class="card-body">
+                @if(session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+
+                @if(session('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form method="POST" action="{{route('trucks.store')}}">
                     @csrf
                     <div id="vehicle-forms-container">
@@ -72,30 +90,6 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-group mb-3 mb-3">
-                                        <label for="year">السنة</label>
-                                        <div class="input-group">
-                                            <input type="text" name="year[]" class="form-control drgpicker" id="year" value="04/24/2020" aria-describedby="button-addon">
-                                            @error('year.*')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                            <div class="input-group-append">
-                                            <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-3 mb-3">
-                                        <label for="model">الموديل</label>
-                                        <div class="input-group">
-                                            <input type="text" name="model[]" class="form-control drgpicker" id="year" value="04/24/2020" aria-describedby="button-addon">
-                                            @error('model.*')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                            <div class="input-group-append">
-                                            <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
@@ -152,18 +146,6 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-group mb-3">
-                                        <label for="driver_id">السائق</label>
-                                        <select class="form-control" id="driver_id" name="driver_id[]">
-                                            <option value="" disabled selected>اختر السائق</option>
-                                            @foreach($drivers as $driver)
-                                                <option value="{{ $driver->id }}">{{ $driver->first_name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('driver_id.*')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
                                     <div class="form-group mb-3 ">
                                         <label for="register">التسجيل</label>
                                         <div class="input-group">
@@ -176,7 +158,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group mb-3">
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="form-group col-md-4 mb-3 mb-3">
+                                        <label for="year">السنة</label>
+                                        <div class="input-group">
+                                            <input type="text" name="year[]" class="form-control drgpicker" id="year" value="04/24/2020" aria-describedby="button-addon">
+                                            @error('year.*')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <div class="input-group-append">
+                                                <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 mb-3">
                                         <label for="demarcation_date">تاريخ الترسيم</label>
                                         <div class="input-group">
                                             <input type="text" name="demarcation_date[]" class="form-control drgpicker" id="year" value="04/24/2020" aria-describedby="button-addon">
@@ -189,7 +186,19 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    <div class="form-group col-md-4 mb-3 mb-3">
+                                        <label for="model">الموديل</label>
+                                        <div class="input-group">
+                                            <input type="text" name="model[]" class="form-control drgpicker" id="year" value="04/24/2020" aria-describedby="button-addon">
+                                            @error('model.*')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <div class="input-group-append">
+                                                <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mb-3">

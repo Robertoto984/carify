@@ -6,6 +6,7 @@ use App\Enums\Color;
 use App\Enums\FuelTypes;
 use App\Http\Requests\Truck\StoreTruckRequest;
 use App\Models\Driver;
+use App\Models\Truck;
 use App\Services\Truck\AddTruckService;
 
 class TrucksController extends Controller
@@ -19,7 +20,8 @@ class TrucksController extends Controller
 
     public function index()
     {
-        return view('trucks.index');
+        $trucks = Truck::with('truckDeliverCards.driver')->get();
+        return view('trucks.index', compact('trucks'));
     }
 
     public function create()
@@ -30,15 +32,14 @@ class TrucksController extends Controller
         return view('trucks.create', compact('colors', 'fuelTypes','drivers'));
     }
 
-    public function store(StoreTruckRequest $request)
+     public function store(StoreTruckRequest $request)
     {
-        $data = $request->validated();
-
         try {
-            $this->addTruckService->store($data);
-            return redirect()->route('trucks.index')->with('success', 'تم إضافة المركبة بنجاح');
+            $this->addTruckService->store($request->validated());
+
+            return redirect()->route('trucks.index')->with('success', 'Truck(s) added successfully.');
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'حدث خطأ أثناء إضافة المركبة']);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 }

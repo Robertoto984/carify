@@ -68,3 +68,22 @@ label {
     margin-left: 5px !important; 
 }
 
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+    font-family: 'Markazi Text', sans-serif;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
