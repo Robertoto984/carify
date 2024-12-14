@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Markazi+Text:wght@400..700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Markazi Text', serif;
+}
+
+
+.input-label {
+    color:blue;
+    text-align: right;
+    display: block;
+    font-family: 'Markazi Text', sans-serif;
+}
+
+.footer {
+    text-align: left;
+    display: block;
+    padding: 0;
+}
+
+.form-control, .btn, .item-text {
+    font-family: 'Markazi Text', sans-serif;
+}
+
+.item-text {
+    font-family: 'Markazi Text', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.table thead th  {
+    color: rgb(35, 42, 251);
+    font-family: 'Markazi Text', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.page-title  {
+    color: rgb(35, 42, 251);
+    font-family: 'Markazi Text', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+label {
+    color:blue;
+    font-family: 'Markazi Text', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.rounded-btn {
+    border-radius: 50px;
+    font-weight: 700;
+    color: white;
+}
+
+.btn-success {
+    background-color: darkgreen;
+    border: none;
+}
+
+.btn-primary {
+    margin-left: 5px !important; 
+}
+
