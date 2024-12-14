@@ -1,3 +1,6 @@
+
+
+
 <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>
         <a href="#" class="btn collapseSidebar toggle-btn d-lg-none text-muted ml-2 mt-3" data-toggle="toggle">
           <i class="fe fe-x"><span class="sr-only"></span></i>
@@ -17,11 +20,11 @@
           </div>
           <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
-              <a href="#vehicles" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+              <a href="#vehicles" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link" style="{{ request()->segment(1) == 'trucks' ? 'color:#1b68ff':''}}">
                 <i class="fe fe-truck fe-16"></i>
                 <span class="ml-3 item-text">المركبات</span><span class="sr-only">(current)</span>
               </a>
-              <ul class="collapse list-unstyled pl-4 w-100" id="vehicles">
+              <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == 'trucks' ? 'show':''}}" id="vehicles">
                 <li class="nav-item active">
                   <a class="nav-link pl-3" href="{{route('trucks.index')}}"><span class="ml-1 item-text">قائمة المركبات</span></a>
                 </li>
@@ -36,11 +39,11 @@
           </ul>
           <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
-              <a href="#drivers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+              <a href="#drivers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link " style="{{ request()->segment(1) == 'drivers' ? 'color:#1b68ff':''}}">
                 <i class="fe fe-users fe-16"></i>
                 <span class="ml-3 item-text">السائقين</span><span class="sr-only">(current)</span>
               </a>
-              <ul class="collapse list-unstyled pl-4 w-100" id="drivers">
+              <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == 'drivers' ? 'show':''}}" id="drivers" >
                 <li class="nav-item active">
                   <a class="nav-link pl-3" href="{{route('drivers.index')}}"><span class="ml-1 item-text">قائمة السائقين</span></a>
                 </li>
@@ -52,11 +55,11 @@
           </ul>
           <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
-              <a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+              <a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link" style="{{ request()->segment(1) == 'users' ? 'color:#1b68ff':''}}">
                 <i class="fe fe-users fe-16"></i>
                 <span class="ml-3 item-text">المستخدمين</span><span class="sr-only">(current)</span>
               </a>
-              <ul class="collapse list-unstyled pl-4 w-100" id="users">
+              <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == 'users' ? 'show':''}}" id="users">
                 <li class="nav-item active">
                   <a class="nav-link pl-3" href=""><span class="ml-1 item-text">قائمة المستخدمين</span></a>
                 </li>
