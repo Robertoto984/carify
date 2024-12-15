@@ -6,6 +6,7 @@ use App\Enums\LicenseTypes;
 use App\Http\Requests\Driver\StoreDriverRequest;
 use App\Models\Driver;
 use App\Services\Driver\StoreDriverService;
+use Illuminate\Http\Request;
 
 class DriversController extends Controller
 {
@@ -40,4 +41,15 @@ class DriversController extends Controller
             return redirect()->back()->with('error', 'حدث خطأ أثناء إضافة السائقين: ' . $e->getMessage());
         }
     }
+
+    public function bulkDelete(Request $request)
+    {
+        $driverIds = $request->input('drivers');
+        if (Driver::whereIn('id', $driverIds)->delete()) {
+            return redirect()->route('drivers.index')->with('success', 'تم حذف السائقين بنجاح.');
+        } else {
+            return redirect()->route('drivers.index')->with('error', 'حدث خطأ في عملية الحذف');
+        }
+    }
+
 }

@@ -22,4 +22,5 @@ Route::prefix('drivers')->group(function () {
     Route::get('index', [DriversController::class, 'index'])->name('drivers.index');
     Route::get('create', [DriversController::class, 'create'])->name('drivers.create');
     Route::post('store', [DriversController::class, 'store'])->name('drivers.store');
+    Route::post('bulk-delete', [DriversController::class, 'bulkDelete'])->name('drivers.bulkDelete');
 });

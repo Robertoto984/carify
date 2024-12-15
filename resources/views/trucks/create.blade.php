@@ -225,9 +225,11 @@
         document.getElementById('add-form-btn').addEventListener('click', function () {
         const newForm = document.querySelector('.vehicle-form').cloneNode(true);
         const inputs = newForm.querySelectorAll('input');
-        // inputs.forEach(input => {
-        //     input.value = '';
-        // });
+        inputs.forEach(input => {
+            if (!(input.classList.contains('drgpicker'))) {
+                input.value = '';
+            }
+        });
 
         const deleteButton = newForm.querySelector('.delete-form-btn');
         deleteButton.addEventListener('click', function() {
