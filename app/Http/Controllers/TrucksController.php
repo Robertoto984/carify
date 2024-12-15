@@ -8,7 +8,7 @@ use App\Http\Requests\Truck\StoreTruckRequest;
 use App\Models\Driver;
 use App\Models\Truck;
 use App\Services\Truck\AddTruckService;
-
+use Illuminate\Http\Request;
 class TrucksController extends Controller
 {
     protected $addTruckService;
@@ -38,6 +38,18 @@ class TrucksController extends Controller
             $this->addTruckService->store($request->validated());
 
             return redirect()->route('trucks.index')->with('success', 'Truck(s) added successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function MultiDelete(Request $request)
+    {
+        try {
+            $ids = Truck::whereIn('id',(array)$request['ids'])->delete();
+            return response()
+            ->json(['success' => 'Truck(s) deleted successfully.']);
+            
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

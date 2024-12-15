@@ -13,6 +13,8 @@
         <div class="dropdown-menu" aria-labelledby="actionMenuButton">
             <a class="dropdown-item" href="#">Export</a>
             <a class="dropdown-item" href="#">Delete</a>
+            <a class="dropdown-item" id="MulitDelete" href="{{ route('drivers.delete_all') }}">Delete All Selected</a>
+
             <a class="dropdown-item" href="#">Something else here</a>
         </div>
     </div>
@@ -23,6 +25,7 @@
         <div class="col-md-12">
             <div class="card shadow">
                 <div class="card-body">
+                    <div id="table-container"></div>
                     @if(session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
@@ -44,12 +47,9 @@
                     <table class="table datatables" id="dataTable-1">
                         <thead>
                             <tr>
-                                <th>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="selectAll">
-                                        <label class="custom-control-label" for="selectAll"></label>
-                                    </div>
-                                </th>
+                               
+                                <th><input type="checkbox"  class="checkbox"  id='check_all'/></th>
+
                                 <th>#</th>
                                 <th>الاسم الأول</th>
                                 <th>الكنية</th>
@@ -64,12 +64,8 @@
                         <tbody>
                             @foreach($drivers as $driver)
                                 <tr>
-                                    <td>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input selectDriver" data-id="{{ $driver->id }}">
-                                            <label class="custom-control-label"></label>
-                                        </div>
-                                    </td>
+                                    <td><input type="checkbox" name="ids[]" value="{{ $driver->id }}" id="check"/></td>
+
                                     <td>{{ $driver->id }}</td>
                                     <td>{{ $driver->first_name }}</td>
                                     <td>{{ $driver->last_name }}</td>

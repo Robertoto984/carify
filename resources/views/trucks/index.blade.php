@@ -12,6 +12,8 @@
         <div class="dropdown-menu" aria-labelledby="actionMenuButton">
             <a class="dropdown-item" href="#">Export</a>
             <a class="dropdown-item" href="#">Delete</a>
+            <a class="dropdown-item" id="MulitDelete" href="{{ route('trucks.delete_all') }}">Delete All Selected</a>
+
             <a class="dropdown-item" href="#">Something else here</a>
         </div>
     </div>
@@ -23,12 +25,14 @@
             <div class="card shadow">
                 <div class="card-body">
                     <div class="table-container">
+                        <div id="table-container"></div>
+
                         @if(session('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
+                        <div class="alert alert-success" id="success">{{ session('success') }}</div>
                         @endif
 
                         @if(session('error'))
-                            <div class="alert alert-danger">{{ session('error') }}</div>
+                            <div class="alert alert-danger" id='danger'>{{ session('error') }}</div>
                         @endif
 
                         @if($errors->any())
@@ -43,6 +47,7 @@
                         <table class="table datatables" id="dataTable-1">
                             <thead>
                                 <tr>
+                                    <th><input type="checkbox"  class="checkbox"  id='check_all'/></th>
                                     <th>#</th>
                                     <th>النوع</th>
                                     <th>الصانع</th>
@@ -71,6 +76,7 @@
                             <tbody>
                                 @foreach($trucks as $truck)
                                     <tr>
+                                        <td><input type="checkbox" name="ids[]" value="{{ $truck->id }}" id="check"/></td>
                                         <td>{{ $truck->id }}</td>
                                         <td>{{ $truck->type }}</td>
                                         <td>{{ $truck->manufacturer }}</td>

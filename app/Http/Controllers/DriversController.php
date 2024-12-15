@@ -52,4 +52,16 @@ class DriversController extends Controller
         }
     }
 
+
+    public function MultiDelete(Request $request)
+    {
+        try {
+            $ids = Driver::whereIn('id',(array)$request['ids'])->delete();
+            return response()
+            ->json(['success' => 'Drivers(s) deleted successfully.']);
+            
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 }
