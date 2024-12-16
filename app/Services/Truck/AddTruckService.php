@@ -11,10 +11,10 @@ class AddTruckService
     public function store(array $trucksData)
     {
         foreach ($trucksData['type'] as $key => $type) {
-            $year = Carbon::createFromFormat('d/m/Y', $trucksData['year'][$key])->year;
-            $model = Carbon::createFromFormat('d/m/Y', $trucksData['model'][$key])->year;
-            $register = Carbon::createFromFormat('d/m/Y', $trucksData['register'][$key])->year;
-            $demarcation_date = Carbon::createFromFormat('d/m/Y', $trucksData['demarcation_date'][$key])->format('Y-m-d');
+            $year =  Carbon::parse( $trucksData['year'][$key].'-01-01')->format('Y-m-d');
+            $model =  Carbon::parse( $trucksData['model'][$key].'-01-01')->format('Y-m-d');
+            $register =  Carbon::parse( $trucksData['register'][$key].'-01-01')->format('Y-m-d');
+            $demarcation_date = Carbon::parse( $trucksData['demarcation_date'][$key])->format('Y-m-d');
             Truck::create([
                 'type' => $type,
                 'manufacturer' => $trucksData['manufacturer'][$key],
@@ -45,9 +45,9 @@ class AddTruckService
         // dd($request);
         $truck = Truck::where('id',$id)->first();
         $year = $request['year'];
-        $model = $request['model'];
-        $register =$request['register'];
-        $demarcation_date = Carbon::createFromFormat('d/m/Y', $request['demarcation_date'])->format('Y-m-d');
+            $model = $request['model'];
+            $register = $request['register'];
+        $demarcation_date = Carbon::parse( $request['demarcation_date'])->format('Y-m-d');
        
         $truck->update([
             'type' => $request['type'],

@@ -110,9 +110,7 @@
                                     <label for="load">الحمولة</label>
                                     <input type="text" name="load[]" id="load" class="form-control">
 
-
                                     <span class="text-danger" id="load-error"></span>
-
 
                                 </div>
                                 <div class="form-group mb-3">
@@ -120,9 +118,7 @@
                                     <input type="text" name="kilometer_number[]" id="kilometer_number"
                                         class="form-control">
 
-
                                     <span class="text-danger" id="kilometer_number-error"></span>
-
 
                                 </div>
                                 <div class="form-group mb-3">
@@ -130,9 +126,7 @@
                                     <input type="text" name="technical_status[]" id="technical_status"
                                         class="form-control">
 
-
                                     <span class="text-danger" id="technical_status-error"></span>
-
 
                                 </div>
                                 <div class="form-group mb-3">
@@ -143,27 +137,23 @@
                                         <option value="{{ $color }}">{{ $color }}</option>
                                         @endforeach
                                     </select>
-
-
                                     <span class="text-danger" id="color-error"></span>
-
 
                                 </div>
                                 <div class="form-group mb-3 ">
                                     <label for="register">التسجيل</label>
                                     <div class="input-group">
-                                        <input type="text" name="register[]" class="form-control drgpicker" id="year"
-                                            value="04/24/2020" aria-describedby="button-addon">
-
-
-                                        <span class="text-danger" id="register-error"></span>
-
+                                        <input type="date" name="register[]" class="form-control" 
+                                            value="04/24/2020" >
 
                                         <div class="input-group-append">
                                             <div class="input-group-text" id="button-addon-date"><span
                                                     class="fe fe-calendar fe-16"></span></div>
                                         </div>
+
                                     </div>
+                                    <span class="text-danger" id="register-error"></span>
+
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -171,50 +161,44 @@
                                     <div class="form-group col-md-4 mb-3 mb-3">
                                         <label for="year">السنة</label>
                                         <div class="input-group">
-                                            <input type="text" name="year[]" class="form-control drgpicker" id="year"
-                                                value="04/24/2020" aria-describedby="button-addon">
-
-
-                                            <span class="text-danger" id="year-error"></span>
-
+                                            <input type="date" name="year[]" class="form-control" 
+                                                value="04/24/2020" >
 
                                             <div class="input-group-append">
                                                 <div class="input-group-text" id="button-addon-date"><span
                                                         class="fe fe-calendar fe-16"></span></div>
                                             </div>
+                                            <span class="text-danger" id="year-error"></span>
+
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4 mb-3">
                                         <label for="demarcation_date">تاريخ الترسيم</label>
                                         <div class="input-group">
-                                            <input type="text" name="demarcation_date[]" class="form-control drgpicker"
-                                                id="year" value="04/24/2020" aria-describedby="button-addon">
-
-
-                                            <span class="text-danger" id="demarcation_date-error"></span>
-
+                                            <input type="date" name="demarcation_date[]" class="form-control"
+                                                value="04/24/2020" >
 
                                             <div class="input-group-append">
                                                 <div class="input-group-text" id="button-addon-date"><span
                                                         class="fe fe-calendar fe-16"></span>
                                                 </div>
                                             </div>
+                                            <span class="text-danger" id="demarcation_date-error"></span>
+
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4 mb-3 mb-3">
                                         <label for="model">الموديل</label>
                                         <div class="input-group">
-                                            <input type="text" name="model[]" class="form-control drgpicker" id="year"
-                                                value="04/24/2020" aria-describedby="button-addon">
-
-
-                                            <span class="text-danger" id="model-error"></span>
-
+                                            <input type="date" name="model[]" class="form-control" 
+                                                value="04/24/2020" >
 
                                             <div class="input-group-append">
                                                 <div class="input-group-text" id="button-addon-date"><span
                                                         class="fe fe-calendar fe-16"></span></div>
                                             </div>
+                                            <span class="text-danger" id="model-error"></span>
+
                                         </div>
                                     </div>
                                 </div>

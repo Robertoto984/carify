@@ -40,7 +40,7 @@ class updateTruckRequest extends FormRequest
             'technical_status' => 'required|string',
             'color' => 'required|string',
             'register' => 'required',
-            'demarcation_date' => 'required|date_format:m/d/Y',
+            'demarcation_date' => 'required|date_format:Y-m-d',
             'parts_description' => 'nullable|string',
         ];
     }
