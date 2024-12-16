@@ -12,6 +12,53 @@ $(document).on('click', '.checkbox', function () {
     }
 })
 
+
+// delete elemnt
+$(document).on('click', '#destroy', function (e) {
+    e.preventDefault()
+    var token = $("meta[name='csrf-token']").attr('content')
+    var href = $(this).attr('href')
+
+    swal.fire({
+        title: 'انتباه!',
+        text: 'هل تريد الاستمرار؟',
+        icon: 'error',
+        confirmButtonText: "نعم",
+        cancelButtonText: "لا",
+        showCancelButton: true,
+        showCloseButton: true,
+    }).then((result) => {
+
+        $.ajax({
+            url: href,
+            type: "DELETE",
+            data: { _token: token },
+            dataType: "json",
+            success: function (response) {
+                if (response.redirect) {
+                    swal.fire({
+                        title: response.message,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false, // Remove the "OK" button
+                        allowOutsideClick: false, // Prevent the dialog from closing by clicking outside
+                        allowEscapeKey: false,// Prevent the dialog from closing by pressing the escape key
+                        position: 'top-start',
+
+                    });
+                    return window.location = response.redirect
+
+                }
+
+            },
+
+        })
+
+    })
+})
+
+
+//multi delete
 $(document).on('click', '#MulitDelete', function (e) {
     e.preventDefault()
     var token = $("meta[name='csrf-token']").attr('content')
@@ -22,11 +69,11 @@ $(document).on('click', '#MulitDelete', function (e) {
         ids.push($(this).val());
     });
     swal.fire({
-        title: 'Wrning!',
-        text: 'Do you want to continue',
+        title: 'انتباه!',
+        text: 'هل تريد الاستمرار؟',
         icon: 'error',
-        confirmButtonText: "yes",
-        cancelButtonText: "No",
+        confirmButtonText: "نعم",
+        cancelButtonText: "لا",
         showCancelButton: true,
         showCloseButton: true,
     }).then((result) => {
@@ -38,9 +85,20 @@ $(document).on('click', '#MulitDelete', function (e) {
                 data: { ids: ids, _token: token },
                 dataType: "json",
                 success: function (response) {
-                    $('#table-container').html(`<div class="alert alert-success" id="success">${response.success}</div>
-                        `)
-                        location.reload();
+                    if (response.redirect) {
+                        swal.fire({
+                            title: response.message,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            showConfirmButton: false, // Remove the "OK" button
+                            allowOutsideClick: false, // Prevent the dialog from closing by clicking outside
+                            allowEscapeKey: false,// Prevent the dialog from closing by pressing the escape key
+                            position: 'top-start',
+
+                        });
+                        return window.location = response.redirect
+
+                    }
 
                 },
 
@@ -49,3 +107,68 @@ $(document).on('click', '#MulitDelete', function (e) {
     })
 })
 
+$(document).on('click', '#modal', function (e) {
+    e.preventDefault()
+
+    var href = $(this).attr('href')
+    $.ajax({
+        url: href,
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            $('#load-form').html(' ')
+            $('#load-form').append(response.html);
+
+        },
+
+    })
+})
+
+
+$('body').on('submit', 'form.submit-form', function (e) {
+    e.preventDefault();
+
+    let form = $(this);
+    form.find('span.error').fadeOut(200);
+    form.parent().addClass('load');
+    var token = $("meta[name='csrf-token']").attr("content");
+    $.ajax({
+        url: form.attr('action'),
+        type: "POST",
+        data: new FormData($(this)[0]), "_token": "{{ csrf_token() }}",
+        dataType: 'JSON',
+        processData: false,
+        contentType: false,
+        success: function (data, textStatus, jqXHR, response) {
+            if (data.redirect) {
+                swal.fire({
+                    title: data.message,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: false, // Remove the "OK" button
+                    allowOutsideClick: false, // Prevent the dialog from closing by clicking outside
+                    allowEscapeKey: false,// Prevent the dialog from closing by pressing the escape key
+                    position: 'top-start',
+
+                });
+                return window.location = data.redirect
+
+            }
+            $('.modal').modal("hide");
+            //    swal.fire(data.title, data.message, data.status);
+            form.trigger("reset");
+            location.reload(true)
+        },
+
+        error: function (err, data, response, jqXhr, xhr) {
+            var errors = err.responseJSON.errors;
+            $.each(errors, function (key, value) {
+                console.log(key)
+                console.log($('#' + key + '-error').text(value[0])
+                )
+            });
+        },
+
+        complete: function () { form.parent().removeClass('load'); }
+    });
+});

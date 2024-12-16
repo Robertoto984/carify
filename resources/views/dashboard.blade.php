@@ -32,6 +32,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 @yield('content') 
+                @include('modal')
             </div>
         </div>
     </main>

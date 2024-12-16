@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\LicenseTypes;
 use App\Http\Requests\Driver\StoreDriverRequest;
+use App\Http\Requests\Driver\updateDriverRequest;
 use App\Models\Driver;
 use App\Services\Driver\StoreDriverService;
 use Illuminate\Http\Request;
@@ -29,36 +30,60 @@ class DriversController extends Controller
 
         return view('drivers.create', compact('LicenseTypes'));
     }
+
+    public function edit($id)
+    {
+        $row = Driver::findOrFail($id);
+        $LicenseTypes = LicenseTypes::values();
+        return response()->json([
+            'html' => view('drivers.edit', ['row' => $row,'LicenseTypes'=>$LicenseTypes])->render(),
+        ]);
+    }
      
     public function store(StoreDriverRequest $request)
     {
         try {
             $driversData = $request->validated();
             $this->storeDriverService->storeDrivers($driversData);
+            return response()->json(['message'=>'تم إضافة السائقين بنجاح.','redirect'=>route('drivers.index')]);
 
-            return redirect()->route('drivers.index')->with('success', 'تم إضافة السائقين بنجاح.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'حدث خطأ أثناء إضافة السائقين: ' . $e->getMessage());
+            return response()->json(['message'=>'حدث خطأ أثناء إضافة السائقين:','redirect'=>route('drivers.index')]);
+
         }
     }
 
-    public function bulkDelete(Request $request)
+   
+    public function update(updateDriverRequest $request,$id)
     {
-        $driverIds = $request->input('drivers');
-        if (Driver::whereIn('id', $driverIds)->delete()) {
-            return redirect()->route('drivers.index')->with('success', 'تم حذف السائقين بنجاح.');
-        } else {
-            return redirect()->route('drivers.index')->with('error', 'حدث خطأ في عملية الحذف');
+        try {
+            $driversData = $request->validated();
+            $this->storeDriverService->updateDrivers($driversData,$id);
+            return response()->json(['message'=>'تم تعديل السائق بنجاح.','redirect'=>route('drivers.index')]);
+        } catch (\Exception $e) {
+            return response()->json(['message'=>'حدث خطأ أثناء تعديل السائق:','redirect'=>route('drivers.index')]);
+
         }
     }
 
+    public function destroy($id)
+    {
+        try {
+            $ids = Driver::where('id',$id)->delete();
+            return response()
+            ->json(['message' => 'تم حذف السائق بنجاح','redirect'=>route('drivers.index')]);
+            
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 
     public function MultiDelete(Request $request)
     {
         try {
             $ids = Driver::whereIn('id',(array)$request['ids'])->delete();
             return response()
-            ->json(['success' => 'Drivers(s) deleted successfully.']);
+            ->json(['message' => 'تم حذف السائق بنجاح','redirect'=>route('drivers.index')]);
             
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

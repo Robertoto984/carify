@@ -1,4 +1,7 @@
 @extends('dashboard')
+@section('modal_title')
+تعديل مركبة
+@endsection
 @section('content')
 
 <div class="col">
@@ -114,13 +117,13 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="" class="btn btn-primary btn-sm">
+                                            <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('trucks.edit',$truck->id) }}" class="btn btn-primary btn-sm">
                                                 <i class="fa fa-edit"></i> تعديل
                                             </a>
 
-                                            <button class="btn btn-danger btn-sm delete-driver" data-id="{{ $truck->id }}">
+                                            <a href="{{ route('trucks.delete',$truck->id) }}" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="{{ $truck->id }}">
                                                 <i class="fa fa-trash"></i> حذف
-                                            </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach      

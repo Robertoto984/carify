@@ -2,58 +2,44 @@
 
 namespace App\Http\Requests\Truck;
 
-use App\Enums\Color;
-use App\Enums\FuelTypes;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTruckRequest extends FormRequest
+class updateTruckRequest extends FormRequest
 {
-    
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule<mixed>|string>
+     */
     public function rules(): array
     {
          return [
-            'type' => 'required|array',
             'type' => 'required|string',
-            'manufacturer' => 'required|array',
             'manufacturer' => 'required|string',
-            'plate_number' => 'required|array',
             'plate_number' => 'required|string',
-            'chassis_number' => 'required|array',
             'chassis_number' => 'required|string',
-            'engine_number' => 'required|array',
             'engine_number' => 'required|string',
-            'traffic_license_number' => 'required|array',
             'traffic_license_number' => 'required|string',
-            'legal_status' => 'required|array',
             'legal_status' => 'required|string',
-            'fuel_type' => 'required|array',
             'fuel_type' => 'required|string',
-            'year' => 'required|array',
-            'year' => 'required|date_format:m/d/Y',
-            'model' => 'required|array',
+            'year' => 'required',
             'model' => 'required|string',
-            'passengers_number' => 'required|array',
             'passengers_number' => 'required|integer',
-            'gross_weight' => 'required|array',
             'gross_weight' => 'required|numeric',
-            'empty_weight' => 'required|array',
             'empty_weight' => 'required|numeric',
-            'load' => 'required|array',
             'load' => 'required|numeric',
-            'kilometer_number' => 'required|array',
             'kilometer_number' => 'required|string',
-            'technical_status' => 'required|array',
             'technical_status' => 'required|string',
-            'color' => 'required|array',
             'color' => 'required|string',
-            'register' => 'required|array',
-            'register' => 'required|date_format:m/d/Y',
-            'demarcation_date' => 'required|array',
+            'register' => 'required',
             'demarcation_date' => 'required|date_format:m/d/Y',
             'parts_description' => 'nullable|string',
         ];
