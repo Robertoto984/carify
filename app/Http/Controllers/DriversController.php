@@ -81,7 +81,7 @@ class DriversController extends Controller
     public function MultiDelete(Request $request)
     {
         try {
-            $ids = Driver::whereIn('id',(array)$request['ids'])->delete();
+             Driver::whereIn('id',(array)$request['ids'])->delete();
             return response()
             ->json(['message' => 'تم حذف السائق بنجاح','redirect'=>route('drivers.index')]);
             

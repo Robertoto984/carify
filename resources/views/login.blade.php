@@ -18,7 +18,8 @@
   <body class="light rtl">
     <div class="wrapper vh-100">
       <div class="row align-items-center h-100">
-        <form class="col-lg-3 col-md-4 col-10 mx-auto text-center">
+        <form action="{{ route('login') }}" method="post"  class="col-lg-3 col-md-4 col-10 mx-auto text-center form-login">
+          @csrf
           <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="./index.html">
             <svg version="1.1" id="logo" class="navbar-brand-img brand-md" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 120 120" xml:space="preserve">
               <g>
@@ -31,16 +32,20 @@
           <h1 class="h6 mb-3">تسجيل الدخول</h1>
           <div class="form-group">
             <label for="inputEmail" class="input-label">البريد الإلكتروني</label>
-            <input type="email" id="inputEmail" class="form-control form-control-lg" placeholder="أدخل البريد الإلكتروني" required="" autofocus="">
+            <input name="email" type="email" id="inputEmail" class="form-control form-control-lg" placeholder="أدخل البريد الإلكتروني" required="" autofocus="">
+            <span class="text-danger" style="text-align: right!important;" id="email-error"></span>
+
           </div>
           <div class="form-group">
             <label for="inputPassword" class="input-label">كلمة المرور</label>
-            <input type="password" id="inputPassword" class="form-control form-control-lg" placeholder="أدخل كلمة المرور" required="">
+            <input name="password" type="password" id="inputPassword" class="form-control form-control-lg" placeholder="أدخل كلمة المرور" required="">
+            <span class="text-danger" style="text-align: right!important;" id="password-error"></span>
+
           </div>
           <div class="checkbox mb-3">
             
           </div>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">تسجيل الدخول</button>
+          <button type="submit" class="btn btn-lg btn-primary btn-block" type="submit">تسجيل الدخول</button>
           <div class="container-fluid">
           <div class="col footer mt-5">
               <div class="row-sm-6">
@@ -59,16 +64,16 @@
         </form>
       </div>
     </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/moment.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/simplebar.min.js"></script>
-    <script src='js/daterangepicker.js'></script>
-    <script src='js/jquery.stickOnScroll.js'></script>
-    <script src="js/tinycolor-min.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/apps.js"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/simplebar.min.js') }}"></script>
+    <script src='{{ asset('js/daterangepicker.js') }}'></script>
+    <script src='{{ asset('js/jquery.stickOnScroll.js') }}'></script>
+    <script src="{{ asset('js/tinycolor-min.js') }}"></script>
+    {{-- <script src="{{ asset('js/config.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/apps.js') }}"></script> --}}
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -80,7 +85,9 @@
       gtag('js', new Date());
       gtag('config', 'UA-56159088-1');
     </script>
-  </body>
+      <script src="{{ asset('js/ajax.js') }}"></script>
+     
+    </body>
 </html>
 </body>
 </html>

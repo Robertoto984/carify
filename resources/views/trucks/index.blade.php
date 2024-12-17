@@ -11,7 +11,7 @@
 <div class="col ml-auto">
     <div class="dropdown float-right">
         <a href="{{ route('trucks.create') }}" class="btn btn-primary rounded-btn ml-10">+ بطاقة مركبة</a>
-        <button id="bulkDeleteBtn" href="{{ route('trucks.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف المحدد</button>
+        <a id="bulkDeleteBtn" href="{{ route('trucks.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف المحدد</a>
         <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> المزيد </button>
         <div class="dropdown-menu" aria-labelledby="actionMenuButton">
             <a class="dropdown-item" href="#">Export</a>

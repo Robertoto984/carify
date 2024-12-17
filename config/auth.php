@@ -40,6 +40,7 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+      
     ],
 
     /*
@@ -99,6 +100,7 @@ return [
         ],
     ],
 
+   
     /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout

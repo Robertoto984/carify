@@ -11,12 +11,11 @@
 <div class="col ml-auto">
     <div class="dropdown float-right">
         <a href="{{ route('drivers.create') }}" class="btn rounded-btn btn-primary">+ بطاقة سائق</a>
-        <button id="bulkDeleteBtn" href="{{ route('trucks.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف المحدد</button>
+        <a id="bulkDeleteBtn" href="{{ route('drivers.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف المحدد</a>
         <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> المزيد </button>
         <div class="dropdown-menu" aria-labelledby="actionMenuButton">
             <a class="dropdown-item" href="#">Export</a>
             <a class="dropdown-item" href="#">Delete</a>
-            <a class="dropdown-item" id="MulitDelete" href="{{ route('drivers.bulk-delete') }}">Delete All Selected</a>
 
             <a class="dropdown-item" href="#">Something else here</a>
         </div>

@@ -28,31 +28,34 @@ $(document).on('click', '#destroy', function (e) {
         showCancelButton: true,
         showCloseButton: true,
     }).then((result) => {
-
-        $.ajax({
-            url: href,
-            type: "DELETE",
-            data: { _token: token },
-            dataType: "json",
-            success: function (response) {
-                if (response.redirect) {
-                    swal.fire({
-                        title: response.message,
-                        timer: 5000,
-                        timerProgressBar: true,
-                        showConfirmButton: false, // Remove the "OK" button
-                        allowOutsideClick: false, // Prevent the dialog from closing by clicking outside
-                        allowEscapeKey: false,// Prevent the dialog from closing by pressing the escape key
-                        position: 'top-start',
-
-                    });
-                    return window.location = response.redirect
-
-                }
-
-            },
-
-        })
+        if(result.isConfirmed){
+            $.ajax({
+                url: href,
+                type: "DELETE",
+                data: { _token: token },
+                dataType: "json",
+                success: function (response) {
+                    if (response.redirect) {
+                        swal.fire({
+                            title: response.message,
+                            timer: 5000,
+                            timerProgressBar: true,
+                            showConfirmButton: false, // Remove the "OK" button
+                            allowOutsideClick: false, // Prevent the dialog from closing by clicking outside
+                            allowEscapeKey: false,// Prevent the dialog from closing by pressing the escape key
+                            position: 'top-start',
+    
+                        }).then(function() {
+                            window.location = response.redirect;
+                        });
+    
+                    }
+    
+                },
+    
+            })
+        }
+       
 
     })
 })
@@ -95,8 +98,10 @@ $(document).on('click', '#bulkDeleteBtn', function (e) {
                             allowEscapeKey: false,// Prevent the dialog from closing by pressing the escape key
                             position: 'top-start',
 
+                        }).then(function() {
+                            window.location = response.redirect;
                         });
-                        return window.location = response.redirect
+                        
 
                     }
 
@@ -143,15 +148,16 @@ $('body').on('submit', 'form.submit-form', function (e) {
             if (data.redirect) {
                 swal.fire({
                     title: data.message,
-                    timer: 2000,
+                    timer: 5000,
                     timerProgressBar: true,
                     showConfirmButton: false, // Remove the "OK" button
                     allowOutsideClick: false, // Prevent the dialog from closing by clicking outside
                     allowEscapeKey: false,// Prevent the dialog from closing by pressing the escape key
                     position: 'top-start',
 
+                }).then(function() {
+                    window.location = response.redirect;
                 });
-                return window.location = data.redirect
 
             }
             $('.modal').modal("hide");
@@ -172,3 +178,38 @@ $('body').on('submit', 'form.submit-form', function (e) {
         complete: function () { form.parent().removeClass('load'); }
     });
 });
+
+$(document).on('submit','form.form-login',function(e){
+    e.preventDefault()
+    let form = $(this);
+    $.ajax({
+        url: form.attr('action'),
+        type: "POST",
+        data: new FormData($(this)[0]), "_token": "{{ csrf_token() }}",
+        dataType: 'JSON',
+        processData: false,
+        contentType: false,
+        success: function (data, textStatus, jqXHR, response) {
+            
+            
+           if(data.status == 200){
+            window.location.href = '/dashboard'
+           }
+           if(data.status == 401){
+            window.location.href = '/'
+           }
+
+        },
+
+        error: function (err, data, response, jqXhr, xhr) {
+            console.log(err)
+            var errors = err.responseJSON.errors;
+            $.each(errors, function (key, value) {
+                console.log($('#' + key + '-error').text(value[0])
+                )
+            });
+        },
+
+    });
+})
+
