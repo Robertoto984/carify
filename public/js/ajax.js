@@ -21,7 +21,7 @@ $(document).on('click', '#destroy', function (e) {
 
     swal.fire({
         title: 'انتباه!',
-        text: 'هل تريد الاستمرار؟',
+        text: 'هل تريد الحذف',
         icon: 'error',
         confirmButtonText: "نعم",
         cancelButtonText: "لا",
@@ -38,7 +38,7 @@ $(document).on('click', '#destroy', function (e) {
                 if (response.redirect) {
                     swal.fire({
                         title: response.message,
-                        timer: 2000,
+                        timer: 5000,
                         timerProgressBar: true,
                         showConfirmButton: false, // Remove the "OK" button
                         allowOutsideClick: false, // Prevent the dialog from closing by clicking outside
@@ -59,7 +59,7 @@ $(document).on('click', '#destroy', function (e) {
 
 
 //multi delete
-$(document).on('click', '#MulitDelete', function (e) {
+$(document).on('click', '#bulkDeleteBtn', function (e) {
     e.preventDefault()
     var token = $("meta[name='csrf-token']").attr('content')
     var href = $(this).attr('href')
@@ -70,7 +70,7 @@ $(document).on('click', '#MulitDelete', function (e) {
     });
     swal.fire({
         title: 'انتباه!',
-        text: 'هل تريد الاستمرار؟',
+        text: 'هل تريد الحذف؟',
         icon: 'error',
         confirmButtonText: "نعم",
         cancelButtonText: "لا",
@@ -88,7 +88,7 @@ $(document).on('click', '#MulitDelete', function (e) {
                     if (response.redirect) {
                         swal.fire({
                             title: response.message,
-                            timer: 2000,
+                            timer: 5000,
                             timerProgressBar: true,
                             showConfirmButton: false, // Remove the "OK" button
                             allowOutsideClick: false, // Prevent the dialog from closing by clicking outside

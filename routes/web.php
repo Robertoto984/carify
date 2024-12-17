@@ -12,24 +12,24 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::prefix('trucks')->group(function () {
-    Route::get('index', [TrucksController::class, 'index'])->name('trucks.index');
-    Route::get('create', [TrucksController::class, 'create'])->name('trucks.create');
-    Route::post('store', [TrucksController::class, 'store'])->name('trucks.store');
-    Route::get('edit/{id}', [TrucksController::class, 'edit'])->name('trucks.edit');
-    Route::post('update/{id}', [TrucksController::class, 'update'])->name('trucks.update');
-    Route::delete('delete_all',[TrucksController::class,'MultiDelete'])->name('trucks.delete_all');
-    Route::delete('delete/{id}',[TrucksController::class,'destroy'])->name('trucks.delete');
-
+Route::prefix('trucks')->controller(TrucksController::class)->group(function () {
+    Route::get('index', 'index')->name('trucks.index');
+    Route::get('create', 'create')->name('trucks.create');
+    Route::post('store', 'store')->name('trucks.store');
+    Route::get('edit/{id}', 'edit')->name('trucks.edit');
+    Route::post('update/{id}', 'update')->name('trucks.update');
+    Route::delete('bulk-delete', 'MultiDelete')->name('trucks.bulk-delete');
+    Route::delete('delete/{id}', 'destroy')->name('trucks.delete');
 });
 
-Route::prefix('drivers')->group(function () {
-    Route::get('index', [DriversController::class, 'index'])->name('drivers.index');
-    Route::get('create', [DriversController::class, 'create'])->name('drivers.create');
-    Route::post('store', [DriversController::class, 'store'])->name('drivers.store');
-    Route::get('edit/{id}', [DriversController::class, 'edit'])->name('drivers.edit');
-    Route::post('update/{id}', [DriversController::class, 'update'])->name('drivers.update');
-    Route::delete('delete_all',[DriversController::class,'MultiDelete'])->name('drivers.delete_all');
-    Route::delete('delete/{id}',[DriversController::class,'destroy'])->name('drivers.delete');
+
+Route::prefix('drivers')->controller(DriversController::class)->group(function () {
+    Route::get('index', 'index')->name('drivers.index');
+    Route::get('create', 'create')->name('drivers.create');
+    Route::post('store', 'store')->name('drivers.store');
+    Route::get('edit/{id}', 'edit')->name('drivers.edit');
+    Route::post('update/{id}', 'update')->name('drivers.update');
+    Route::delete('bulk-delete', 'MultiDelete')->name('drivers.bulk-delete');
+    Route::delete('delete/{id}','destroy')->name('drivers.delete');
 
 });

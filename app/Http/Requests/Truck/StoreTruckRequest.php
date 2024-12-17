@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Truck;
 
-use App\Enums\Color;
-use App\Enums\FuelTypes;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTruckRequest extends FormRequest
@@ -25,8 +23,8 @@ class StoreTruckRequest extends FormRequest
             'traffic_license_number' => 'required|array',
             'legal_status' => 'required|array',
             'fuel_type' => 'required|array',
-            'year' => 'required|array|date_format:Y-m-d',
-            'model' => 'required|date_format:Y-m-d|array',
+            'year' => 'required|array',
+            'model' => 'required|array',
             'passengers_number' => 'required|array',
             'gross_weight' => 'required|array',
             'empty_weight' => 'required|array',
@@ -34,9 +32,8 @@ class StoreTruckRequest extends FormRequest
             'kilometer_number' => 'required|array',
             'technical_status' => 'required|array',
             'color' => 'required|array',
-            'register' => 'required|array|date_format:Y-m-d',
-          
-            'demarcation_date' => 'required|array|date_format:Y-m-d',
+            'register' => 'required|array',
+            'demarcation_date' => 'required|array',
             'parts_description' => 'nullable|string',
         ];
     }

@@ -8,6 +8,7 @@ use App\Http\Requests\Driver\updateDriverRequest;
 use App\Models\Driver;
 use App\Services\Driver\StoreDriverService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class DriversController extends Controller
 {
@@ -52,7 +53,6 @@ class DriversController extends Controller
 
         }
     }
-
    
     public function update(updateDriverRequest $request,$id)
     {

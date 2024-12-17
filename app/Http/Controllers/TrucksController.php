@@ -8,15 +8,15 @@ use App\Http\Requests\Truck\StoreTruckRequest;
 use App\Http\Requests\Truck\updateTruckRequest;
 use App\Models\Driver;
 use App\Models\Truck;
-use App\Services\Truck\AddTruckService;
+use App\Services\Truck\StoreTruckService;
 use Illuminate\Http\Request;
 class TrucksController extends Controller
 {
-    protected $addTruckService;
+    protected $storeTruckService;
 
-    public function __construct(AddTruckService $addTruckService)
+    public function __construct(StoreTruckService $storeTruckService)
     {
-        $this->addTruckService = $addTruckService;
+        $this->storeTruckService = $storeTruckService;
     }
 
     public function index()
@@ -47,7 +47,7 @@ class TrucksController extends Controller
      public function store(StoreTruckRequest $request)
     {
         try {
-            $this->addTruckService->store($request->validated());
+            $this->storeTruckService->store($request->validated());
 
             return response()->json(['message'=>'تم إضافة المركبة بنجاح.','redirect'=>route('trucks.index')]);
         } catch (\Exception $e) {
@@ -60,7 +60,7 @@ class TrucksController extends Controller
     {
         try {
             $data = $request->validated();
-            $this->addTruckService->updateTruck($data,$id);
+            $this->storeTruckService->updateTruck($data,$id);
             return response()->json(['message'=>'تم تعديل المركبة بنجاح.','redirect'=>route('trucks.index')]);
         } catch (\Exception $e) {
             return response()->json(['message'=>'حدث خطأ أثناء تعديل المركبة:','redirect'=>route('trucks.index')]);

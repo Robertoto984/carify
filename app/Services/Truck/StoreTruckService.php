@@ -4,17 +4,16 @@ namespace App\Services\Truck;
 
 use App\Models\Truck;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
-class AddTruckService
+class StoreTruckService
 {
     public function store(array $trucksData)
     {
         foreach ($trucksData['type'] as $key => $type) {
-            $year =  Carbon::parse( $trucksData['year'][$key].'-01-01')->format('Y-m-d');
-            $model =  Carbon::parse( $trucksData['model'][$key].'-01-01')->format('Y-m-d');
-            $register =  Carbon::parse( $trucksData['register'][$key].'-01-01')->format('Y-m-d');
-            $demarcation_date = Carbon::parse( $trucksData['demarcation_date'][$key])->format('Y-m-d');
+            $year = Carbon::createFromFormat('Y-m-d', $trucksData['year'][$key])->format('Y');
+            $model = Carbon::createFromFormat('Y-m-d', $trucksData['model'][$key])->format('Y');
+            $register = Carbon::createFromFormat('Y-m-d', $trucksData['register'][$key])->format('Y');
+            $demarcation_date = Carbon::createFromFormat('Y-m-d', $trucksData['demarcation_date'][$key])->format('Y-m-d');
             Truck::create([
                 'type' => $type,
                 'manufacturer' => $trucksData['manufacturer'][$key],
