@@ -3,10 +3,11 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DriversController;
 use App\Http\Controllers\TrucksController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-// Route::group(['middleware'=>'api'],function(){
+
     Route::get('/', function () {
         return view('login');
     });
@@ -39,6 +40,16 @@ use Illuminate\Support\Facades\Route;
             Route::delete('delete/{id}','destroy')->name('drivers.delete');
         
         });
+
     });
     
-// });
+    Route::prefix('users')->controller(UserController::class)->group(function () {
+        Route::get('index', 'index')->name('users.index');
+        Route::get('create', 'create')->name('users.create');
+        Route::post('store', 'store')->name('users.store');
+        Route::get('edit/{id}', 'edit')->name('users.edit');
+        Route::post('update/{id}', 'update')->name('users.update');
+        Route::delete('bulk-delete', 'MultiDelete')->name('users.bulk-delete');
+        Route::delete('delete/{id}','destroy')->name('users.delete');
+    
+    });

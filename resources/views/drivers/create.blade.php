@@ -31,20 +31,16 @@
                                 <div class="form-group mb-3">
                                     <label for="first_name">الاسم الأول</label>
                                     <input type="text" name="first_name[]" id="first_name" class="form-control">
-                                    <?php $i=0?>
-                                    <span class="text-danger" id="input-first_name.{{ $i }}"></span>
+                                    <span class="text-danger" id="first_name-error"></span>
 
-                                    <?php $i++?>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="last_name">الكنية</label>
                                     <input type="text" name="last_name[]" id="last_name" class="form-control">
-                                    <?php $i=0?>
-                                    <span class="text-danger" id="input-last_name.{{ $i }}"></span>
+                                    <span class="text-danger" id="last_name-error"></span>
 
-                                    <?php $i++?>
                                 </div>
                             </div>
                         </div>
@@ -55,14 +51,13 @@
                                     <div class="input-group">
                                         <input type="text" name="birth_date[]" class="form-control drgpicker"
                                             id="birth_date" aria-describedby="button-addon">
-                                        <?php $i=0?>
-                                        <span class="text-danger" id="input-birth_date.{{ $i }}"></span>
 
-                                        <?php $i++?>
                                         <div class="input-group-append">
                                             <div class="input-group-text" id="button-addon-date"><span
                                                     class="fe fe-calendar fe-16"></span></div>
                                         </div>
+                                        <span class="text-danger" id="birth_date-error"></span>
+
                                     </div>
                                 </div>
                             </div>
@@ -70,20 +65,16 @@
                                 <div class="form-group mb-3">
                                     <label for="phone">رقم الهاتف</label>
                                     <input type="text" name="phone[]" id="phone" class="form-control">
-                                    <?php $i=0?>
-                                    <span class="text-danger" id="input-phone.{{ $i }}"></span>
+                                    <span class="text-danger" id="phone-error"></span>
 
-                                    <?php $i++?>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="address">العنوان</label>
                                     <input type="text" name="address[]" id="address" class="form-control">
-                                    <?php $i=0?>
-                                    <span class="text-danger" id="input-address.{{ $i }}"></span>
+                                    <span class="text-danger" id="address-error"></span>
 
-                                    <?php $i++?>
                                 </div>
                             </div>
                         </div>
@@ -98,10 +89,8 @@
                                             {{ $type }}</option>
                                         @endforeach
                                     </select>
-                                    <?php $i=0?>
-                                    <span class="text-danger" id="input-license_type.{{ $i }}"></span>
+                                    <span class="text-danger" id="license_type-error"></span>
 
-                                    <?php $i++?>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -111,14 +100,13 @@
                                         <input type="text" name="license_expiration_date[]"
                                             class="form-control drgpicker" id="license_expiration_date"
                                             aria-describedby="button-addon">
-                                        <?php $i=0?>
-                                        <span class="text-danger" id="input-license_expiration_date.{{ $i }}"></span>
 
-                                        <?php $i++?>
                                         <div class="input-group-append">
                                             <div class="input-group-text" id="button-addon-date"><span
                                                     class="fe fe-calendar fe-16"></span></div>
                                         </div>
+                                        <span class="text-danger" id="license_expiration_date-error"></span>
+
                                     </div>
                                 </div>
                             </div>

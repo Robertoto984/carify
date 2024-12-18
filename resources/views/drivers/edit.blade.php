@@ -9,9 +9,8 @@
                         <label for="first_name">الاسم الأول</label>
                         <input type="text" name="first_name" value="{{ $row->first_name }}" id="first_name"
                             class="form-control">
-                        @error('first_name')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                        <span class="text-danger" id="first_name-error"></span>
+
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -19,9 +18,8 @@
                         <label for="last_name">الكنية</label>
                         <input type="text" name="last_name" value="{{ $row->last_name }}" id="last_name"
                             class="form-control">
-                        @error('last_name')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                        <span class="text-danger" id="last_name-error"></span>
+
                     </div>
                 </div>
             </div>
@@ -32,13 +30,13 @@
                         <div class="input-group">
                             <input type="text" name="birth_date" value="{{ $row->birth_date }}"
                                 class="form-control drgpicker" id="birth_date" aria-describedby="button-addon">
-                            @error('birth_date')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
+
                             <div class="input-group-append">
                                 <div class="input-group-text" id="button-addon-date"><span
                                         class="fe fe-calendar fe-16"></span></div>
                             </div>
+                            <span class="text-danger" id="birth_date-error"></span>
+
                         </div>
                     </div>
                 </div>
@@ -46,18 +44,16 @@
                     <div class="form-group mb-3">
                         <label for="phone">رقم الهاتف</label>
                         <input type="text" name="phone" id="phone" value="{{ $row->phone }}" class="form-control">
-                        @error('phone')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                        <span class="text-danger" id="phone-error"></span>
+
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label for="address">العنوان</label>
                         <input type="text" name="address" id="address" value="{{ $row->address }}" class="form-control">
-                        @error('address')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                        <span class="text-danger" id="address-error"></span>
+
                     </div>
                 </div>
             </div>
@@ -73,9 +69,8 @@
                                 }}</option>
                             @endforeach
                         </select>
-                        @error('license_type')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                        <span class="text-danger" id="license_type-error"></span>
+
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -85,13 +80,13 @@
                             <input type="text" name="license_expiration_date"
                                 value="{{ $row->license_expiration_date }}" class="form-control drgpicker"
                                 id="license_expiration_date" aria-describedby="button-addon">
-                            @error('license_expiration_date')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
+
                             <div class="input-group-append">
                                 <div class="input-group-text" id="button-addon-date"><span
                                         class="fe fe-calendar fe-16"></span></div>
                             </div>
+                            <span class="text-danger" id="license_expiration_date-error"></span>
+
                         </div>
                     </div>
                 </div>

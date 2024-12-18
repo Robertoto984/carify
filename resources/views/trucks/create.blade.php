@@ -5,7 +5,23 @@
     <h2 class="page-title mb-3">إضافة مركبة</h2>
     <div class="card shadow mb-4">
         <div class="card-body">
+            @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
 
+            @if(session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
+
+            @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
 
             <form method="POST" action="{{route('trucks.store')}}" class="submit-form">
                 @csrf
@@ -143,8 +159,7 @@
                                 <div class="form-group mb-3 ">
                                     <label for="register">التسجيل</label>
                                     <div class="input-group">
-                                        <input type="date" name="register[]" class="form-control" 
-                                            value="04/24/2020" >
+                                        <input type="date" name="register[]" class="form-control" value="04/24/2020">
 
                                         <div class="input-group-append">
                                             <div class="input-group-text" id="button-addon-date"><span
@@ -161,8 +176,7 @@
                                     <div class="form-group col-md-4 mb-3 mb-3">
                                         <label for="year">السنة</label>
                                         <div class="input-group">
-                                            <input type="date" name="year[]" class="form-control" 
-                                                value="04/24/2020" >
+                                            <input type="date" name="year[]" class="form-control" value="04/24/2020">
 
                                             <div class="input-group-append">
                                                 <div class="input-group-text" id="button-addon-date"><span
@@ -176,7 +190,7 @@
                                         <label for="demarcation_date">تاريخ الترسيم</label>
                                         <div class="input-group">
                                             <input type="date" name="demarcation_date[]" class="form-control"
-                                                value="04/24/2020" >
+                                                value="04/24/2020">
 
                                             <div class="input-group-append">
                                                 <div class="input-group-text" id="button-addon-date"><span
@@ -190,8 +204,7 @@
                                     <div class="form-group col-md-4 mb-3 mb-3">
                                         <label for="model">الموديل</label>
                                         <div class="input-group">
-                                            <input type="date" name="model[]" class="form-control" 
-                                                value="04/24/2020" >
+                                            <input type="date" name="model[]" class="form-control" value="04/24/2020">
 
                                             <div class="input-group-append">
                                                 <div class="input-group-text" id="button-addon-date"><span

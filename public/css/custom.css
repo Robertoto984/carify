@@ -81,7 +81,7 @@ label {
 
 th, td {
     padding: 8px;
-    text-align: center;
+    /* text-align: center; */
     font-family: 'Markazi Text', sans-serif;
     font-size: 16px;
     white-space: nowrap;

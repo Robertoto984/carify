@@ -156,7 +156,7 @@ $('body').on('submit', 'form.submit-form', function (e) {
                     position: 'top-start',
 
                 }).then(function() {
-                    window.location = response.redirect;
+                    window.location = data.redirect;
                 });
 
             }

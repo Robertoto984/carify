@@ -25,9 +25,12 @@
                 <span class="ml-3 item-text">المركبات</span><span class="sr-only">(current)</span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == 'trucks' ? 'show':''}}" id="vehicles">
+                @can('index',\App\Models\Truck::class)
+
                 <li class="nav-item active">
                   <a class="nav-link pl-3" href="{{route('trucks.index')}}"><span class="ml-1 item-text">قائمة المركبات</span></a>
                 </li>
+                @endcan
                 <li class="nav-item">
                   <a class="nav-link pl-3" href=""><span class="ml-1 item-text">أمر حركة</span></a>
                 </li>
@@ -44,12 +47,18 @@
                 <span class="ml-3 item-text">السائقين</span><span class="sr-only">(current)</span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == 'drivers' ? 'show':''}}" id="drivers" >
+                @can('index',\App\Models\Driver::class)
+
                 <li class="nav-item active">
                   <a class="nav-link pl-3" href="{{route('drivers.index')}}"><span class="ml-1 item-text">قائمة السائقين</span></a>
                 </li>
+                @endcan
+                @can('create',\App\Models\Driver::class)
+
                 <li class="nav-item">
                   <a class="nav-link pl-3" href="{{route('drivers.create')}}"><span class="ml-1 item-text">إضافة سائق</span></a>
                 </li>
+                @endcan
               </ul>
             </li>
           </ul>
@@ -60,12 +69,18 @@
                 <span class="ml-3 item-text">المستخدمين</span><span class="sr-only">(current)</span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == 'users' ? 'show':''}}" id="users">
+                @can('index',\App\Models\User::class)
+
                 <li class="nav-item active">
-                  <a class="nav-link pl-3" href=""><span class="ml-1 item-text">قائمة المستخدمين</span></a>
+                  <a class="nav-link pl-3" href="{{ route('users.index') }}"><span class="ml-1 item-text">قائمة المستخدمين</span></a>
                 </li>
+                @endcan
+                @can('create',\App\Models\User::class)
+
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href=""><span class="ml-1 item-text">إضافة مستخدم</span></a>
+                  <a class="nav-link pl-3" href="{{ route('users.create') }}"><span class="ml-1 item-text">إضافة مستخدم</span></a>
                 </li>
+                @endcan
               </ul>
             </li>
           </ul>

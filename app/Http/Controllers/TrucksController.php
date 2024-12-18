@@ -21,12 +21,18 @@ class TrucksController extends Controller
 
     public function index()
     {
+        if (request()->user()->cannot('index', Truck::class)) {
+            abort(403);
+        }
         $trucks = Truck::with('truckDeliverCards.driver')->get();
         return view('trucks.index', compact('trucks'));
     }
 
     public function create()
     {
+        if (request()->user()->cannot('create', Truck::class)) {
+            abort(403);
+        }
         $colors = Color::values();
         $fuelTypes = FuelTypes::values();
         $drivers = Driver::all();
@@ -36,6 +42,10 @@ class TrucksController extends Controller
     
     public function edit($id)
     {
+        $truck = new Truck();
+        if (request()->user()->cannot('update', $truck)) {
+            abort(403);
+        }
         $row = Truck::findOrFail($id);
         $colors = Color::values();
         $fuelTypes = FuelTypes::values();
@@ -46,6 +56,9 @@ class TrucksController extends Controller
     }
      public function store(StoreTruckRequest $request)
     {
+        if (request()->user()->cannot('create', Truck::class)) {
+            abort(403);
+        }
         try {
             $this->storeTruckService->store($request->validated());
 
@@ -59,6 +72,10 @@ class TrucksController extends Controller
     public function update(updateTruckRequest $request,$id)
     {
         try {
+            $truck = new Truck();
+            if (request()->user()->cannot('update', $truck)) {
+                abort(403);
+            }
             $data = $request->validated();
             $this->storeTruckService->updateTruck($data,$id);
             return response()->json(['message'=>'تم تعديل المركبة بنجاح.','redirect'=>route('trucks.index')]);
@@ -71,6 +88,10 @@ class TrucksController extends Controller
     public function destroy($id)
     {
         try {
+            $truck = new Truck();
+            if (request()->user()->cannot('delete', $truck)) {
+                abort(403);
+            }
             $ids = Truck::where('id',$id)->delete();
             return response()
             ->json(['message' => 'تم حذف المركبة بنجاح.','redirect'=>route('trucks.index')]);
@@ -82,6 +103,9 @@ class TrucksController extends Controller
     public function MultiDelete(Request $request)
     {
         try {
+            if (request()->user()->cannot('MultiDelete', Truck::class)) {
+                abort(403);
+            }
             $ids = Truck::whereIn('id',(array)$request['ids'])->delete();
             return response()
             ->json(['message' => 'تم حذف المركبة بنجاح.','redirect'=>route('trucks.index')]);
