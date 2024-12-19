@@ -122,6 +122,13 @@ class DriversController extends Controller
         }
     }
 
+    public function ImportForm()
+    {
+        return response()->json([
+            'html' => view('drivers.import')->render(),
+        ]);
+    }
+
     public function export() 
     {
         return Excel::download(new DriversExport, 'drivers.xlsx');

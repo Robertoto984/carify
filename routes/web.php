@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
             Route::post('update/{id}', 'update')->name('trucks.update');
             Route::delete('bulk-delete', 'MultiDelete')->name('trucks.bulk-delete');
             Route::delete('delete/{id}', 'destroy')->name('trucks.delete');
+            Route::get('import_form','ImportForm')->name('trucks.import_form');
             Route::get('export','export')->name('trucks.export');
             Route::post('import', 'import')->name('trucks.import');
         });
@@ -40,6 +41,7 @@ use Illuminate\Support\Facades\Route;
             Route::post('update/{id}', 'update')->name('drivers.update');
             Route::delete('bulk-delete', 'MultiDelete')->name('drivers.bulk-delete');
             Route::delete('delete/{id}','destroy')->name('drivers.delete');
+            Route::get('import_form','ImportForm')->name('drivers.import_form');
             Route::get('export','export')->name('drivers.export');
             Route::post('import', 'import')->name('drivers.import');
         
@@ -55,5 +57,8 @@ use Illuminate\Support\Facades\Route;
         Route::post('update/{id}', 'update')->name('users.update');
         Route::delete('bulk-delete', 'MultiDelete')->name('users.bulk-delete');
         Route::delete('delete/{id}','destroy')->name('users.delete');
-    
+        Route::get('import_form','ImportForm')->name('users.import_form');
+        
+        Route::get('export','export')->name('users.export');
+        Route::post('import', 'import')->name('users.import');
     });

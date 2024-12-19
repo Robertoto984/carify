@@ -38,7 +38,7 @@ $(document).on('click', '#destroy', function (e) {
                     if (response.redirect) {
                         swal.fire({
                             title: response.message,
-                            timer: 5000,
+                            timer: 3000,
                             timerProgressBar: true,
                             showConfirmButton: false, // Remove the "OK" button
                             allowOutsideClick: false, // Prevent the dialog from closing by clicking outside
@@ -91,7 +91,7 @@ $(document).on('click', '#bulkDeleteBtn', function (e) {
                     if (response.redirect) {
                         swal.fire({
                             title: response.message,
-                            timer: 5000,
+                            timer: 3000,
                             timerProgressBar: true,
                             showConfirmButton: false, // Remove the "OK" button
                             allowOutsideClick: false, // Prevent the dialog from closing by clicking outside
@@ -148,7 +148,7 @@ $('body').on('submit', 'form.submit-form', function (e) {
             if (data.redirect) {
                 swal.fire({
                     title: data.message,
-                    timer: 5000,
+                    timer: 3000,
                     timerProgressBar: true,
                     showConfirmButton: false, // Remove the "OK" button
                     allowOutsideClick: false, // Prevent the dialog from closing by clicking outside

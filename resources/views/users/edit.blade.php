@@ -1,3 +1,6 @@
+
+
+
 <form method="POST" action="{{route('users.update',['id'=>$row->id])}}" class="submit-form">
     @csrf
     <div id="vehicle-forms-container">

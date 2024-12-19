@@ -119,6 +119,13 @@ class TrucksController extends Controller
         }
     }
 
+    public function ImportForm()
+    {
+        return response()->json([
+            'html' => view('trucks.import')->render(),
+        ]);
+    }
+
     public function export() 
     {
         return Excel::download(new TrucksExport, 'trucks.xlsx');

@@ -8,6 +8,9 @@ use App\Services\User\UserService;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Exports\UsersExport;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -110,5 +113,28 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+    public function ImportForm()
+    {
+        return response()->json([
+            'html' => view('users.import')->render(),
+        ]);
+    }
+
+    public function export() 
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+    public function import(Request $request) 
+    {
+        $request->validate([
+            'file' => 'required|max:2048',
+        ]);
+  
+        Excel::import(new UsersImport, $request->file('file'));
+                 
+        return back()->with('success', 'تم استيراد المستخدمين بنجاح');
     }
 }
