@@ -11,7 +11,7 @@
     <div class="dropdown float-right">
         @can('create',\App\Models\User::class)
 
-        <a href="{{ route('users.create') }}" class="btn btn-primary rounded-btn ml-10">+ بطاقة مركبة</a>
+        <a href="{{ route('users.create') }}" class="btn btn-primary rounded-btn ml-10">+ مستخدم</a>
         @endcan
         @can('MultiDelete',\App\Models\User::class)
 
