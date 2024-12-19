@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CardsController;
 use App\Http\Controllers\DriversController;
 use App\Http\Controllers\TrucksController;
 use App\Http\Controllers\UserController;
@@ -30,6 +31,12 @@ use Illuminate\Support\Facades\Route;
             Route::get('import_form','ImportForm')->name('trucks.import_form');
             Route::get('export','export')->name('trucks.export');
             Route::post('import', 'import')->name('trucks.import');
+        });
+
+        Route::prefix('cards')->controller(CardsController::class)->group(function () {
+            Route::get('index/', 'index')->name('cards.index');
+            Route::get('create/{id}', 'create')->name('trucks.create-deliver-order');
+            Route::post('store', 'store')->name('trucks.store-deliver-order');
         });
         
         

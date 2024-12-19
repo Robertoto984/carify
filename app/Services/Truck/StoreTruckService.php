@@ -44,8 +44,8 @@ class StoreTruckService
         // dd($request);
         $truck = Truck::where('id',$id)->first();
         $year = $request['year'];
-            $model = $request['model'];
-            $register = $request['register'];
+        $model = $request['model'];
+        $register = $request['register'];
         $demarcation_date = Carbon::parse( $request['demarcation_date'])->format('Y-m-d');
        
         $truck->update([

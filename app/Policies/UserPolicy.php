@@ -47,5 +47,10 @@ class UserPolicy
         return $user->role->name === 'مدير';
     }
 
+    public function deliverOrder(User $user): bool
+    {
+        return $user->role->name === 'مدير';
+    }
+
    
 }

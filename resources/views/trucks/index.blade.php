@@ -88,10 +88,10 @@
                                         <td>{{ $truck->id }}</td>
                                         <td>{{ $truck->type }}</td>
                                         <td>{{ $truck->manufacturer }}</td>
-                                        <td>{{ $truck->plate_number }}</td>
                                         <td>{{ $truck->year }}</td>
                                         <td>{{ $truck->register }}</td>
                                         <td>{{ $truck->model }}</td>
+                                        <td>{{ $truck->plate_number }}</td>
                                         <td>{{ $truck->chassis_number }}</td>
                                         <td>{{ $truck->engine_number }}</td>
                                         <td>{{ $truck->traffic_license_number }}</td>
@@ -123,6 +123,10 @@
                                         </td>
                                         <td>
                                             @can('update',$truck)
+                                            
+                                            <a href="{{ route('trucks.create-deliver-order',$truck->id)}}" class="btn btn-warning btn-sm">
+                                                <i class="fa fa-ticket"></i> بطاقة تسليم
+                                            </a>
 
                                             <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('trucks.edit',$truck->id) }}" class="btn btn-primary btn-sm">
                                                 <i class="fa fa-edit"></i> تعديل
@@ -133,6 +137,7 @@
                                             <a href="{{ route('trucks.delete',$truck->id) }}" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="{{ $truck->id }}">
                                                 <i class="fa fa-trash"></i> حذف
                                             </a>
+
                                             @endcan
                                         </td>
                                     </tr>

@@ -32,6 +32,9 @@
                 </li>
                 @endcan
                 <li class="nav-item">
+                  <a class="nav-link pl-3" href="{{route('trucks.create')}}"><span class="ml-1 item-text">بطاقة مركبة</span></a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link pl-3" href=""><span class="ml-1 item-text">أمر حركة</span></a>
                 </li>
                 <li class="nav-item">
@@ -56,7 +59,7 @@
                 @can('create',\App\Models\Driver::class)
 
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="{{route('drivers.create')}}"><span class="ml-1 item-text">إضافة سائق</span></a>
+                  <a class="nav-link pl-3" href="{{route('drivers.create')}}"><span class="ml-1 item-text">بطاقة سائق</span></a>
                 </li>
                 @endcan
               </ul>
@@ -78,7 +81,7 @@
                 @can('create',\App\Models\User::class)
 
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="{{ route('users.create') }}"><span class="ml-1 item-text">إضافة مستخدم</span></a>
+                  <a class="nav-link pl-3" href="{{ route('users.create') }}"><span class="ml-1 item-text">بطاقة مستخدم</span></a>
                 </li>
                 @endcan
               </ul>
@@ -92,7 +95,7 @@
               </a>
               <ul class="collapse list-unstyled pl-4 w-100" id="cards">
                 <li class="nav-item">
-                <a class="nav-link pl-3" href=""><span class="ml-1 item-text">قائمة البطاقات</span></a>
+                  <a class="nav-link pl-3" href="{{route('cards.index')}}"><span class="ml-1 item-text">قائمة البطاقات</span></a>
                 </li>
                 <li class="nav-item active">
                   <a class="nav-link pl-3" href=""><span class="ml-1 item-text">بطاقة مركبة</span></a>

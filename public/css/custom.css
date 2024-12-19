@@ -68,6 +68,12 @@ label {
     margin-left: 5px !important; 
 }
 
+.btn-warning, .btn-primary, .btn-danger  {
+    font-family: 'Markazi Text', sans-serif;
+    font-size: 12px;
+    color: white;
+}
+
 .table-container {
     width: 100%;
     overflow-x: auto;

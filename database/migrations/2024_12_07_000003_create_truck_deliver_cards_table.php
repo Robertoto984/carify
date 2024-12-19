@@ -15,10 +15,10 @@ return new class extends Migration
             $table->year('year');
             $table->year('register');
             $table->year('model');
-            $table->integer('plate_number');
-            $table->integer('chassis_number');
-            $table->integer('engine_number');
-            $table->integer('traffic_license_number');
+            $table->string('plate_number');
+            $table->string('chassis_number');
+            $table->string('engine_number');
+            $table->string('traffic_license_number');
             $table->date('demarcation_date');
             $table->enum('color', \App\Enums\Color::values());
             $table->enum('fuel_type', \App\Enums\FuelTypes::values());
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('gross_weight');
             $table->string('empty_weight');
             $table->string('load');
-            $table->string('kilometer_number')->default('0');
+            $table->integer('kilometer_number')->default('0');
             $table->string('technical_status');
             $table->string('legal_status');
             $table->date('receipt_date');

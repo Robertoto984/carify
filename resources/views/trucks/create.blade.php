@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="col-12">
-    <h2 class="page-title mb-3">إضافة مركبة</h2>
+    <h2 class="page-title mb-3">بطاقة مركبة</h2>
     <div class="card shadow mb-4">
         <div class="card-body">
             @if(session('success'))
@@ -232,10 +232,12 @@
                         <div class="col mr-auto mb-5 mt-5">
                             <div class="dropdown">
                                 <button type="submit" class="btn btn-success rounded-btn">حفظ</button>
-                                <button type="button" id="add-form-btn" class="btn rounded-btn btn-primary">إضافة مركبة
-                                    أخرى</button>
-                                <button type="button" class="btn btn-danger rounded-btn delete-form-btn">حذف هذه
-                                    المركبة</button>
+                                <button type="button" id="add-form-btn" class="btn rounded-btn btn-primary">
+                                    بطاقة مركبة جديدة
+                                </button>
+                                <button type="button" class="btn btn-danger rounded-btn delete-form-btn">
+                                    إلغاء هذه البطاقة
+                                </button>
                             </div>
                         </div>
                     </div>

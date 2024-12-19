@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Truck;
+namespace App\Http\Requests\Cards;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTruckRequest extends FormRequest
+class StoreDeliverCardRequest extends FormRequest
 {
-    
     public function authorize(): bool
     {
         return true;
@@ -14,27 +13,30 @@ class StoreTruckRequest extends FormRequest
 
     public function rules(): array
     {
-         return [
-            'type' => 'required|array',
-            'manufacturer' => 'required|array',
-            'plate_number' => 'required|array',
-            'chassis_number' => 'required|array',
-            'engine_number' => 'required|array',
-            'traffic_license_number' => 'required|array',
-            'legal_status' => 'required|array',
-            'fuel_type' => 'required|array',
-            'year' => 'required|array',
-            'model' => 'required|array',
-            'passengers_number' => 'required|array',
-            'gross_weight' => 'required|array',
-            'empty_weight' => 'required|array',
-            'load' => 'required|array',
-            'kilometer_number' => 'required|array',
-            'technical_status' => 'required|array',
-            'color' => 'required|array',
-            'register' => 'required|array',
-            'demarcation_date' => 'required|array',
-            'parts_description' => 'nullable|string',
+        return [
+            'type' => 'required',
+            'manufacturer' => 'required',
+            'plate_number' => 'required',
+            'chassis_number' => 'required',
+            'engine_number' => 'required',
+            'traffic_license_number' => 'required',
+            'legal_status' => 'required',
+            'fuel_type' => 'required',
+            'year' => 'required|date_format:Y',  // Specify a valid year format
+            'model' => 'required|date_format:Y', // Similarly for model
+            'register' => 'required|date_format:Y', // Ensure it's in year format
+            'demarcation_date' => 'required|date_format:Y-m-d', // Full date format
+            'passengers_number' => 'required',
+            'gross_weight' => 'required',
+            'empty_weight' => 'required',
+            'load' => 'required',
+            'kilometer_number' => 'required',
+            'technical_status' => 'required',
+            'color' => 'required',
+            'receipt_date' => 'required',
+            'deliver_date' => 'required',
+            'driver_id' => 'required',
+            'truck_id' => 'required',
         ];
     }
 
@@ -58,8 +60,12 @@ class StoreTruckRequest extends FormRequest
             'kilometer_number.required' => 'رقم العداد مطلوب',
             'technical_status.required' => 'الحالة الفنية مطلوبة',
             'color.required' => 'اللون مطلوب',
+            'driver_id.required' => 'السائق مطلوب',
+            'truck_id.required' => ' معرف المركبة مطلوب',
             'register.required' => 'التجسيل مطلوب',
             'demarcation_date.required' => 'تاريخ الترسيم مطلوب',
+            'deliver_date.required' => 'تاريخ التسليم مطلوب',
+            'receipt_date.required' => 'تاريخ الاستلام مطلوب',
         ];
     }
 }

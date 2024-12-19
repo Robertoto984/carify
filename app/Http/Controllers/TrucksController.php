@@ -53,25 +53,24 @@ class TrucksController extends Controller
         $row = Truck::findOrFail($id);
         $colors = Color::values();
         $fuelTypes = FuelTypes::values();
-        $drivers = Driver::all();
         return response()->json([
-            'html' => view('trucks.edit', ['row' => $row,'colors'=>$colors,'fuelTypes'=>$fuelTypes,'drivers'=>$drivers])->render(),
+            'html' => view('trucks.edit', ['row' => $row,'colors'=>$colors,'fuelTypes'=>$fuelTypes])->render(),
         ]);
     }
-     public function store(StoreTruckRequest $request)
+    public function store(StoreTruckRequest $request)
     {
         if (request()->user()->cannot('create', Truck::class)) {
             abort(403);
         }
         try {
             $this->storeTruckService->store($request->validated());
-
+            
             return response()->json(['message'=>'تم إضافة المركبة بنجاح.','redirect'=>route('trucks.index')]);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-
+    
     
     public function update(updateTruckRequest $request,$id)
     {
@@ -85,10 +84,10 @@ class TrucksController extends Controller
             return response()->json(['message'=>'تم تعديل المركبة بنجاح.','redirect'=>route('trucks.index')]);
         } catch (\Exception $e) {
             return response()->json(['message'=>'حدث خطأ أثناء تعديل المركبة:','redirect'=>route('trucks.index')]);
-
+            
         }
     }
-
+    
     public function destroy($id)
     {
         try {
@@ -136,9 +135,9 @@ class TrucksController extends Controller
         $request->validate([
             'file' => 'required|max:2048',
         ]);
-  
+        
         Excel::import(new TrucksImport, $request->file('file'));
-                 
+        
         return back()->with('success', 'تم استيراد المركبات بنجاح');
     }
 }
