@@ -20,10 +20,8 @@
         @endcan
         <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> المزيد </button>
         <div class="dropdown-menu" aria-labelledby="actionMenuButton">
-            <a class="dropdown-item" href="#">Export</a>
-            <a class="dropdown-item" href="#">Delete</a>
-
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item more" href="{{ route('trucks.export') }}"><i class="fa fa-download mr-2"></i>تصدير</a>
+            <a class="dropdown-item more" href="#"><i class="fa-solid fa-file-import mr-2"></i>استيراد</a>
         </div>
     </div>
 </div>
@@ -52,7 +50,15 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif                                                                  
+                        @endif
+                        
+                        <form action="{{ route('trucks.import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="file" class="form-control">
+                            <br>
+                            <button class="btn btn-success"><i class="fa fa-file"></i> استيراد</button>
+                        </form>
+
                         <table class="table datatables" id="dataTable-1">
                             <thead>
                                 <tr>

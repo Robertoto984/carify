@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Enums\Color;
 use App\Enums\FuelTypes;
+use App\Exports\TrucksExport;
 use App\Http\Requests\Truck\StoreTruckRequest;
 use App\Http\Requests\Truck\updateTruckRequest;
+use App\Imports\TrucksImport;
 use App\Models\Driver;
 use App\Models\Truck;
 use App\Services\Truck\StoreTruckService;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+
 class TrucksController extends Controller
 {
     protected $storeTruckService;
@@ -113,5 +117,21 @@ class TrucksController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+    public function export() 
+    {
+        return Excel::download(new TrucksExport, 'trucks.xlsx');
+    }
+
+    public function import(Request $request) 
+    {
+        $request->validate([
+            'file' => 'required|max:2048',
+        ]);
+  
+        Excel::import(new TrucksImport, $request->file('file'));
+                 
+        return back()->with('success', 'تم استيراد المركبات بنجاح');
     }
 }

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Enums\LicenseTypes;
+use App\Exports\DriversExport;
 use App\Http\Requests\Driver\StoreDriverRequest;
 use App\Http\Requests\Driver\updateDriverRequest;
+use App\Imports\DriversImport;
 use App\Models\Driver;
 use App\Services\Driver\StoreDriverService;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DriversController extends Controller
 {
@@ -117,5 +120,21 @@ class DriversController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+    public function export() 
+    {
+        return Excel::download(new DriversExport, 'drivers.xlsx');
+    }
+
+    public function import(Request $request) 
+    {
+        $request->validate([
+            'file' => 'required|max:2048',
+        ]);
+  
+        Excel::import(new DriversImport, $request->file('file'));
+                 
+        return back()->with('success', 'تم استيراد السائقين بنجاح');
     }
 }

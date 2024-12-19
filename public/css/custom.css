@@ -81,9 +81,64 @@ label {
 
 th, td {
     padding: 8px;
-    /* text-align: center; */
+    text-align: center;
     font-family: 'Markazi Text', sans-serif;
     font-size: 16px;
     white-space: nowrap;
 }
+
+.more {
+    padding: 8px;
+    text-align: center;
+    font-family: 'Markazi Text', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(156, 156, 156);
+}
+
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.dropdown-btn:hover {
+  background-color: #064385;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.custom-dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+  border-radius: 5px;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+  color: #0959af;
+}
+
 

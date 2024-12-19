@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Route;
             Route::post('update/{id}', 'update')->name('trucks.update');
             Route::delete('bulk-delete', 'MultiDelete')->name('trucks.bulk-delete');
             Route::delete('delete/{id}', 'destroy')->name('trucks.delete');
+            Route::get('export','export')->name('trucks.export');
+            Route::post('import', 'import')->name('trucks.import');
         });
         
         
@@ -38,6 +40,8 @@ use Illuminate\Support\Facades\Route;
             Route::post('update/{id}', 'update')->name('drivers.update');
             Route::delete('bulk-delete', 'MultiDelete')->name('drivers.bulk-delete');
             Route::delete('delete/{id}','destroy')->name('drivers.delete');
+            Route::get('export','export')->name('drivers.export');
+            Route::post('import', 'import')->name('drivers.import');
         
         });
 
