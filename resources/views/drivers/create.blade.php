@@ -83,7 +83,7 @@
                                 <div class="form-group mb-3">
                                     <label for="license_type">فئة الشهادة</label>
                                     <select class="form-control" name="license_type[]" id="license_type">
-                                        <option value="" disabled selected>اختر فئة الشهادة</option>
+                                        <option value=""  selected>اختر فئة الشهادة</option>
                                         @foreach($LicenseTypes as $type)
                                         <option value="{{ $type }}" {{ old('license_type')==$type ? 'selected' : '' }}>
                                             {{ $type }}</option>
