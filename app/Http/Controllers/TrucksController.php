@@ -127,7 +127,7 @@ class TrucksController extends Controller
 
     public function export() 
     {
-        return Excel::download(new TrucksExport, 'trucks.xlsx');
+        return Excel::download(new TrucksExport, 'المركبات.xlsx');
     }
 
     public function import(Request $request) 

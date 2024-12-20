@@ -13,7 +13,7 @@ class StoreDriverRequest extends FormRequest
 
     public function rules()
     {
-         return [
+        return [
             'first_name' => 'required|array|max:255',
             'last_name' => 'required|array|max:255',
             'birth_date' => 'required',
@@ -34,8 +34,6 @@ class StoreDriverRequest extends FormRequest
             'address.*.required' => 'العنوان مطلوب',
             'license_type.*.required' => 'فئة الشهادة مطلوبة',
             'license_expiration_date.*.required' => 'تاريخ انتهاء الشهادة مطلوب',
-            'birth_date.*.date_format' => 'يجب أن يكون تاريخ الميلاد بالصيغة يوم/شهر/سنة',
-            'license_expiration_date.*.date_format' => 'يجب أن يكون تاريخ انتهاء الشهادة بالصيغة يوم/شهر/سنة',
         ];
     }
 }

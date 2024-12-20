@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CardsController;
 use App\Http\Controllers\DriversController;
+use App\Http\Controllers\EscortController;
 use App\Http\Controllers\TrucksController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -51,10 +52,21 @@ use Illuminate\Support\Facades\Route;
             Route::get('import_form','ImportForm')->name('drivers.import_form');
             Route::get('export','export')->name('drivers.export');
             Route::post('import', 'import')->name('drivers.import');
-        
         });
-
     });
+
+        Route::prefix('escorts')->controller(EscortController::class)->group(function () {
+            Route::get('index', 'index')->name('escorts.index');
+            Route::get('create', 'create')->name('escorts.create');
+            Route::post('store', 'store')->name('escorts.store');
+            Route::get('edit/{id}', 'edit')->name('escorts.edit');
+            Route::post('update/{id}', 'update')->name('escorts.update');
+            Route::delete('delete/{id}','destroy')->name('escorts.delete');
+            Route::delete('bulk-delete', 'MultiDelete')->name('escorts.bulk-delete');
+            Route::get('import_form','ImportForm')->name('escorts.import_form');
+            Route::get('export','export')->name('escorts.export');
+            Route::post('import', 'import')->name('escorts.import');
+        });
     
     Route::prefix('users')->controller(UserController::class)->group(function () {
         Route::get('index', 'index')->name('users.index');

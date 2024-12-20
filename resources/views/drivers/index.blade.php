@@ -1,5 +1,4 @@
 @extends('dashboard')
-
 @section('content')
 
 <div class="col">
@@ -9,14 +8,16 @@
 <div class="col ml-auto">
     <div class="dropdown float-right">
         @can('create',\App\Models\Driver::class)
-        <a href="{{ route('drivers.create') }}" class="btn rounded-btn btn-primary">+ بطاقة سائق</a>
+            <a href="{{ route('drivers.create') }}" class="btn rounded-btn btn-primary">+ بطاقة سائق</a>
         @endcan
         @can('MultiDelete',\App\Models\Driver::class)
-        <a id="bulkDeleteBtn" href="{{ route('drivers.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف
-            المحدد</a>
+            <a id="bulkDeleteBtn" href="{{ route('drivers.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">
+                حذف المحدد
+            </a>
         @endcan
-        <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> المزيد </button>
+        <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            المزيد
+        </button>
         <div class="dropdown-menu" aria-labelledby="actionMenuButton">
             <a class="dropdown-item more" href="{{ route('drivers.export') }}"><i class="fa fa-download mr-2"></i>تصدير</a>
             <a class="dropdown-item more" href="{{route('drivers.import_form')}}" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
@@ -29,33 +30,30 @@
         <div class="col-md-12">
             <div class="card shadow">
                 <div class="card-body">
-                    <div id="table-container"></div>
                     @if(session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
                     @endif
-
                     @if(session('error'))
-                    <div class="alert alert-danger">{{ session('error') }}</div>
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
                     @endif
-
                     @if($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
-
-                    
 
                     <table class="table datatables" id="dataTable-1">
                         <thead>
                             <tr>
-
                                 <th><input type="checkbox" class="checkbox" id='check_all' /></th>
-
                                 <th>#</th>
                                 <th>الاسم الأول</th>
                                 <th>الكنية</th>
@@ -69,42 +67,31 @@
                         </thead>
                         <tbody>
                             @foreach($drivers as $driver)
-                            <tr>
-                                <td><input type="checkbox" name="ids[]" value="{{ $driver->id }}" id="check" /></td>
-
-                                <td>{{ $driver->id }}</td>
-                                <td>{{ $driver->first_name }}</td>
-                                <td>{{ $driver->last_name }}</td>
-                                <td>{{ $driver->birth_date }}</td>
-                                <td>{{ $driver->phone }}</td>
-                                <td>{{ $driver->address }}</td>
-                                <td>{{ $driver->license_type }}</td>
-                                <td>{{ $driver->license_expiration_date }}</td>
-                                <td>
-                                    @can('update',$driver)
-
-                                    <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal"
-                                        href="{{ route('drivers.edit',$driver->id) }}" class="btn btn-primary btn-sm">
-                                        <i class="fa fa-edit"></i> تعديل
-                                    </a>
-                                    @endcan
-                                    @can('delete',$driver)
-
-                                    <a href="{{ route('drivers.delete',$driver->id) }}" id="destroy"
-                                        class="btn btn-danger btn-sm delete-driver" data-id="{{ $driver->id }}">
-                                        <i class="fa fa-trash"></i> حذف
-                                    </a>
-                                    @endcan
-                                </td>
-                                <td>
-                                    @foreach($driver->truckDeliverCards as $truckDeliverCard)
-                                    @if($truckDeliverCard->truck)
-                                    <p>{{ $truckDeliverCard->truck->manufacturer }} {{ $truckDeliverCard->truck->model
-                                        }} (Plate: {{ $truckDeliverCard->truck->plate_number }})</p>
-                                    @endif
-                                    @endforeach
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="ids[]" value="{{ $driver->id }}" id="check" /></td>
+                                    <td>{{ $driver->id }}</td>
+                                    <td>{{ $driver->first_name }}</td>
+                                    <td>{{ $driver->last_name }}</td>
+                                    <td>{{ $driver->birth_date }}</td>
+                                    <td>{{ $driver->phone }}</td>
+                                    <td>{{ $driver->address }}</td>
+                                    <td>{{ $driver->license_type }}</td>
+                                    <td>{{ $driver->license_expiration_date }}</td>
+                                    <td>
+                                        @can('update',$driver)
+                                            <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('drivers.edit',$driver->id) }}" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-edit"></i> 
+                                                تعديل
+                                            </a>
+                                        @endcan
+                                        @can('delete',$driver)
+                                            <a href="{{ route('drivers.delete',$driver->id) }}" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="{{ $driver->id }}">
+                                                <i class="fa fa-trash"></i>
+                                                حذف
+                                            </a>
+                                        @endcan
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -113,6 +100,4 @@
         </div>
     </div>
 </div>
-
-
 @endsection

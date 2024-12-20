@@ -1,26 +1,19 @@
 <?php
 
-namespace App\Http\Requests\Driver;
+namespace App\Http\Requests\Escort;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class updateDriverRequest extends FormRequest
+class UpdateEscortRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules()
     {
-         return [
+        return [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'birth_date' => 'required',
             'phone' => 'required|string|max:15',
             'address' => 'required|string|max:255',
-            'license_type' => 'required|string',
-            'license_expiration_date' => 'required',
         ];
     }
 
@@ -32,10 +25,7 @@ class updateDriverRequest extends FormRequest
             'birth_date.required' => 'تاريخ الميلاد مطلوب',
             'phone.required' => 'رقم الهاتف مطلوب',
             'address.required' => 'العنوان مطلوب',
-            'license_type.required' => 'فئة الشهادة مطلوبة',
-            'license_expiration_date.required' => 'تاريخ انتهاء الشهادة مطلوب',
             'birth_date.date_format' => 'يجب أن يكون تاريخ الميلاد بالصيغة يوم/شهر/سنة',
-            'license_expiration_date.date_format' => 'يجب أن يكون تاريخ انتهاء الشهادة بالصيغة يوم/شهر/سنة',
         ];
     }
 }

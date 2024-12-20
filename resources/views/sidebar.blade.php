@@ -67,6 +67,24 @@
           </ul>
           <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
+              <a href="#escorts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link " style="{{ request()->segment(1) == 'escorts' ? 'color:#1b68ff':''}}">
+                <i class="fe fe-users fe-16"></i>
+                <span class="ml-3 item-text">المرافقين</span><span class="sr-only">(current)</span>
+              </a>
+              <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == 'escorts' ? 'show':''}}" id="escorts" >
+
+                <li class="nav-item active">
+                  <a class="nav-link pl-3" href="{{route('escorts.index')}}"><span class="ml-1 item-text">قائمة المرافقين</span></a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href=""><span class="ml-1 item-text">بطاقة مرافق</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navbar-nav flex-fill w-100 mb-2">
+            <li class="nav-item dropdown">
               <a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link" style="{{ request()->segment(1) == 'users' ? 'color:#1b68ff':''}}">
                 <i class="fe fe-users fe-16"></i>
                 <span class="ml-3 item-text">المستخدمين</span><span class="sr-only">(current)</span>

@@ -51,7 +51,10 @@ class DriversController extends Controller
         $row = Driver::findOrFail($id);
         $LicenseTypes = LicenseTypes::values();
         return response()->json([
-            'html' => view('drivers.edit', ['row' => $row, 'LicenseTypes' => $LicenseTypes])->render(),
+            'html' => view('drivers.edit',[
+                'row' => $row,
+                'LicenseTypes' => $LicenseTypes
+                ])->render(),
         ]);
     }
 
@@ -65,10 +68,17 @@ class DriversController extends Controller
     
             $driversData = $request->validated();
             $this->storeDriverService->storeDrivers($driversData);
-            return response()->json(['message' => 'تم إضافة السائقين بنجاح.', 'redirect' => route('drivers.index')]);
+            return response()->json([
+                'message' => 'تم إضافة السائقين بنجاح.', 
+                'redirect' => route('drivers.index')
+            ]);
 
         } catch (\Exception $e) {
-            return response()->json(['message' => 'حدث خطأ أثناء إضافة السائقين:', 'redirect' => route('drivers.index')]);
+            return response()->json([
+                'message' => 'حدث خطأ أثناء إضافة المرافق.',
+                'error' => $e->getMessage(),
+                'redirect' => route('drivers.index')
+            ], 500);
 
         }
     }
@@ -83,7 +93,10 @@ class DriversController extends Controller
     
             $driversData = $request->validated();
             $this->storeDriverService->updateDrivers($driversData, $id);
-            return response()->json(['message' => 'تم تعديل السائق بنجاح.', 'redirect' => route('drivers.index')]);
+            return response()->json([
+                'message' => 'تم تعديل السائق بنجاح.', 
+                'redirect' => route('drivers.index')
+            ]);
         } catch (\Exception $e) {
             return response()->json(['message' => 'حدث خطأ أثناء تعديل السائق:', 'redirect' => route('drivers.index')]);
 
@@ -97,7 +110,7 @@ class DriversController extends Controller
             if (request()->user()->cannot('delete', $driver)) {
                 abort(403);
             }
-                $ids = Driver::where('id', $id)->delete();
+                Driver::where('id', $id)->delete();
             return response()
                 ->json(['message' => 'تم حذف السائق بنجاح', 'redirect' => route('drivers.index')]);
 
@@ -131,7 +144,7 @@ class DriversController extends Controller
 
     public function export() 
     {
-        return Excel::download(new DriversExport, 'drivers.xlsx');
+        return Excel::download(new DriversExport, 'السائقين.xlsx');
     }
 
     public function import(Request $request) 
