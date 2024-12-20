@@ -28,4 +28,16 @@ class UpdateUserRequest extends FormRequest
             'password'=>'required|min:5',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.*.required'=>'الاسم مطلوب',
+            'email.*.required'=>'البريد الالكتروني مطلوب',
+            'email.*.unique'=>'البريد الالكتروني موجود',
+            'password.*.required'=>'كلمة المرور مطلوبة',
+            'password.*.min'=>'كلمة المرور يجب ان تكون أكبر من 5 محارف',
+            'role_id.*.required'=>'الوظيفة مطلوبة'
+        ];
+    }
 }

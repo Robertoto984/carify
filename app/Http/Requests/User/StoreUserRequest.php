@@ -22,10 +22,23 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|array',
-            'email'=>'required|array|unique:users,email,except,id',
-            'role_id'=>'required|array',
-            'password'=>'required|array',
+            'name.*'=>'required',
+            'email.*'=>'required|unique:users,email,except,id',
+            'role_id.*'=>'required',
+            'password.*'=>'required|min:5',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.*.required'=>'الاسم مطلوب',
+            'email.*.required'=>'البريد الالكتروني مطلوب',
+            'email.*.unique'=>'البريد الالكتروني موجود',
+            'password.*.required'=>'كلمة المرور مطلوبة',
+            'password.*.min'=>'كلمة المرور يجب ان تكون أكبر من 5 محارف',
+            'role_id.*.required'=>'الوظيفة مطلوبة'
+        ];
+    }
+    
 }

@@ -28,12 +28,18 @@ class EscortController extends Controller
 
     public function index()
     {
+        if (request()->user()->cannot('index', Escort::class)) {
+            abort(403);
+        }
         $escorts = Escort::all();
         return view('escorts.index', \compact('escorts'));
     }
 
     public function create()
     {
+        if (request()->user()->cannot('create', Escort::class)) {
+            abort(403);
+        }
         $LicenseTypes = LicenseTypes::values();
 
         return view('escorts.create', compact('LicenseTypes'));
@@ -42,6 +48,9 @@ class EscortController extends Controller
     public function store(StoreEscortRequest $request)
     {
         try {
+            if (request()->user()->cannot('create', Escort::class)) {
+                abort(403);
+            }
             $this->storeEscortService->storeEscorts($request->validated());
 
             return response()->json([
@@ -60,6 +69,11 @@ class EscortController extends Controller
 
     public function edit($id)
     {
+        $escort = new Escort();
+        if (request()->user()->cannot('update', $escort)) {
+            abort(403);
+        }
+
         $row = Escort::findOrFail($id);
         $LicenseTypes = LicenseTypes::values();
         return response()->json([
@@ -73,6 +87,10 @@ class EscortController extends Controller
     public function update(UpdateEscortRequest $request, $id)
     {
         try {
+            $escort = new Escort();
+            if (request()->user()->cannot('update', $escort)) {
+                abort(403);
+            }
             $escortsData = $request->validated();
             $this->updateEscortService->updateEscort($escortsData, $id);
             return response()->json([
@@ -91,6 +109,10 @@ class EscortController extends Controller
     public function destroy($id)
     {
         try {
+            $escort = new Escort();
+            if (request()->user()->cannot('delete', $escort)) {
+                abort(403);
+            }
             Escort::where('id', $id)->delete();
             return response()
                 ->json(['message' => 'تم حذف المرافق بنجاح', 'redirect' => route('escorts.index')]);
@@ -103,6 +125,9 @@ class EscortController extends Controller
     public function MultiDelete(Request $request)
     {
         try {
+            if (request()->user()->cannot('MultiDelete', Escort::class)) {
+                abort(403);
+            }
             Escort::whereIn('id', (array) $request['ids'])->delete();
             return response()
                 ->json(['message' => 'تم حذف المرافقين بنجاح', 'redirect' => route('escorts.index')]);
@@ -126,12 +151,18 @@ class EscortController extends Controller
 
     public function import(Request $request) 
     {
-        $request->validate([
-            'file' => 'required|max:2048',
-        ]);
-  
-        Excel::import(new EscortsImport, $request->file('file'));
-                 
-        return back()->with('success', 'تم استيراد المرافقين بنجاح');
+        try{
+            $request->validate([
+                'file' => 'required|max:2048',
+            ]);
+      
+            Excel::import(new EscortsImport, $request->file('file'));
+            
+         
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', $e->getMessage());
+
+        }
+        
     }
 }

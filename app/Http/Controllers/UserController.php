@@ -54,6 +54,7 @@ class UserController extends Controller
      
     public function store(StoreUserRequest $request)
     {
+     
         try {
             if (request()->user()->cannot('create', User::class)) {
                 abort(403);
@@ -91,7 +92,7 @@ class UserController extends Controller
             if (request()->user()->cannot('delete', $user)) {
                 abort(403);
             }
-            $ids = User::where('id',$id)->delete();
+            User::where('id',$id)->delete();
             return response()
             ->json(['message' => 'تم حذف المستخدم بنجاح','redirect'=>route('users.index')]);
             
@@ -134,7 +135,8 @@ class UserController extends Controller
         ]);
   
         Excel::import(new UsersImport, $request->file('file'));
-                 
-        return back()->with('success', 'تم استيراد المستخدمين بنجاح');
+          
+        return response()
+        ->json(['message' =>  'تم استيراد المستخدمين بنجاح', 'redirect' => route('users.index')]);
     }
 }

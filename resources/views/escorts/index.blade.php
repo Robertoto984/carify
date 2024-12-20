@@ -8,10 +8,16 @@
 
 <div class="col ml-auto">
     <div class="dropdown float-right">
+        @can('create',\App\Models\Escort::class)
+
         <a href="{{ route('escorts.create') }}" class="btn rounded-btn btn-primary">+ بطاقة مرافق</a>
+        @endcan
+        @can('MultiDelete',\App\Models\Escort::class)
+
         <a id="bulkDeleteBtn" href="{{ route('escorts.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">
             حذف المحدد
         </a>
+        @endcan
         <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> المزيد </button>
         <div class="dropdown-menu" aria-labelledby="actionMenuButton">
@@ -76,14 +82,20 @@
                                 <td>{{$escort->license_type}}</td>
                                 <td>{{$escort->license_expiration_date}}</td>
                                 <td>
+                                    @can('update',$escort)
+
                                     <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal"
                                         href="{{ route('escorts.edit',$escort->id) }}" class="btn btn-primary btn-sm">
                                         <i class="fa fa-edit"></i> تعديل
                                     </a>
+                                    @endcan
+                                    @can('delete',$escort)
+
                                     <a href="{{ route('escorts.delete',$escort->id) }}" id="destroy"
                                         class="btn btn-danger btn-sm delete-driver" data-id="">
                                         <i class="fa fa-trash"></i> حذف
                                     </a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

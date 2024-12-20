@@ -124,7 +124,7 @@
                                         <td>
                                             @can('update',$truck)
                                             
-                                            <a href="{{ route('trucks.create-deliver-order',$truck->id)}}" class="btn btn-warning btn-sm">
+                                            <a  href="{{ route('trucks.create-deliver-order',$truck->id)}}" class="btn btn-warning btn-sm deliver-order">
                                                 <i class="fa fa-ticket"></i> بطاقة تسليم
                                             </a>
 

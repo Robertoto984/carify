@@ -32,9 +32,8 @@
                                 <div class="form-group mb-3">
                                     <label for="type">النوع</label>
                                     <input type="text" name="type[]" id="type" class="form-control">
-
+                                    
                                     <span class="text-danger" id="type-error"></span>
-
 
                                 </div>
                                 <div class="form-group mb-3">
@@ -96,7 +95,7 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="passengers_number">عدد الركاب</label>
-                                    <input type="text" name="passengers_number[]" id="passengers_number"
+                                    <input type="number" name="passengers_number[]" id="passengers_number"
                                         class="form-control">
 
 
@@ -131,7 +130,7 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="kilometer_number">رقم العداد</label>
-                                    <input type="text" name="kilometer_number[]" id="kilometer_number"
+                                    <input type="number" name="kilometer_number[]" id="kilometer_number"
                                         class="form-control">
 
                                     <span class="text-danger" id="kilometer_number-error"></span>
