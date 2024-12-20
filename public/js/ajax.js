@@ -129,7 +129,6 @@ $(document).on('click', '#modal', function (e) {
     })
 })
 
-
 $('body').on('submit', 'form.submit-form', function (e) {
     e.preventDefault();
 
@@ -137,22 +136,19 @@ $('body').on('submit', 'form.submit-form', function (e) {
     form.find('span.error').fadeOut(200);
     form.parent().addClass('load');
 
-    // Add CSRF token in the request header
     var token = $("meta[name='csrf-token']").attr("content");
 
     $.ajax({
         url: form.attr('action'),
         type: "POST",
-        data: new FormData($(this)[0]), // Send form data, including files
+        data: new FormData($(this)[0]),
         processData: false,
         contentType: false,
         beforeSend: function(xhr) {
-            // Set the CSRF token in the header
             xhr.setRequestHeader('X-CSRF-TOKEN', token);
         },
         dataType: 'JSON',
         success: function (data) {
-            // Check for a redirect URL in the response
             if (data.redirect) {
                 swal.fire({
                     title: data.message, 
@@ -163,22 +159,24 @@ $('body').on('submit', 'form.submit-form', function (e) {
                     allowEscapeKey: false,
                     position: 'top-start',
                 }).then(function() {
-                    // Perform the redirect
-                    window.location = data.redirect; // Redirect to the provided URL
+                    window.location = data.redirect;
                 });
             }
-            // Hide modal and reset the form
             $('.modal').modal("hide");
             form.trigger("reset");
         },
-        error: function (err) {
+        error: function (err, data, response, jqXhr, xhr) {
             var errors = err.responseJSON.errors;
+          
             $.each(errors, function (key, value) {
-                $('#' + key + '-error').text(value[0]);
+                for(let i =0; i<=2; i++)
+                {
+                    $('#' + key.replace(`.${i}`,'') + '-error').text(value[0])
+                }
             });
         },
         complete: function () {
-            form.parent().removeClass('load');
+            form.parent().removeClass('load'); // Remove the loading class
         }
     });
 });
@@ -206,7 +204,7 @@ $(document).on('submit','form.form-login',function(e){
 
         },
 
-        error: function (err, data, response, jqXhr, xhr) {
+        error: function (err, data, response, jqXhr, xhr, status) {
             console.log(err)
             var errors = err.responseJSON.errors;
             $.each(errors, function (key, value) {

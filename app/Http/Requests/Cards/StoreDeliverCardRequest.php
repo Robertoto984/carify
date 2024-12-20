@@ -22,10 +22,10 @@ class StoreDeliverCardRequest extends FormRequest
             'traffic_license_number.*' => 'required',
             'legal_status.*' => 'required',
             'fuel_type.*' => 'required',
-            'year.*' => 'required|date_format:Y',  // Specify a valid year format
-            'model.*' => 'required|date_format:Y', // Similarly for model
-            'register.*' => 'required|date_format:Y', // Ensure it's in year format
-            'demarcation_date.*' => 'required|date_format:Y-m-d', // Full date format
+            'year.*' => 'required|date_format:Y',
+            'model.*' => 'required|date_format:Y',
+            'register.*' => 'required|date_format:Y',
+            'demarcation_date.*' => 'required|date_format:Y-m-d',
             'passengers_number.*' => 'required',
             'gross_weight.*' => 'required',
             'empty_weight.*' => 'required',

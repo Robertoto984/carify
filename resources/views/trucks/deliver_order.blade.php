@@ -1,7 +1,7 @@
 @extends('dashboard')
 @section('content')
  
- <form method="POST" action="{{ route('trucks.store-deliver-order')}}">
+<form method="POST" action="{{route('trucks.store-deliver-order')}}" class="submit-form"> 
     @csrf
     <div id="vehicle-forms-container">
         <div class="vehicle-form">
@@ -113,7 +113,7 @@
                         <div class="form-group col-md-4 mb-3">
                             <label for="year">السنة</label>
                             <div class="input-group">
-                                <input type="text" name="year" value="{{ $truck->year ?? " 04/24/2020"}}"value="{{ $truck->year }}" class="form-control">
+                                <input type="text" name="year" value="{{ $truck->year }}" class="form-control" value="04/24/2020">
                                 <div class="input-group-append">
                                     <div class="input-group-text" id="button-addon-date">
                                         <span class="fe fe-calendar fe-16">
@@ -140,7 +140,7 @@
                         <div class="form-group col-md-4 mb-3 mb-3">
                             <label for="model">الموديل</label>
                             <div class="input-group">
-                                <input type="text" name="model" class="form-control" value="{{ $truck->model }}">
+                                <input type="text" name="model" class="form-control" value="{{ $truck->model }}" value="04/24/2020">
                                 <div class="input-group-append">
                                     <div class="input-group-text" id="button-addon-date">
                                         <span class="fe fe-calendar fe-16">
