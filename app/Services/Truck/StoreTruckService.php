@@ -9,6 +9,7 @@ class StoreTruckService
 {
     public function store(array $trucksData)
     {
+        
         foreach ($trucksData['type'] as $key => $type) {
             $year = Carbon::createFromFormat('Y-m-d', $trucksData['year'][$key])->format('Y');
             $model = Carbon::createFromFormat('Y-m-d', $trucksData['model'][$key])->format('Y');

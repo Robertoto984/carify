@@ -145,7 +145,7 @@ $('body').on('submit', 'form.submit-form', function (e) {
         processData: false,
         contentType: false,
         success: function (data, textStatus, jqXHR, response) {
-            if (data.redirect) {
+            // if (data.redirect) {
                 swal.fire({
                     title: data.message,
                     timer: 3000,
@@ -155,11 +155,11 @@ $('body').on('submit', 'form.submit-form', function (e) {
                     allowEscapeKey: false,// Prevent the dialog from closing by pressing the escape key
                     position: 'top-start',
 
-                }).then(function() {
-                    window.location = data.redirect;
-                });
+                })
+                $(location).attr('href',data.redirect);
 
-            }
+
+            // }
             $('.modal').modal("hide");
             //    swal.fire(data.title, data.message, data.status);
             form.trigger("reset");
@@ -168,10 +168,16 @@ $('body').on('submit', 'form.submit-form', function (e) {
 
         error: function (err, data, response, jqXhr, xhr) {
             var errors = err.responseJSON.errors;
+          
             $.each(errors, function (key, value) {
-                console.log(key)
-                console.log($('#' + key + '-error').text(value[0])
-                )
+                for(let i =0; i<=2; i++)
+                {
+                  
+
+                    $('#' + key.replace(`.${i}`,'') + '-error').text(value[0])
+                }
+
+                
             });
         },
 

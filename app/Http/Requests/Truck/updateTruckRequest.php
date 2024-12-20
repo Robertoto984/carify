@@ -36,7 +36,7 @@ class updateTruckRequest extends FormRequest
             'gross_weight' => 'required|numeric',
             'empty_weight' => 'required|numeric',
             'load' => 'required|numeric',
-            'kilometer_number' => 'required|string',
+            'kilometer_number' => 'required|integer',
             'technical_status' => 'required|string',
             'color' => 'required|string',
             'register' => 'required',

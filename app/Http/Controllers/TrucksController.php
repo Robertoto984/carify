@@ -59,10 +59,12 @@ class TrucksController extends Controller
     }
     public function store(StoreTruckRequest $request)
     {
+        
         if (request()->user()->cannot('create', Truck::class)) {
             abort(403);
         }
         try {
+            
             $this->storeTruckService->store($request->validated());
             
             return response()->json(['message'=>'تم إضافة المركبة بنجاح.','redirect'=>route('trucks.index')]);
@@ -95,7 +97,7 @@ class TrucksController extends Controller
             if (request()->user()->cannot('delete', $truck)) {
                 abort(403);
             }
-            $ids = Truck::where('id',$id)->delete();
+             Truck::where('id',$id)->delete();
             return response()
             ->json(['message' => 'تم حذف المركبة بنجاح.','redirect'=>route('trucks.index')]);
             
@@ -109,7 +111,7 @@ class TrucksController extends Controller
             if (request()->user()->cannot('MultiDelete', Truck::class)) {
                 abort(403);
             }
-            $ids = Truck::whereIn('id',(array)$request['ids'])->delete();
+             Truck::whereIn('id',(array)$request['ids'])->delete();
             return response()
             ->json(['message' => 'تم حذف المركبة بنجاح.','redirect'=>route('trucks.index')]);
             
@@ -138,6 +140,7 @@ class TrucksController extends Controller
         
         Excel::import(new TrucksImport, $request->file('file'));
         
-        return back()->with('success', 'تم استيراد المركبات بنجاح');
+        return response()
+        ->json(['message' =>  'تم استيراد المركبات بنجاح', 'redirect' => route('trucks.index')]);
     }
 }

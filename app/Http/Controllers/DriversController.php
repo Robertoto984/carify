@@ -97,7 +97,7 @@ class DriversController extends Controller
             if (request()->user()->cannot('delete', $driver)) {
                 abort(403);
             }
-                $ids = Driver::where('id', $id)->delete();
+                 Driver::where('id', $id)->delete();
             return response()
                 ->json(['message' => 'تم حذف السائق بنجاح', 'redirect' => route('drivers.index')]);
 
@@ -142,6 +142,7 @@ class DriversController extends Controller
   
         Excel::import(new DriversImport, $request->file('file'));
                  
-        return back()->with('success', 'تم استيراد السائقين بنجاح');
+        return response()
+                ->json(['message' => 'تم استيراد السائقين بنجاح', 'redirect' => route('drivers.index')]);
     }
 }

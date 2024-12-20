@@ -1,4 +1,4 @@
-  <form action="{{ route('trucks.import') }}" style="margin:10px" method="POST" enctype="multipart/form-data">
+  <form action="{{ route('trucks.import') }}" style="margin:10px" method="POST" enctype="multipart/form-data" class="submit-form">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
