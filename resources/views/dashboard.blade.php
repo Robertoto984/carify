@@ -87,9 +87,11 @@
         showDropdowns: true,
         locale:
         {
-          format: 'MM/DD/YYYY'
+          format: 'MM/DD/YYYY',
+         
         }
       });
+      
       $('.time-input').timepicker(
       {
         'scrollDefault': 'now',

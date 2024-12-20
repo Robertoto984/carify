@@ -21,7 +21,7 @@ class StoreDriverRequest extends FormRequest
             'address.*' => 'required|string',
             'license_type.*' => 'required',
             'license_expiration_date.*' => 'required',
-        ];
+         ];
     }
 
     public function messages()
@@ -34,9 +34,11 @@ class StoreDriverRequest extends FormRequest
             'address.*.required' => 'العنوان مطلوب',
             'license_type.*.required' => 'فئة الشهادة مطلوبة',
             'license_expiration_date.*.required' => 'تاريخ انتهاء الشهادة مطلوب',
+
             'birth_date.*.date_format' => 'يجب أن يكون تاريخ الميلاد بالصيغة يوم/شهر/سنة',
             'license_expiration_date.*.required'=>' تاريخ انتهاء الشهادة مطلوب',
             'license_expiration_date.*.date_format' => 'يجب أن يكون تاريخ انتهاء الشهادة بالصيغة يوم/شهر/سنة',
+
         ];
     }
 }

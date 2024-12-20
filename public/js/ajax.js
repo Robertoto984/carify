@@ -155,8 +155,9 @@ $('body').on('submit', 'form.submit-form', function (e) {
                     allowEscapeKey: false,// Prevent the dialog from closing by pressing the escape key
                     position: 'top-start',
 
+                }).then(function(){
+                    window.location=data.redirect
                 })
-                $(location).attr('href',data.redirect);
 
 
             // }

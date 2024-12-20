@@ -50,7 +50,7 @@
                                     <label for="birth_date">تاريخ الميلاد</label>
                                     <div class="input-group">
                                         <input type="text" name="birth_date[]" class="form-control drgpicker"
-                                            id="birth_date" aria-describedby="button-addon">
+                                            id="birth-date" aria-describedby="button-addon">
 
                                         <div class="input-group-append">
                                             <div class="input-group-text" id="button-addon-date"><span

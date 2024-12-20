@@ -11,6 +11,7 @@ enum LicenseTypes: string
     const G = 'ج';
     const D1 = 'د1';
     const D2 = 'د2';
+    const NONE = null;
 
     public static function values()
     {
@@ -22,6 +23,7 @@ enum LicenseTypes: string
             self::G,
             self::D1,
             self::D2,
+            self::NONE,
         ];
     }
 }
