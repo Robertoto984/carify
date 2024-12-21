@@ -11,12 +11,6 @@ class StoreDeliverCardService
    public function store(array $data)
     {
         return DB::transaction(function () use ($data) {
-            // $year = Carbon::createFromFormat('Y-m-d', $data['year'])->format('Y');
-            // $model = Carbon::createFromFormat('Y-m-d', $data['model'])->format('Y');
-            // $register = Carbon::createFromFormat('Y-m-d', $data['register'])->format('Y');
-            // $demarcation_date = Carbon::createFromFormat('Y-m-d', $data['demarcation_date'])->format('Y-m-d');
-            // $receipt_date = Carbon::createFromFormat('Y-m-d', $data['receipt_date'])->format('Y-m-d');
-            // $deliver_date = Carbon::createFromFormat('Y-m-d', $data['deliver_date'])->format('Y-m-d');
             $year = Carbon::createFromFormat('Y', $data['year'])->format('Y');
             $model = Carbon::createFromFormat('Y', $data['model'])->format('Y');
             $register = Carbon::createFromFormat('Y', $data['register'])->format('Y');

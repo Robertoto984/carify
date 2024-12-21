@@ -26,11 +26,10 @@ class StoreTruckRequest extends FormRequest
             'year.*' => 'required',
             'model.*' => 'required',
             'passengers_number.*' => 'required',
-
-            'gross_weight.*' => 'required',
-            'empty_weight.*' => 'required',
-            'load.*' => 'required',
-            'kilometer_number.*' => 'required',
+            'gross_weight.*' => 'required|numeric|min:0',
+            'empty_weight.*' => 'required|numeric|min:0',
+            'load.*' => 'required|numeric|min:0',
+            'kilometer_number.*' => 'required|numeric|min:0',
             'technical_status.*' => 'required',
             'color.*' => 'required',
             'register.*' => 'required',
@@ -54,17 +53,19 @@ class StoreTruckRequest extends FormRequest
             'model.*.required' => 'الموديل مطلوب',
             'passengers_number.*.required' => 'عدد الركاب مطلوب',
             'passengers_number.*.integer' => 'عدد الركاب يجب ان يكون ارقام',
-
             'gross_weight.*.required' => 'الوزن القائم مطلوب',
             'empty_weight.*.required' => 'الوزن الفارغ مطلوب',
             'load.*.required' => 'الحمولة مطلوبة',
             'kilometer_number.*.required' => 'رقم العداد مطلوب',
             'kilometer_number.*.integer' => ' رقم العداد يجب ان يكون ارقام',
-
             'technical_status.*.required' => 'الحالة الفنية مطلوبة',
             'color.*.required' => 'اللون مطلوب',
             'register.*.required' => 'التجسيل مطلوب',
             'demarcation_date.*.required' => 'تاريخ الترسيم مطلوب',
+            'gross_weight.*.numeric' => 'يجب أن يكون الوزن القائم رقماً',
+            'empty_weight.*.numeric' => 'يجب أن يكون الوزن الفارغ رقماً',
+            'load.*.numeric' => 'يجب أن تكون الحمولة رقماً',
+            'kilometer_number.*.numeric' => 'يجب أن يكون رقم العداد رقماً',
         ];
     }
 

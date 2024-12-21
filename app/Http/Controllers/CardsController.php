@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Enums\Color;
-use App\Enums\FuelTypes;
-use App\Http\Requests\Cards\StoreDeliverCardRequest;
-use App\Models\Driver;
 use App\Models\Truck;
+use App\Models\Driver;
+use App\Enums\FuelTypes;
 use App\Models\TruckDeliverCard;
+use Illuminate\Support\Facades\Log;
 use App\Services\Card\StoreDeliverCardService;
+use App\Http\Requests\Cards\StoreDeliverCardRequest;
 
 class CardsController extends Controller
 {
@@ -36,15 +38,18 @@ class CardsController extends Controller
 
     public function store(StoreDeliverCardRequest $request)
     {
-        $validatedData = $request->validated();
         try {
-            $this->storeDeliverCardService->store($validatedData);
-            
-            return redirect()->route('trucks.index')
-                ->with('message', 'تم إضافة بطاقة التسليم بنجاح.');
+            $this->storeDeliverCardService->store($request->validated());
+            return response()->json([
+                'message'=>'تم إضافة بطاقة التسليم بنجاح.',
+                'redirect'=>route('trucks.index')
+            ]);
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            return response()->json([
+                'message'=>'حدث خطأ أثناء إضافة البطاقة:',
+                'redirect'=>route('trucks.index')
+            ]);
+            
         }
     }
-
 }

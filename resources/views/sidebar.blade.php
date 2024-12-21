@@ -22,7 +22,7 @@
             <li class="nav-item dropdown">
               <a href="#vehicles" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link" style="{{ request()->segment(1) == 'trucks' ? 'color:#1b68ff':''}}">
                 <i class="fe fe-truck fe-16"></i>
-                <span class="ml-3 item-text">المركبات</span><span class="sr-only">(current)</span>
+                <span class="ml-3 item-main-text">المركبات</span><span class="sr-only">(current)</span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == 'trucks' ? 'show':''}}" id="vehicles">
                 @can('index',\App\Models\Truck::class)
@@ -31,9 +31,7 @@
                   <a class="nav-link pl-3" href="{{route('trucks.index')}}"><span class="ml-1 item-text">قائمة المركبات</span></a>
                 </li>
                 @endcan
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="{{route('trucks.create')}}"><span class="ml-1 item-text">بطاقة مركبة</span></a>
-                </li>
+                
                 <li class="nav-item">
                   <a class="nav-link pl-3" href=""><span class="ml-1 item-text">أمر حركة</span></a>
                 </li>
@@ -47,19 +45,13 @@
             <li class="nav-item dropdown">
               <a href="#drivers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link " style="{{ request()->segment(1) == 'drivers' ? 'color:#1b68ff':''}}">
                 <i class="fe fe-users fe-16"></i>
-                <span class="ml-3 item-text">السائقين</span><span class="sr-only">(current)</span>
+                <span class="ml-3 item-main-text">السائقين</span><span class="sr-only">(current)</span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == 'drivers' ? 'show':''}}" id="drivers" >
                 @can('index',\App\Models\Driver::class)
 
                 <li class="nav-item active">
                   <a class="nav-link pl-3" href="{{route('drivers.index')}}"><span class="ml-1 item-text">قائمة السائقين</span></a>
-                </li>
-                @endcan
-                @can('create',\App\Models\Driver::class)
-
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="{{route('drivers.create')}}"><span class="ml-1 item-text">بطاقة سائق</span></a>
                 </li>
                 @endcan
               </ul>
@@ -69,19 +61,13 @@
             <li class="nav-item dropdown">
               <a href="#escorts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link " style="{{ request()->segment(1) == 'escorts' ? 'color:#1b68ff':''}}">
                 <i class="fe fe-users fe-16"></i>
-                <span class="ml-3 item-text">المرافقين</span><span class="sr-only">(current)</span>
+                <span class="ml-3 item-main-text">المرافقين</span><span class="sr-only">(current)</span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == 'escorts' ? 'show':''}}" id="escorts" >
                 @can('index',\App\Models\Escort::class)
 
                 <li class="nav-item active">
                   <a class="nav-link pl-3" href="{{route('escorts.index')}}"><span class="ml-1 item-text">قائمة المرافقين</span></a>
-                </li>
-                @endcan
-                @can('create',\App\Models\Escort::class)
-
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href=""><span class="ml-1 item-text">بطاقة مرافق</span></a>
                 </li>
                 @endcan
               </ul>
@@ -91,7 +77,7 @@
             <li class="nav-item dropdown">
               <a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link" style="{{ request()->segment(1) == 'users' ? 'color:#1b68ff':''}}">
                 <i class="fe fe-users fe-16"></i>
-                <span class="ml-3 item-text">المستخدمين</span><span class="sr-only">(current)</span>
+                <span class="ml-3 item-main-text">المستخدمين</span><span class="sr-only">(current)</span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == 'users' ? 'show':''}}" id="users">
                 @can('index',\App\Models\User::class)
@@ -100,12 +86,7 @@
                   <a class="nav-link pl-3" href="{{ route('users.index') }}"><span class="ml-1 item-text">قائمة المستخدمين</span></a>
                 </li>
                 @endcan
-                @can('create',\App\Models\User::class)
-
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="{{ route('users.create') }}"><span class="ml-1 item-text">بطاقة مستخدم</span></a>
-                </li>
-                @endcan
+                
               </ul>
             </li>
           </ul>
@@ -113,15 +94,30 @@
             <li class="nav-item dropdown">
               <a href="#cards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                 <i class="fe fe-plus-square fe-16"></i>
-                <span class="ml-3 item-text">البطاقات</span><span class="sr-only">(current)</span>
+                <span class="ml-3 item-main-text">البطاقات</span><span class="sr-only">(current)</span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100" id="cards">
                 <li class="nav-item">
                   <a class="nav-link pl-3" href="{{route('cards.index')}}"><span class="ml-1 item-text">قائمة البطاقات</span></a>
                 </li>
-                <li class="nav-item active">
-                  <a class="nav-link pl-3" href=""><span class="ml-1 item-text">بطاقة مركبة</span></a>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{{route('trucks.create')}}"><span class="ml-1 item-text">بطاقة مركبة</span></a>
                 </li>
+                @can('create',\App\Models\Driver::class)
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{{route('drivers.create')}}"><span class="ml-1 item-text">بطاقة سائق</span></a>
+                </li>
+                @endcan
+                @can('create',\App\Models\Escort::class)
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href=""><span class="ml-1 item-text">بطاقة مرافق</span></a>
+                </li>
+                @endcan
+                @can('create',\App\Models\User::class)
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{{ route('users.create') }}"><span class="ml-1 item-text">بطاقة مستخدم</span></a>
+                </li>
+                @endcan
                 <li class="nav-item">
                   <a class="nav-link pl-3" href=""><span class="ml-1 item-text">بطاقة تسليم مركبة</span></a>
                 </li>
@@ -132,7 +128,7 @@
             <li class="nav-item dropdown">
               <a href="#orders" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                 <i class="fe fe-package fe-16"></i>
-                <span class="ml-3 item-text">الطلبات</span><span class="sr-only">(current)</span>
+                <span class="ml-3 item-main-text">الطلبات</span><span class="sr-only">(current)</span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100" id="orders">
                 <li class="nav-item">
@@ -151,7 +147,7 @@
             <li class="nav-item dropdown">
               <a href="#reports" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                 <i class="fe fe-flag fe-16"></i>
-                <span class="ml-3 item-text">التقارير</span><span class="sr-only">(current)</span>
+                <span class="ml-3 item-main-text">التقارير</span><span class="sr-only">(current)</span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100" id="reports">
                 <li class="nav-item">
