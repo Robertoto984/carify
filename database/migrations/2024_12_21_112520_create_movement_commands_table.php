@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('movement_commands', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('organized_by')->constrained();
+            $table->string('organized_by');
             $table->string('number');
             $table->date('date');
             $table->string('responsible');

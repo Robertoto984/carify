@@ -7,16 +7,20 @@
 
 <div class="col ml-auto">
     <div class="dropdown float-right">
+        @can('create',\App\Models\MovementCommand::class)
             <a href="{{route('commands.create')}}" class="btn rounded-btn btn-primary">+ أمر حركة</a>
-            <a id="bulkDeleteBtn" href="{{ route('drivers.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">
+            @endcan
+            @can('MultiDelete',\App\Models\MovementCommand::class)
+            <a id="bulkDeleteBtn" href="{{ route('commands.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">
                 حذف المحدد
             </a>
+            @endcan
         <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             المزيد
         </button>
         <div class="dropdown-menu" aria-labelledby="actionMenuButton">
-            <a class="dropdown-item more" href=""><i class="fa fa-download mr-2"></i>تصدير</a>
-            <a class="dropdown-item more" href="" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
+            <a class="dropdown-item more" href="{{ route('commands.export') }}"><i class="fa fa-download mr-2"></i>تصدير</a>
+            <a class="dropdown-item more" href="{{route('commands.import_form')}}" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
         </div>
     </div>
 </div>
@@ -72,38 +76,48 @@
                                     </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach($trucks as $truck) --}}
+                                @foreach($commands as $command)
                                     <tr>
                                         <td><input type="checkbox" name="ids[]" value="" id="check"/></td>
-                                        
+                                        <td>{{ $command->number }}</td>
+                                        <td>{{ $command->organized_by }}</td>
+                                        <td>{{ $command->date }}</td>
+                                        <td>{{ $command->responsible }}</td>
+                                        <td>{{ $command->truck->plate_number }}</td>
+                                        <td>{{ $command->driver->first_name }}{{ $command->driver->last_name }}</td>
                                         <td>
-                                            {{-- @php
-                                                $drivers = $truck->truckDeliverCards->map(function($deliverCard) {
-                                                    return $deliverCard->driver;
-                                                })->filter();
-                                            @endphp
-                                            
-                                            @if($drivers->isNotEmpty())
-                                                @foreach($drivers as $driver)
-                                                    <p>{{ $driver->first_name }} {{ $driver->last_name }}</p>
-                                                @endforeach
-                                            @else
-                                                <p>لا يوجد سائق</p>
-                                            @endif --}}
+                                            @forelse ($command->escort as $escort)
+                                                <br>
+                                                <li>   {{ $escort->first_name }} {{ $escort->last_name }} </li>
+                                            @empty  
+                                            لا يوجد
+                                            @endforelse
                                         </td>
-                                        {{-- <td>
-                                        
-                                            <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="" class="btn btn-primary btn-sm">
+                                        <td>{{ $command->destination }}</td>
+                                        <td>{{ $command->task }}</td>
+                                       
+                                        <td>{{ $command->task_start_time }}</td>
+                                        <td>{{ $command->task_end_time }}</td>
+                                        <td>{{ $command->initial_odometer_number }}</td>
+                                        <td>{{ $command->final_odometer_number }}</td>
+                                        <td>{{ $command->distance }}</td>
+                                        <td>{{ $command->notes }}</td>
+                                        <td>
+                                            @can('delete',$command)
+
+                                            <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('commands.edit',$command->id) }}" class="btn btn-primary btn-sm">
                                                 <i class="fa fa-edit"></i> تعديل
                                             </a>
+                                            @endcan
+                                            @can('update',$command)
 
-                                            <a href="" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="">
+                                            <a href="{{ route('commands.delete',$command->id) }}" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="">
                                                 <i class="fa fa-trash"></i> حذف
                                             </a>
-
-                                        </td> --}}
+                                            @endcan
+                                        </td>
                                     </tr>
-                                {{-- @endforeach       --}}
+                                @endforeach      
                             </tbody>
                         </table>
                     </div>

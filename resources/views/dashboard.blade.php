@@ -1,41 +1,47 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="{{asset('favicon.ico')}}">
-    <title>Dashboard - CARIFY</title>
-    <link rel="stylesheet" href="{{asset('css/simplebar.css')}}">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/feather.css')}}">
-    <link rel="stylesheet" href="{{asset('css/select2.css')}}">
-    <link rel="stylesheet" href="{{asset('css/dropzone.css')}}">
-    <link rel="stylesheet" href="{{asset('css/uppy.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/jquery.steps.css')}}">
-    <link rel="stylesheet" href="{{asset('css/jquery.timepicker.css')}}">
-    <link rel="stylesheet" href="{{asset('css/quill.snow.css')}}">
-    <link rel="stylesheet" href="{{asset('css/daterangepicker.css')}}">
-    <link rel="stylesheet" href="{{asset('css/app-light.css')}}" id="lightTheme">
-    <link rel="stylesheet" href="{{asset('css/app-dark.css')}}" id="darkTheme" disabled>
-    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  </head>
-  <body class="vertical  light rtl ">
-    <div class="wrapper">
-      @include('header')
-      @include('sidebar')
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="{{asset('favicon.ico')}}">
+  <title>Dashboard - CARIFY</title>
+  <link rel="stylesheet" href="{{asset('css/simplebar.css')}}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{{asset('css/feather.css')}}">
+  <link rel="stylesheet" href="{{asset('css/select2.css')}}">
+  <link rel="stylesheet" href="{{asset('css/dropzone.css')}}">
+  <link rel="stylesheet" href="{{asset('css/uppy.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/jquery.steps.css')}}">
+  <link rel="stylesheet" href="{{asset('css/jquery.timepicker.css')}}">
+  <link rel="stylesheet" href="{{asset('css/quill.snow.css')}}">
+  <link rel="stylesheet" href="{{asset('css/daterangepicker.css')}}">
+  <link rel="stylesheet" href="{{asset('css/app-light.css')}}" id="lightTheme">
+  <link rel="stylesheet" href="{{asset('css/app-dark.css')}}" id="darkTheme" disabled>
+  <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
+
+</head>
+
+<body class="vertical  light rtl ">
+  <div class="wrapper">
+    @include('header')
+    @include('sidebar')
 
     <main role="main" class="main-content">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                @yield('content') 
-                @include('modal')
-            </div>
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          @yield('content')
+          @include('modal')
         </div>
+      </div>
     </main>
 
     <script src="{{asset('js/jquery.min.js')}}"></script>
@@ -287,9 +293,13 @@
       gtag('js', new Date());
       gtag('config', 'UA-56159088-1');
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- 
-      <script src="{{ asset('js/ajax.js') }}"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
 
-  </body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="{{ asset('js/ajax.js') }}"></script>
+
+</body>
+
 </html>

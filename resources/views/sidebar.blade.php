@@ -24,17 +24,19 @@
                 <i class="fe fe-truck fe-16"></i>
                 <span class="ml-3 item-main-text">المركبات</span><span class="sr-only">(current)</span>
               </a>
-              <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == 'trucks' ? 'show':''}}" id="vehicles">
+              <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == ('trucks' || 'commands') ? 'show':''}}" id="vehicles">
                 @can('index',\App\Models\Truck::class)
 
                 <li class="nav-item active">
                   <a class="nav-link pl-3" href="{{route('trucks.index')}}"><span class="ml-1 item-text">قائمة المركبات</span></a>
                 </li>
                 @endcan
-                
+                @can('index',\App\Models\MovementCommand::class)
+
                 <li class="nav-item">
                   <a class="nav-link pl-3" href="{{route('commands.index')}}"><span class="ml-1 item-text">أمر حركة</span></a>
                 </li>
+                @endcan
                 <li class="nav-item">
                   <a class="nav-link pl-3" href=""><span class="ml-1 item-text">تعبئة وقود</span></a>
                 </li>

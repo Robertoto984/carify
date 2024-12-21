@@ -1,4 +1,5 @@
 @extends('dashboard')
+
 @section('content')
 
 <div class="col-12">
@@ -23,7 +24,7 @@
             </div>
             @endif
 
-            <form method="POST" action="" class="submit-form">
+            <form method="POST" action="{{ route('commands.store') }}" class="submit-form">
                 @csrf
                 <div id="vehicle-forms-container">
                     <div class="vehicle-form">
@@ -58,7 +59,14 @@
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
                                     <label for="truck_id">رقم السيارة</label>
-                                    <input type="text" name="truck_id[]" id="truck_id" class="form-control">
+                                    <select name="truck_id[]" id="truck_id"  class="selectpicker  form-control" data-live-search="true">
+                                         <option value="" disabled selected>اختر السيارة</option>
+                                      @foreach ($trucks as $truck)
+                                      <option value="{{ $truck->id }}">{{ $truck->plate_number }}</option>
+                                      @endforeach
+                                      </select>
+                                      
+
                                     <span class="text-danger" id="truck_id-error"></span>
                                 </div>
                             </div>
@@ -68,20 +76,22 @@
                                 <label for="driver_id">السائق</label>
                                 <select class="form-control" id="driver_id" name="driver_id[]">
                                     <option value="" disabled selected>اختر السائق</option>
-                                    {{-- @foreach($drivers as $driver)
+                                    @foreach($drivers as $driver)
                                         <option value="{{ $driver->id }}">{{ $driver->first_name . ' '.  $driver->last_name }}</option>
-                                    @endforeach --}}
+                                    @endforeach
                                 </select>
                                 <span class="text-danger" id="driver_id-error"></span>
                             </div>
                             <div class="form-group col-md-4 mb-3">
                                 <label for="escort_id">المرافق</label>
-                                <select class="form-control" id="escort_id" name="escort_id[]">
-                                    <option value="" disabled selected>اختر المرافق</option>
-                                    {{-- @foreach($drivers as $driver)
-                                        <option value="{{ $driver->id }}">{{ $driver->first_name . ' '.  $driver->last_name }}</option>
-                                    @endforeach --}}
+                                <select class="selectpicker form-control" id="escort_id" name="escort_id[]" multiple data-live-search="true">
+                                    <option value="" disabled >اختر المرافق</option>
+                                    @foreach($escorts as $escort)
+                                        <option value="{{ $escort->id }}">{{ $escort->first_name . ' '.  $escort->last_name }}</option>
+                                    @endforeach
                                 </select>
+                                
+                                  
                                 <span class="text-danger" id="escort_id-error"></span>
                             </div>
                             <div class="col-md-5">
@@ -133,7 +143,7 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="task">المهمة</label>
-                                    <textarea class="form-control" id="task" name="task" rows="4">
+                                    <textarea class="form-control" id="task" name="task[]" rows="4">
                                     </textarea>
                                     <span class="text-danger" id="task-error"></span>
                                 </div>
@@ -141,7 +151,7 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="notes">ملاحظات</label>
-                                    <textarea class="form-control" id="notes" name="notes" rows="4">
+                                    <textarea class="form-control" id="notes" name="notes[]" rows="4">
                                     </textarea>
                                     <span class="text-danger" id="notes-error"></span>
                                 </div>

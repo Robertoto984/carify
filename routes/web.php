@@ -44,6 +44,14 @@ use Illuminate\Support\Facades\Route;
         Route::prefix('commands')->controller(MovementCommandController::class)->group(function () {
             Route::get('index', 'index')->name('commands.index');
             Route::get('create', 'create')->name('commands.create');
+            Route::post('store', 'store')->name('commands.store');
+            Route::get('edit/{id}', 'edit')->name('commands.edit');
+            Route::post('update/{id}', 'update')->name('commands.update');
+            Route::delete('bulk-delete', 'MultiDelete')->name('commands.bulk-delete');
+            Route::delete('delete/{id}','destroy')->name('commands.delete');
+            Route::get('import_form','ImportForm')->name('commands.import_form');
+            Route::get('export','export')->name('commands.export');
+            Route::post('import', 'import')->name('commands.import');
         });
         
         
