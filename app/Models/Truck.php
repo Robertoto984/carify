@@ -41,4 +41,9 @@ class Truck extends Model
         return $this->hasMany(TruckDeliverCard::class);
     }
 
+     public function movements()
+    {
+        return $this->hasMany(MovementCommand::class);
+    }
+
 }

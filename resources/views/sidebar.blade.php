@@ -33,7 +33,7 @@
                 @endcan
                 
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href=""><span class="ml-1 item-text">أمر حركة</span></a>
+                  <a class="nav-link pl-3" href="{{route('commands.index')}}"><span class="ml-1 item-text">أمر حركة</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link pl-3" href=""><span class="ml-1 item-text">تعبئة وقود</span></a>

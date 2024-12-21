@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Escort extends Model
@@ -18,11 +19,16 @@ class Escort extends Model
 
     public function getBirthDateAttribute($value)
     {
-        return \Carbon\Carbon::parse($value)->toDateString();
+        return Carbon::parse($value)->toDateString();
     }
 
     public function getLicenseExpirationDateAttribute($value)
     {
-        return \Carbon\Carbon::parse($value)->toDateString();
+        return Carbon::parse($value)->toDateString();
+    }
+
+    public function movements()
+    {
+        return $this->belongsToMany(MovementCommand::class, 'movement_escorts');
     }
 }

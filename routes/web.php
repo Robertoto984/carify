@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CardsController;
 use App\Http\Controllers\DriversController;
 use App\Http\Controllers\EscortController;
+use App\Http\Controllers\MovementCommandController;
 use App\Http\Controllers\TrucksController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -35,9 +36,14 @@ use Illuminate\Support\Facades\Route;
         });
 
         Route::prefix('cards')->controller(CardsController::class)->group(function () {
-            Route::get('index/', 'index')->name('cards.index');
+            Route::get('index', 'index')->name('cards.index');
             Route::get('create/{id}', 'create')->name('trucks.create-deliver-order');
             Route::post('store', 'store')->name('trucks.store-deliver-order');
+        });
+
+        Route::prefix('commands')->controller(MovementCommandController::class)->group(function () {
+            Route::get('index', 'index')->name('commands.index');
+            Route::get('create', 'create')->name('commands.create');
         });
         
         
