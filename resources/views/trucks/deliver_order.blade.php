@@ -1,6 +1,9 @@
 @extends('dashboard')
 @section('content')
- 
+<div class="col-12">
+    <h2 class="page-title mb-3">بطاقة التسليم</h2>
+    <div class="card shadow mb-4">
+        <div class="card-body">
 <form method="POST" action="{{route('trucks.store-deliver-order')}}" class="submit-form"> 
     @csrf
     <div id="vehicle-forms-container">
@@ -197,4 +200,7 @@
         </div>
     </div>
 </form>
+        </div>
+    </div>
+</div>
 @endsection

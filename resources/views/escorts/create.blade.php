@@ -99,7 +99,7 @@
                     <div class="form-group mb-3">
                         <label for="license_expiration_date">تاريخ انتهاء الشهادة</label>
                         <div class="input-group">
-                            <input type="text" name="license_expiration_date[]" class="form-control drgpicker " value="" id="license_expiration_date" aria-describedby="button-addon">
+                            <input type="date" name="license_expiration_date[]" class="form-control  " value="" id="license_expiration_date" aria-describedby="button-addon">
                             <div class="input-group-append">
                                 <div class="input-group-text" id="button-addon-date">
                                     <span class="fe fe-calendar fe-16"></span>

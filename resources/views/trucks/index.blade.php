@@ -83,7 +83,7 @@
                             </thead>
                             <tbody>
                                 @foreach($trucks as $truck)
-                                    <tr>
+                                    <tr >
                                         <td><input type="checkbox" name="ids[]" value="{{ $truck->id }}" id="check"/></td>
                                         <td>{{ $truck->id }}</td>
                                         <td>{{ $truck->type }}</td>
@@ -105,8 +105,8 @@
                                         <td>{{ $truck->kilometer_number }}</td>
                                         <td>{{ $truck->technical_status }}</td>
                                         <td>{{ $truck->legal_status }}</td>
-                                        <td>{{ $truck->parts_description }}</td>
-                                        <td>
+                                        <td class="td" >{{ $truck->parts_description }}</td>
+                                        <td class="td">
                                             @php
                                                 $drivers = $truck->truckDeliverCards->map(function($deliverCard) {
                                                     return $deliverCard->driver;

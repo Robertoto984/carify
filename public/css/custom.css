@@ -157,3 +157,13 @@ th, td {
 .deliver-order{
   margin:5px;
 }
+
+
+.table th{
+  text-align: center;
+}
+.td{
+  width: 200px;
+  word-wrap: break-word;
+  white-space: normal;
+}
