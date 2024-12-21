@@ -60,7 +60,7 @@ class StoreTruckRequest extends FormRequest
             'kilometer_number.*.integer' => ' رقم العداد يجب ان يكون ارقام',
             'technical_status.*.required' => 'الحالة الفنية مطلوبة',
             'color.*.required' => 'اللون مطلوب',
-            'register.*.required' => 'التجسيل مطلوب',
+            'register.*.required' => 'التسجيل مطلوب',
             'demarcation_date.*.required' => 'تاريخ الترسيم مطلوب',
             'gross_weight.*.numeric' => 'يجب أن يكون الوزن القائم رقماً',
             'empty_weight.*.numeric' => 'يجب أن يكون الوزن الفارغ رقماً',
