@@ -135,16 +135,9 @@
                 </div>
             </div>
 
-            <div class="col mr-auto mb-5 mt-5">
-                <div class="dropdown">
-                    <button type="submit" class="btn btn-success rounded-btn">حفظ</button>
-                    <button type="button" id="add-form-btn" class="btn rounded-btn btn-primary">
-                        أمر حركة جديد
-                    </button>
-                    <button type="button" class="btn btn-danger rounded-btn delete-form-btn">
-                        إلغاء هذا الأمر
-                    </button>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary rounded-btn" data-dismiss="modal">إغلاق</button>
+                <button type="submit" class="btn btn-success rounded-btn">حفظ</button>
             </div>
         </div>
     </div>
