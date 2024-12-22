@@ -53,6 +53,7 @@ class MovementCommandController extends Controller
                 'redirect' => route('commands.index')
             ]);
         } catch (\Exception $e) {
+            dd($e);
             Log::error($e->getMessage());
             return response()->json([
                 'message' => 'حدث خطأ أثناء إضافة الحركة.',

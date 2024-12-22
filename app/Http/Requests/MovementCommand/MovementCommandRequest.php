@@ -35,7 +35,7 @@ class MovementCommandRequest extends FormRequest
             'final_odometer_number.*'=>'required|integer',
             'distance.*'=>'required|integer',
             'task.*'=>'required',
-            'notes.*'=>'required',
+            'notes.*'=>'nullable',
         ];
     }
 
@@ -58,7 +58,7 @@ class MovementCommandRequest extends FormRequest
             'distance.*.required'=>'حقل المسافة المقطوعة مطلوب',
             'distance.*.integer'=>'حقل المسافة المقطوعة ارقام',
             'task.*.required'=>'حقل المهمة مطلوب',
-            'notes.*.required'=>'حقل الملاحظات مطلوب',
+            // 'notes.*.required'=>'حقل الملاحظات مطلوب',
 
         ];
     }

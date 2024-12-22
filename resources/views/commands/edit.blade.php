@@ -118,18 +118,18 @@
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="task">المهمة</label>
-                        <textarea class="form-control" id="task"  name="task[]" rows="4">
-                            {{ $row->task }}
-                        </textarea>
+                        <textarea class="form-control" id="task"  name="task[]" rows="4">{{ $row->task }}</textarea>
+                            
+                        
                         <span class="text-danger" id="task-error"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="notes">ملاحظات</label>
-                        <textarea class="form-control" id="notes" name="notes[]" rows="4">
-                            {{ $row->notes }}
-                        </textarea>
+                        <textarea class="form-control" id="notes" name="notes[]" rows="4">{{ $row->notes }}</textarea>
+                      
+                            
                         <span class="text-danger" id="notes-error"></span>
                     </div>
                 </div>
