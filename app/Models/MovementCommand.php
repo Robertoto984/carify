@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\CommandNumGen;
 use Illuminate\Database\Eloquent\Model;
 
 class MovementCommand extends Model
 {
+    use CommandNumGen;
+
     protected $guarded = [];
 
     public function truck()
@@ -20,7 +23,13 @@ class MovementCommand extends Model
 
     public function escort()
     {
-        return $this->belongsToMany(Escort::class, 'movement_escorts','mov_command_id','id');
+        return $this->belongsToMany(Escort::class, 'movement_escorts', 'mov_command_id', 'id');
     }
 
+    protected static function booted()
+    {
+        static::creating(function ($command) {
+            $command->number = $command->generateCustomNumber();
+        });
+    }
 }

@@ -13,9 +13,12 @@ use App\Services\MovementCommand\MovementCommandService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Traits\CommandNumGen;
+use Illuminate\Support\Facades\Log;
 
 class MovementCommandController extends Controller
 {
+    use CommandNumGen;
     protected $movementService;
     public function __construct(MovementCommandService $movementService)
     {
@@ -23,17 +26,18 @@ class MovementCommandController extends Controller
     }
     public function index()
     {
-        $commands = MovementCommand::with('driver','truck')->paginate();
-        return view('commands.index',compact('commands'));
+        $commands = MovementCommand::with('driver', 'truck')->paginate();
+        return view('commands.index', compact('commands'));
     }
-    
+
     public function create()
     {
-        $trucks = Truck::select('id','plate_number')->get();
-        $escorts = Escort::select('first_name','last_name','id')->get();
-        $drivers = Driver::select('first_name','last_name','id')->get();
+        $trucks = Truck::select('id', 'plate_number')->get();
+        $escorts = Escort::select('first_name', 'last_name', 'id')->get();
+        $drivers = Driver::select('first_name', 'last_name', 'id')->get();
+        $number = $this->generateCustomNumber();
 
-        return view('commands.create',compact('trucks','escorts','drivers'));
+        return view('commands.create', compact('trucks', 'escorts', 'drivers', 'number'));
     }
 
     public function store(MovementCommandRequest $request)
@@ -45,11 +49,11 @@ class MovementCommandController extends Controller
             $this->movementService->store($request->validated());
 
             return response()->json([
-                'message' => 'تم إضافة الحركة بنجاح.', 
+                'message' => 'تم إضافة الحركة بنجاح.',
                 'redirect' => route('commands.index')
             ]);
-
         } catch (\Exception $e) {
+            Log::error($e->getMessage());
             return response()->json([
                 'message' => 'حدث خطأ أثناء إضافة الحركة.',
                 'error' => $e->getMessage(),
@@ -64,17 +68,17 @@ class MovementCommandController extends Controller
         if (request()->user()->cannot('update', $command)) {
             abort(403);
         }
-        $trucks = Truck::select('id','plate_number')->get();
-        $escorts = Escort::select('first_name','last_name','id')->get();
-        $drivers = Driver::select('first_name','last_name','id')->get();
-        $row = MovementCommand::where('id',$id)->first();
+        $trucks = Truck::select('id', 'plate_number')->get();
+        $escorts = Escort::select('first_name', 'last_name', 'id')->get();
+        $drivers = Driver::select('first_name', 'last_name', 'id')->get();
+        $row = MovementCommand::where('id', $id)->first();
         return response()->json([
-            'html' => view('commands.edit',[
+            'html' => view('commands.edit', [
                 'row' => $row,
                 'trucks' => $trucks,
-                'escorts'=>$escorts,
-                'drivers'=>$drivers
-                ])->render(),
+                'escorts' => $escorts,
+                'drivers' => $drivers
+            ])->render(),
         ]);
     }
 
@@ -88,7 +92,7 @@ class MovementCommandController extends Controller
             $data = $request->validated();
             $this->movementService->update($data, $id);
             return response()->json([
-                'message' => 'تم تعديل الحركة بنجاح.', 
+                'message' => 'تم تعديل الحركة بنجاح.',
                 'redirect' => route('commands.index')
             ]);
         } catch (\Exception $e) {
@@ -96,7 +100,6 @@ class MovementCommandController extends Controller
                 'message' => $e->getMessage(),
                 'redirect' => route('commands.index')
             ]);
-
         }
     }
 
@@ -108,10 +111,9 @@ class MovementCommandController extends Controller
                 abort(403);
             }
             MovementCommand::where('id', $id)->delete();
-            DB::table('movement_escorts')->where('mov_command_id',$id)->delete();
+            DB::table('movement_escorts')->where('mov_command_id', $id)->delete();
             return response()
                 ->json(['message' => 'تم حذف الحركة بنجاح', 'redirect' => route('commands.index')]);
-
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -124,11 +126,10 @@ class MovementCommandController extends Controller
                 abort(403);
             }
             Escort::whereIn('id', (array) $request['ids'])->delete();
-            DB::table('movement_escorts')->whereIn('mov_command_id',(array) $request['ids'])->delete();
+            DB::table('movement_escorts')->whereIn('mov_command_id', (array) $request['ids'])->delete();
 
             return response()
                 ->json(['message' => 'تم حذف الحركات بنجاح', 'redirect' => route('commands.index')]);
-
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -141,25 +142,21 @@ class MovementCommandController extends Controller
         ]);
     }
 
-    public function export() 
+    public function export()
     {
         return Excel::download(new MovementCommandExport, 'commands.xlsx');
     }
 
-    public function import(Request $request) 
+    public function import(Request $request)
     {
-        try{
+        try {
             $request->validate([
                 'file' => 'required|max:2048',
             ]);
-      
-            Excel::import(new MovementCommandImport, $request->file('file'));
-            
-         
-        }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
 
+            Excel::import(new MovementCommandImport, $request->file('file'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
-        
     }
 }

@@ -32,7 +32,7 @@
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
                                     <label for="number">الرقم</label>
-                                    <input type="text" name="number[]" id="number" class="form-control">
+                                    <input type="text" name="number[]" id="number" class="form-control" value="{{ $number }}" readonly>
                                     <span class="text-danger" id="number-error"></span>
                                 </div>
                             </div>
