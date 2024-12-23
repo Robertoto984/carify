@@ -9,20 +9,27 @@ use App\Models\Driver;
 use App\Models\Escort;
 use App\Models\MovementCommand;
 use App\Models\Truck;
-use App\Services\MovementCommand\MovementCommandService;
+use App\Services\MovementCommand\StoreMovementCommandService;
+use App\Services\MovementCommand\UpdateMovementCommandService;
+use App\Traits\CommandNumGen;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Traits\CommandNumGen;
-use Illuminate\Support\Facades\Log;
 
 class MovementCommandController extends Controller
 {
     use CommandNumGen;
-    protected $movementService;
-    public function __construct(MovementCommandService $movementService)
+    protected $storemovementService;
+    protected $updatemovementService;
+
+    public function __construct(
+        StoreMovementCommandService $storemovementService,
+        UpdateMovementCommandService $updatemovementService
+        )
     {
-        $this->movementService = $movementService;
+        $this->storemovementService = $storemovementService;
+        $this->updatemovementService = $updatemovementService;
     }
     public function index()
     {
@@ -46,7 +53,7 @@ class MovementCommandController extends Controller
             if (request()->user()->cannot('create', MovementCommand::class)) {
                 abort(403);
             }
-            $this->movementService->store($request->validated());
+            $this->storemovementService->store($request->validated());
 
             return response()->json([
                 'message' => 'تم إضافة الحركة بنجاح.',
@@ -91,7 +98,7 @@ class MovementCommandController extends Controller
                 abort(403);
             }
             $data = $request->validated();
-            $this->movementService->update($data, $id);
+            $this->updatemovementService->update($data, $id);
             return response()->json([
                 'message' => 'تم تعديل الحركة بنجاح.',
                 'redirect' => route('commands.index')
@@ -159,5 +166,21 @@ class MovementCommandController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+    public function finish($id)
+    {
+        $trucks = Truck::select('id', 'plate_number')->get();
+        $escorts = Escort::select('first_name', 'last_name', 'id')->get();
+        $drivers = Driver::select('first_name', 'last_name', 'id')->get();
+        $row = MovementCommand::where('id', $id)->first();
+        return response()->json([
+            'html' => view('commands.completion', [
+                'row' => $row,
+                'trucks' => $trucks,
+                'escorts' => $escorts,
+                'drivers' => $drivers
+            ])->render(),
+        ]);
     }
 }

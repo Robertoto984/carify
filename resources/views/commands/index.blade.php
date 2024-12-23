@@ -88,7 +88,7 @@
                                         <td>
                                             @forelse ($command->escort as $escort)
                                                 <br>
-                                                <li>   {{ $escort->first_name }} {{ $escort->last_name }} </li>
+                                                <li>   {{ $escort->first_name .' '. $escort->last_name }} </li>
                                             @empty  
                                             لا يوجد
                                             @endforelse
@@ -103,6 +103,11 @@
                                         <td>{{ $command->distance }}</td>
                                         <td>{{ $command->notes }}</td>
                                         <td>
+
+                                            <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="" class="btn btn-success btn-sm">
+                                                <i class="fa-regular fa-circle-check"></i> إنهاء
+                                            </a>
+
                                             @can('delete',$command)
 
                                             <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('commands.edit',$command->id) }}" class="btn btn-primary btn-sm">

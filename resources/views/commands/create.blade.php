@@ -220,9 +220,15 @@
              }
         })
         inputs.forEach(input => {
-            if(input.classList.contains('number')){
-            input.value = number+1
-             }
+            if (input.classList.contains('number')) {
+            let numericString = $('#number').val().replace(/\D/g, '');
+            let numericValue = Number(numericString);
+            if (!isNaN(numericValue)) {
+                input.value = numericValue + 1;
+            } else {
+                console.log("Invalid number");
+            }
+        }
           
             if(input.classList.contains('final_odometer_number_0')){
             input.classList.remove("final_odometer_number_0"); // Remove mystyle class from DIV

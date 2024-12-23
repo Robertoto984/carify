@@ -38,6 +38,13 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
 }
 
+.escort {
+    font-family: 'Markazi Text', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0;
+}
+
 .table thead th  {
     color: rgb(35, 42, 251);
     font-family: 'Markazi Text', sans-serif;
@@ -70,14 +77,11 @@ label {
     border: none;
 }
 
-.btn-primary {
-    margin-left: 5px !important; 
-}
-
-.btn-warning, .btn-primary, .btn-danger  {
+.btn-warning, .btn-primary, .btn-danger, .btn-success  {
     font-family: 'Markazi Text', sans-serif;
     font-size: 12px;
     color: white;
+    margin-left: 5px !important; 
 }
 
 .table-container {
