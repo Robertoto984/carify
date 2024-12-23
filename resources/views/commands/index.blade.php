@@ -86,12 +86,11 @@
                                         <td>{{ $command->truck->plate_number }}</td>
                                         <td>{{ $command->driver->first_name }}{{ $command->driver->last_name }}</td>
                                         <td>
-                                            @forelse ($command->escort as $escort)
-                                                <br>
-                                                <li>   {{ $escort->first_name .' '. $escort->last_name }} </li>
-                                            @empty  
-                                            لا يوجد
-                                            @endforelse
+                                            @foreach ($command->escort as $escort)
+                                            <br>
+                                            <li>   {{ $escort->first_name .' '. $escort->last_name }} </li>
+                                            @endforeach
+                                        
                                         </td>
                                         <td>{{ $command->destination }}</td>
                                         <td>{{ $command->task }}</td>
@@ -104,7 +103,7 @@
                                         <td>{{ $command->notes }}</td>
                                         <td>
 
-                                            <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="" class="btn btn-success btn-sm">
+                                            <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('commands.finish',$command->id) }}" class="btn btn-success btn-sm">
                                                 <i class="fa-regular fa-circle-check"></i> إنهاء
                                             </a>
 

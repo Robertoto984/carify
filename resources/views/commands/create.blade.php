@@ -40,7 +40,7 @@
                             <div class="form-group col-md-3 mb-3">
                                 <label for="date">التاريخ</label>
                                 <div class="input-group">
-                                    <input type="date" name="date[]" class="form-control" value="{{ date('Y-m-d') }}">
+                                    <input type="date" name="date[]" class="date form-control" value="{{ date('Y-m-d') }}">
                                     <div class="input-group-append">
                                         <div class="input-group-text" id="button-addon-date">
                                             <span class="fe fe-calendar fe-16">
@@ -111,8 +111,8 @@
                             <div class="col-md-2">
                                 <div class="form-group mb-3">
                                     <label for="task_start_time">توقيت البدء</label>
-                                    <input type="time" name="task_start_time[]" id="task_start_time" value="{{ date("
-                                        H:i") }}" class="form-control">
+                                    <input type="time" name="task_start_time[]" id="task_start_time" value="{{ date("H:i") }}"
+                                         class="task_start_time form-control">
                                     <span class="text-danger" id="task_start_time-error"></span>
                                 </div>
                             </div>
@@ -154,16 +154,16 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="task">المهمة</label>
-                                    <textarea class="form-control" id="task" name="task[]" rows="4">
-                                    </textarea>
+                                    <textarea class="form-control" id="task" name="task[]" rows="4"></textarea>
+                                   
                                     <span class="text-danger" id="task-error"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="notes">ملاحظات</label>
-                                    <textarea class="form-control" id="notes" name="notes[]" rows="4">
-                                    </textarea>
+                                    <textarea class="form-control" id="notes" name="notes[]" rows="4"></textarea>
+                                    
                                     <span class="text-danger" id="notes-error"></span>
                                 </div>
                             </div>
@@ -195,7 +195,8 @@
 <script>
 
     document.getElementById('add-form-btn').addEventListener('click', function () {
-        
+        $('.selectpicker').selectpicker('refresh');
+      
         const newForm = document.querySelector('.vehicle-form').cloneNode(true);
         const inputs = newForm.querySelectorAll('input');
         // Refresh selectpicker
@@ -246,7 +247,7 @@
             input.classList.remove("distance_0"); // Remove mystyle class from DIV
             input.classList.add("distance_1"); // add mystyle class from DIV
              }
-            if (!(input.classList.contains('drgpicker')) && !(input.classList.contains('number')) ) {
+            if (!(input.classList.contains('drgpicker')) && !(input.classList.contains('number')) && !(input.classList.contains('task_start_time') ) && !(input.classList.contains('date') )) {
                 
                 input.value = '';
             }
@@ -284,7 +285,7 @@
 </script>
 <script>
     //calc distance 
-    for(let i=0; i<=2; i++){
+    for(let i=0; i<=100; i++){
 
         $(document).on('input',`.final_odometer_number_${i}`,function(e){
           let distance = $(`.final_odometer_number_${i}`).val()-$(`.initial_odometer_number_${i}`).val()

@@ -79,15 +79,15 @@ class MovementCommandController extends Controller
         $trucks = Truck::select('id', 'plate_number')->get();
         $escorts = Escort::select('first_name', 'last_name', 'id')->get();
         $drivers = Driver::select('first_name', 'last_name', 'id')->get();
-        $row = MovementCommand::where('id', $id)->first();
+        $row = MovementCommand::with('escort')->where('id', $id)->first();
         return response()->json([
             'html' => view('commands.edit', [
                 'row' => $row,
                 'trucks' => $trucks,
                 'escorts' => $escorts,
                 'drivers' => $drivers
-            ])->render(),
-        ]);
+            ])->render(),'row'=>$row
+            ]);
     }
 
     public function update(MovementCommandRequest $request, $id)
@@ -173,14 +173,16 @@ class MovementCommandController extends Controller
         $trucks = Truck::select('id', 'plate_number')->get();
         $escorts = Escort::select('first_name', 'last_name', 'id')->get();
         $drivers = Driver::select('first_name', 'last_name', 'id')->get();
-        $row = MovementCommand::where('id', $id)->first();
+        $row = MovementCommand::with('escort')->where('id', $id)->first();
         return response()->json([
-            'html' => view('commands.completion', [
+            'html' => view('commands.complete', [
                 'row' => $row,
                 'trucks' => $trucks,
                 'escorts' => $escorts,
                 'drivers' => $drivers
-            ])->render(),
+            ])->render(),'row'=>$row
         ]);
+
+        
     }
 }

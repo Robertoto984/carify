@@ -9,16 +9,20 @@ use App\Http\Requests\Driver\updateDriverRequest;
 use App\Imports\DriversImport;
 use App\Models\Driver;
 use App\Services\Driver\StoreDriverService;
+use App\Services\Driver\UpdateDriverService;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DriversController extends Controller
 {
     protected $storeDriverService;
+    protected $updateDriverService;
 
-    public function __construct(StoreDriverService $storeDriverService)
+    public function __construct(StoreDriverService $storeDriverService,UpdateDriverService $updateDriverService)
     {
         $this->storeDriverService = $storeDriverService;
+        $this->updateDriverService = $updateDriverService;
+
     }
 
     public function index()
@@ -92,7 +96,7 @@ class DriversController extends Controller
             }
 
             $driversData = $request->validated();
-            $this->storeDriverService->updateDrivers($driversData, $id);
+            $this->updateDriverService->updateDrivers($driversData, $id);
             return response()->json([
                 'message' => 'تم تعديل السائق بنجاح.',
                 'redirect' => route('drivers.index'),

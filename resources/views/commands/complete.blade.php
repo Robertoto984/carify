@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
 
-<form method="POST" action="{{ route('commands.complete',['id'=>$row->id]) }}" class="submit-form">
+<form method="POST" id="edit" action="{{ route('commands.complete',['id'=>$row->id]) }}" class="submit-form">
     @csrf
     <div id="vehicle-forms-container">
         <div class="vehicle-form">
@@ -106,7 +106,7 @@
             </div>
             <div class="form-group col-md-4 mb-3">
                 <label for="escort_id">المرافق</label>
-                <select class="form-control" id="escort_id" name="escort_id[]" multiple data-live-search="true" readonly>
+                <select class="selectpicker form-control" id="escort_id" name="escort_id[]" multiple data-live-search="true" readonly>
                     @foreach($escorts as $escort)
                         <option value="{{ $escort->id }}" {{ $escort->id == $row->escort_id ? 'selected':'' }}>{{ $escort->first_name . ' '.  $escort->last_name }}</option>
                     @endforeach
@@ -118,18 +118,14 @@
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="task">المهمة</label>
-                        <textarea class="form-control" id="task"  name="task[]" rows="4" readonly>
-                            {{ $row->task }}
-                        </textarea>
+                        <textarea class="form-control" id="task"  name="task[]" rows="4" readonly>{{ $row->task }}</textarea>
                         <span class="text-danger" id="task-error"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="notes">ملاحظات</label>
-                        <textarea class="form-control" id="notes" name="notes[]" rows="4">
-                            {{ $row->notes }}
-                        </textarea>
+                        <textarea class="form-control" id="notes" name="notes[]" rows="4">{{ $row->notes }}</textarea>
                         <span class="text-danger" id="notes-error"></span>
                     </div>
                 </div>
@@ -143,4 +139,37 @@
     </div>
 </form>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
+<script>
+     $('.selectpicker').selectpicker('render');
+</script>
+<script>
+    $(document).ready(function(){
+        
+        var id = $(`#edit`).attr('action').split('/').indexOf('complete')+1
+        $.ajax({
+        url: window.location.origin+`/commands/finish/${id}`,
+        type: "GET",
+        dataType: "json",
+        success: function (response,data) {
+            var escorts = response.row.escort;
+            var ids = []
+            escorts.forEach(element => {
+                ids.push(element.id)
+                $('.selectpicker').val(ids);
+                console.log(ids)
+              
+
+            });
+
+
+        },
+
+    })
+    })
+   
+
+</script>
+
+

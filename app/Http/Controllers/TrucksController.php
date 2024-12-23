@@ -11,16 +11,20 @@ use App\Imports\TrucksImport;
 use App\Models\Driver;
 use App\Models\Truck;
 use App\Services\Truck\StoreTruckService;
+use App\Services\Truck\UpdateTruckService;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class TrucksController extends Controller
 {
     protected $storeTruckService;
+    protected $updateTruckService;
 
-    public function __construct(StoreTruckService $storeTruckService)
+    public function __construct(StoreTruckService $storeTruckService,UpdateTruckService $updateTruckService)
     {
         $this->storeTruckService = $storeTruckService;
+        $this->updateTruckService = $updateTruckService;
+
     }
 
     public function index()
@@ -82,7 +86,7 @@ class TrucksController extends Controller
                 abort(403);
             }
             $data = $request->validated();
-            $this->storeTruckService->updateTruck($data,$id);
+            $this->updateTruckService->updateTruck($data,$id);
             return response()->json(['message'=>'تم تعديل المركبة بنجاح.','redirect'=>route('trucks.index')]);
         } catch (\Exception $e) {
             return response()->json(['message'=>'حدث خطأ أثناء تعديل المركبة:','redirect'=>route('trucks.index')]);
