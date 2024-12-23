@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('movement_escorts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mov_command_id')->on('movement_commands')->cascadeOnDelete()->cascadeOnUpdate()->nullable();
-            $table->foreignId('escort_id')->constrained();
+            $table->foreignId('escort_id')->constrained()->nullable();
             $table->timestamps();
         });
     }

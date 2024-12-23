@@ -18,11 +18,11 @@ return new class extends Migration
             $table->foreignId('truck_id')->constrained();
             $table->string('destination');
             $table->string('task');
-            $table->integer('initial_odometer_number');
-            $table->integer('final_odometer_number');
-            $table->integer('distance');
+            $table->integer('initial_odometer_number')->nullable();
+            $table->integer('final_odometer_number')->nullable();
+            $table->integer('distance')->nullable();
             $table->time('task_start_time');
-            $table->time('task_end_time');
+            $table->time('task_end_time')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
         });
