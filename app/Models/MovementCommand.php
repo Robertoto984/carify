@@ -11,19 +11,19 @@ class MovementCommand extends Model
 
     protected $guarded = [];
 
-    public function truck()
-    {
-        return $this->belongsTo(Truck::class);
-    }
-
     public function driver()
     {
         return $this->belongsTo(Driver::class);
     }
 
+    public function truck()
+    {
+        return $this->belongsTo(Truck::class);
+    }
+
     public function escort()
     {
-        return $this->belongsToMany(Escort::class, 'movement_escorts', 'mov_command_id', 'id');
+        return $this->belongsToMany(Escort::class, 'movement_escorts', 'mov_command_id', 'escort_id');
     }
 
     protected static function booted()

@@ -26,14 +26,14 @@ class MovementCommandController extends Controller
     public function __construct(
         StoreMovementCommandService $storemovementService,
         UpdateMovementCommandService $updatemovementService
-        )
-    {
+    ) {
         $this->storemovementService = $storemovementService;
         $this->updatemovementService = $updatemovementService;
     }
     public function index()
     {
-        $commands = MovementCommand::with('driver', 'truck')->paginate();
+        $commands = MovementCommand::with(['driver', 'truck', 'escort'])
+            ->paginate();
         return view('commands.index', compact('commands'));
     }
 
@@ -54,13 +54,11 @@ class MovementCommandController extends Controller
                 abort(403);
             }
             $this->storemovementService->store($request->validated());
-
             return response()->json([
                 'message' => 'تم إضافة الحركة بنجاح.',
                 'redirect' => route('commands.index')
             ]);
         } catch (\Exception $e) {
-            dd($e);
             Log::error($e->getMessage());
             return response()->json([
                 'message' => 'حدث خطأ أثناء إضافة الحركة.',
@@ -86,8 +84,9 @@ class MovementCommandController extends Controller
                 'trucks' => $trucks,
                 'escorts' => $escorts,
                 'drivers' => $drivers
-            ])->render(),'row'=>$row
-            ]);
+            ])->render(),
+            'row' => $row
+        ]);
     }
 
     public function update(MovementCommandRequest $request, $id)
@@ -180,9 +179,8 @@ class MovementCommandController extends Controller
                 'trucks' => $trucks,
                 'escorts' => $escorts,
                 'drivers' => $drivers
-            ])->render(),'row'=>$row
+            ])->render(),
+            'row' => $row
         ]);
-
-        
     }
 }

@@ -61,7 +61,7 @@
                                 <div class="form-group mb-3">
                                     <label for="truck_id">رقم السيارة</label>
                                     <select name="truck_id[]" id="truck_id"
-                                        class="selectpicker selectpicker_0 form-control" data-live-search="true">
+                                        class="selectpicker_0 form-control" data-live-search="true">
                                         <option value="" disabled selected>اختر السيارة</option>
                                         @foreach ($trucks as $truck)
                                         <option value="{{ $truck->id }}">{{ $truck->plate_number }}</option>
@@ -95,8 +95,6 @@
                                         }}</option>
                                     @endforeach
                                 </select>
-
-
                                 <span class="text-danger" id="escort_id-error"></span>
                             </div>
                             <div class="col-md-5">
@@ -192,7 +190,163 @@
 @endsection
 
 @section('scripts')
+
+<!-- 7akoom  -->
+{{-- <script>
+    document.getElementById('add-form-btn').addEventListener('click', function () {
+        $('.selectpicker').selectpicker('refresh');
+
+        const newForm = document.querySelector('.vehicle-form').cloneNode(true);
+        const inputs = newForm.querySelectorAll('input');
+        const selects = newForm.querySelectorAll('.selectpicker');
+
+        const lastNumberInput = document.querySelector('.vehicle-form:last-of-type .number');
+        let lastNumberValue = 0;
+
+        if (lastNumberInput) {
+            const numericString = lastNumberInput.value.replace(/\D/g, '');
+            const numericValue = Number(numericString);
+            if (!isNaN(numericValue)) {
+                lastNumberValue = numericValue;
+            }
+        }
+
+        inputs.forEach(input => {
+            if (input.classList.contains('number')) {
+                let newValue = lastNumberValue + 1;
+                input.value = lastNumberInput.value.replace(/\d/g, '') + newValue;
+            }
+
+            if (input.classList.contains('final_odometer_number_0')) {
+                input.classList.remove("final_odometer_number_0");
+                input.classList.add("final_odometer_number_1");
+            }
+
+            if (input.classList.contains('initial_odometer_number_0')) {
+                input.classList.remove("initial_odometer_number_0");
+                input.classList.add("initial_odometer_number_1");
+            }
+
+            if (input.classList.contains('distance_0')) {
+                input.classList.remove("distance_0");
+                input.classList.add("distance_1");
+            }
+
+            if (!(input.classList.contains('drgpicker')) && !(input.classList.contains('number')) && !(input.classList.contains('task_start_time')) && !(input.classList.contains('date'))) {
+                input.value = '';
+            }
+        });
+
+        const deleteButton = newForm.querySelector('.delete-form-btn');
+        deleteButton.addEventListener('click', function () {
+            newForm.remove();
+            checkDeleteButtonVisibility();
+        });
+
+        document.getElementById('vehicle-forms-container').appendChild(newForm);
+
+        const newAddButton = newForm.querySelector('.btn-primary');
+        newAddButton.addEventListener('click', function () {
+            document.getElementById('add-form-btn').click();
+        });
+
+        checkDeleteButtonVisibility();
+    });
+
+    function checkDeleteButtonVisibility() {
+        const formCount = document.querySelectorAll('.vehicle-form').length;
+        const deleteButtons = document.querySelectorAll('.delete-form-btn');
+        deleteButtons.forEach(button => {
+            if (formCount <= 1) {
+                button.style.display = 'none';
+            } else {
+                button.style.display = 'inline-block';
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        checkDeleteButtonVisibility();
+    });
+
+</script> --}}
+
+<!-- 7akoom temp -->
 <script>
+    $(document).ready(function () {
+        $('#add-form-btn').click(function () {
+            var $oldForm = $('.vehicle-form');
+            var $originalSelect = $oldForm.find('.selectpicker');
+            $originalSelect.selectpicker('destroy').addClass('tmpSelect');
+            var newForm = $('.vehicle-form').last().clone(true, true);
+
+            var lastNumberInput = $('.vehicle-form').last().find('.number');
+            var lastNumberValue = 0;
+
+            if (lastNumberInput.length) {
+                var numericString = lastNumberInput.val().replace(/\D/g, '');
+                var numericValue = Number(numericString);
+                if (!isNaN(numericValue)) {
+                    lastNumberValue = numericValue;
+                }
+            }
+
+            newForm.find('input').each(function () {
+                var input = $(this);
+
+                if (input.hasClass('number')) {
+                    input.val(lastNumberInput.val().replace(/\d/g, '') + (lastNumberValue + 1));
+                }
+
+                if (input.hasClass('final_odometer_number_0')) {
+                    input.removeClass('final_odometer_number_0').addClass('final_odometer_number_1');
+                }
+
+                if (input.hasClass('initial_odometer_number_0')) {
+                    input.removeClass('initial_odometer_number_0').addClass('initial_odometer_number_1');
+                }
+
+                if (input.hasClass('distance_0')) {
+                    input.removeClass('distance_0').addClass('distance_1');
+                }
+
+                if (!(input.hasClass('drgpicker') || input.hasClass('number') || input.hasClass('task_start_time') || input.hasClass('date'))) {
+                    input.val('');
+                }
+            });
+
+            newForm.find('.delete-form-btn').click(function () {
+                newForm.remove();
+                checkDeleteButtonVisibility();
+            });
+
+            $('#vehicle-forms-container').append(newForm);
+            $('.tmpSelect').selectpicker().removeClass('tmpSelect');
+
+            newForm.find('.btn-primary').click(function () {
+                $('#add-form-btn').click();
+            });
+
+            checkDeleteButtonVisibility();
+        });
+
+        function checkDeleteButtonVisibility() {
+            var formCount = $('.vehicle-form').length;
+            $('.delete-form-btn').each(function () {
+                if (formCount <= 1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        }
+
+        checkDeleteButtonVisibility();
+    });
+</script>
+
+<!-- rahma solution -->
+{{-- <script>
 
     document.getElementById('add-form-btn').addEventListener('click', function () {
         $('.selectpicker').selectpicker('refresh');
@@ -282,17 +436,14 @@
             checkDeleteButtonVisibility();
         });
     
-</script>
-<script>
-    //calc distance 
-    for(let i=0; i<=100; i++){
+</script> --}}
 
+<script>
+    for(let i=0; i<=100; i++){
         $(document).on('input',`.final_odometer_number_${i}`,function(e){
-          let distance = $(`.final_odometer_number_${i}`).val()-$(`.initial_odometer_number_${i}`).val()
-             $(`.distance_${i}`).val(distance)
-        
-          })
+            let distance = $(`.final_odometer_number_${i}`).val()-$(`.initial_odometer_number_${i}`).val()
+            $(`.distance_${i}`).val(distance)  
+        })
     }
-   
 </script>
 @endsection

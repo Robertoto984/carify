@@ -29,6 +29,6 @@ class Escort extends Model
 
     public function movements()
     {
-        return $this->belongsToMany(MovementCommand::class, 'movement_escorts');
+        return $this->belongsToMany(MovementCommand::class, 'movement_escorts', 'escort_id', 'mov_command_id');
     }
 }

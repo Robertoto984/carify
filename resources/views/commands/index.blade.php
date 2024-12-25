@@ -84,7 +84,7 @@
                                         <td>{{ $command->date }}</td>
                                         <td>{{ $command->responsible }}</td>
                                         <td>{{ $command->truck->plate_number }}</td>
-                                        <td>{{ $command->driver->first_name }}{{ $command->driver->last_name }}</td>
+                                        <td>{{ $command->driver->first_name.' '. $command->driver->last_name }}</td>
                                         <td>
                                             @foreach ($command->escort as $escort)
                                             <br>

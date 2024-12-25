@@ -11,10 +11,9 @@ class StoreMovementCommandService
     public function store(array $data)
     {
         foreach ($data['number'] as $index => $value) {
-            $number = (new MovementCommand())->generateCustomNumber();
             $row = MovementCommand::create([
                 'organized_by' => auth()->user()->name,
-                'number' => $number,
+                'number' => $data['number'],
                 'date' => $data['date'][$index],
                 'responsible' => $data['responsible'][$index],
                 'truck_id' => $data['truck_id'][$index],
