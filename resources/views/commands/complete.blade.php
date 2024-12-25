@@ -28,7 +28,7 @@
                 <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label for="task_start_time">توقيت البدء</label>
-                        <input type="time" name="task_start_time[]" value="{{ $row->task_start_time_formatted }}" id="task_start_time" class="form-control" readonly>
+                        <input type="time" name="task_start_time[]" value="{{ $row->task_start_time }}" id="task_start_time" class="form-control" readonly>
                         <span class="text-danger" id="task_start_time-error"></span>
                     </div>
                 </div>
@@ -70,21 +70,21 @@
                 <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label for="initial_odometer_number">العداد عند البدء</label>
-                        <input type="number" name="initial_odometer_number[]" value="{{ $row->initial_odometer_number }}" id="initial_odometer_number" class="form-control" readonly>
+                        <input type="number" name="initial_odometer_number[]" value="{{ $row->initial_odometer_number }}" id="initial_odometer_number" class="initial_odometer_number_0 form-control" readonly>
                         <span class="text-danger" id="initial_odometer_number-error"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label for="final_odometer_number">العداد عند الانتهاء</label>
-                        <input type="number" name="final_odometer_number[]" value="{{ $row->final_odometer_number }}" id="final_odometer_number" class="form-control">
+                        <input type="number" name="final_odometer_number[]" value="{{ $row->final_odometer_number }}" id="final_odometer_number" class="final_odometer_number_0 form-control">
                         <span class="text-danger" id="final_odometer_number-error"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label for="distance">المسافة المقطوعة</label>
-                        <input type="number" name="distance[]" value="{{ $row->distance }}" id="distance" class="form-control" >
+                        <input type="number" name="distance[]" value="{{ $row->distance }}" id="distance" class="distance_0 form-control" >
                         <span class="text-danger" id="distance-error"></span>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
             <div class="col-md-4">
                 <div class="form-group mb-3">
                     <label for="task_end_time">توقيت الانتهاء</label>
-                    <input type="time" name="task_end_time[]" value="{{ $row->task_end_time_formatted }}" id="task_end_time" class="form-control">
+                    <input type="time" name="task_end_time[]" value="{{ $row->task_end_time }}" id="task_end_time" class="form-control">
                     <span class="text-danger" id="task_end_time-error"></span>
                 </div>
             </div>
@@ -158,8 +158,6 @@
             escorts.forEach(element => {
                 ids.push(element.id)
                 $('.selectpicker').val(ids);
-                console.log(ids)
-              
 
             });
 
@@ -173,3 +171,12 @@
 </script>
 
 
+<script>
+    for(let i=0; i<=100; i++){
+        $(document).on('input',`.final_odometer_number_${i}`,function(e){
+            $(`.distance_${i}`).val(0)
+            let distance = $(`.final_odometer_number_${i}`).val()-$(`.initial_odometer_number_${i}`).val()
+            $(`.distance_${i}`).val(distance)  
+        })
+    }
+</script>

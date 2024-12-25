@@ -70,21 +70,21 @@
                 <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label for="initial_odometer_number">العداد عند البدء</label>
-                        <input type="number" name="initial_odometer_number[]" value="{{ $row->initial_odometer_number }}" id="initial_odometer_number" class="form-control">
+                        <input type="number" name="initial_odometer_number[]" value="{{ $row->initial_odometer_number }}" id="initial_odometer_number" class="initial_odometer_number_0 form-control">
                         <span class="text-danger" id="initial_odometer_number-error"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label for="final_odometer_number">العداد عند الانتهاء</label>
-                        <input type="number" name="final_odometer_number[]" value="{{ $row->final_odometer_number }}" id="final_odometer_number" class="form-control">
+                        <input type="number" name="final_odometer_number[]" value="{{ $row->final_odometer_number }}" id="final_odometer_number" class="final_odometer_number_0 form-control">
                         <span class="text-danger" id="final_odometer_number-error"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label for="distance">المسافة المقطوعة</label>
-                        <input type="number" name="distance[]" value="{{ $row->distance }}" id="distance" class="form-control" readonly>
+                        <input type="number" name="distance[]" value="{{ $row->distance }}" id="distance" class="distance_0 form-control" readonly>
                         <span class="text-danger" id="distance-error"></span>
                     </div>
                 </div>
@@ -118,18 +118,14 @@
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="task">المهمة</label>
-                        <textarea class="form-control" id="task"  name="task[]" rows="4">
-                            {{ $row->task }}
-                        </textarea>
+                        <textarea class="form-control" id="task"  name="task[]" rows="4">{{ $row->task }}</textarea>
                         <span class="text-danger" id="task-error"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="notes">ملاحظات</label>
-                        <textarea class="form-control" id="notes" name="notes[]" rows="4">
-                            {{ $row->notes }}
-                        </textarea>
+                        <textarea class="form-control" id="notes" name="notes[]" rows="4">{{ $row->notes }}</textarea>
                         <span class="text-danger" id="notes-error"></span>
                     </div>
                 </div>
@@ -161,8 +157,6 @@
             escorts.forEach(element => {
                 ids.push(element.id)
                 $('.selectpicker').val(ids);
-                console.log(ids)
-              
 
             });
 
@@ -174,4 +168,12 @@
    
 
 </script>
-
+<script>
+    for(let i=0; i<=100; i++){
+        $(document).on('input',`.final_odometer_number_${i}`,function(e){
+            $(`.distance_${i}`).val(0)
+            let distance = $(`.final_odometer_number_${i}`).val()-$(`.initial_odometer_number_${i}`).val()
+            $(`.distance_${i}`).val(distance)  
+        })
+    }
+</script>

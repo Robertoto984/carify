@@ -133,46 +133,10 @@
     </div>
 </div>
 
-<script>
-    document.getElementById('add-form-btn').addEventListener('click', function () {
-    const newForm = document.querySelector('.vehicle-form').cloneNode(true);
-    const inputs = newForm.querySelectorAll('input');
-    inputs.forEach(input => {
-        if (!(input.classList.contains('drgpicker'))) {
-            input.value = '';
-        }
-    });
-
-    const deleteButton = newForm.querySelector('.delete-form-btn');
-    deleteButton.addEventListener('click', function() {
-        newForm.remove();
-        checkDeleteButtonVisibility();
-    });
-
-        document.getElementById('vehicle-forms-container').appendChild(newForm);
-
-        checkDeleteButtonVisibility();
-    });
-
-    function checkDeleteButtonVisibility() {
-        const formCount = document.querySelectorAll('.vehicle-form').length;
-
-        const deleteButtons = document.querySelectorAll('.delete-form-btn');
-        deleteButtons.forEach(button => {
-            if (formCount <= 1) {
-                button.style.display = 'none';
-            } else {
-                button.style.display = 'inline-block';
-            }
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        checkDeleteButtonVisibility();
-    });
-    
-</script>
 
 
 
+@endsection
+@section('scripts')
+    <script src="{{ asset('js/form-repeater.js') }}"></script>
 @endsection

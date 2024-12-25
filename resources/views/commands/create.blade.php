@@ -61,7 +61,7 @@
                                 <div class="form-group mb-3">
                                     <label for="truck_id">رقم السيارة</label>
                                     <select name="truck_id[]" id="truck_id"
-                                        class="selectpicker_0 form-control" data-live-search="true">
+                                        class="selectpicker form-control" data-live-search="true">
                                         <option value="" disabled selected>اختر السيارة</option>
                                         @foreach ($trucks as $truck)
                                         <option value="{{ $truck->id }}">{{ $truck->plate_number }}</option>
@@ -87,7 +87,7 @@
                             </div>
                             <div class="form-group center col-md-4 mb-3">
                                 <label for="escort_id">المرافق</label>
-                                <select class="selectpicker selectpicker_2 form-control" id="escort_id"
+                                <select class="selectpicker  form-control" id="escort_id"
                                     name="escort_id[]" multiple >
                                     <option value="" disabled>اختر المرافق</option>
                                     @foreach($escorts as $escort)
@@ -190,6 +190,7 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('js/form-repeater.js') }}"></script>
 
 <!-- 7akoom  -->
 {{-- <script>
@@ -272,7 +273,7 @@
 </script> --}}
 
 <!-- 7akoom temp -->
-<script>
+{{-- <script>
     $(document).ready(function () {
         $('#add-form-btn').click(function () {
             var $oldForm = $('.vehicle-form');
@@ -297,7 +298,7 @@
                 if (input.hasClass('number')) {
                     input.val(lastNumberInput.val().replace(/\d/g, '') + (lastNumberValue + 1));
                 }
-
+               
                 if (input.hasClass('final_odometer_number_0')) {
                     input.removeClass('final_odometer_number_0').addClass('final_odometer_number_1');
                 }
@@ -343,7 +344,9 @@
 
         checkDeleteButtonVisibility();
     });
-</script>
+</script> --}}
+
+
 
 <!-- rahma solution -->
 {{-- <script>
