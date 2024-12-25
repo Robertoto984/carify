@@ -167,7 +167,6 @@ $('body').on('submit', 'form.submit-form', function (e) {
         },
         error: function (err, data, response, jqXhr, xhr) {
             var errors = err.responseJSON.errors;
-          
             $.each(errors, function (key, value) {
                 for(let i =0; i<=2; i++)
                 {

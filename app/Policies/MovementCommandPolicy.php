@@ -47,4 +47,9 @@ class MovementCommandPolicy
         return $user->role->name === 'مدير';
     }
     
+    public function complete(User $user, MovementCommand $movementcommand)
+    {
+        return $user->role->name === 'مدير';
+
+    }
 }

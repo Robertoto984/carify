@@ -2,10 +2,8 @@
 
 namespace App\Services\MovementCommand;
 
-use Carbon\Carbon;
 use App\Models\MovementCommand;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class UpdateMovementCommandService
 {
@@ -30,13 +28,15 @@ class UpdateMovementCommandService
             'task' => $request['task'][0],
             'notes' => $request['notes'][0],
         ]);
-        foreach ($request['escort_id'] as $escort) {
-            DB::table('movement_escorts')
-                ->where('mov_command_id', $row->id)
-                ->updateOrInsert([
-                    'mov_command_id' => $row->id,
-                    'escort_id' => $escort
-                ]);
+        if (isset($request['escort_id'][0])) {
+
+            foreach ($request['escort_id'] as $escort) {
+                DB::table('movement_escorts')
+                    ->where('mov_command_id', $row->id)
+                    ->updateOrInsert([
+                        'mov_command_id' => $row->id,
+                        'escort_id' => $escort]);
+            }
         }
     }
 }

@@ -78,17 +78,17 @@
                             <tbody>
                                 @foreach($commands as $command)
                                     <tr>
-                                        <td><input type="checkbox" name="ids[]" value="" id="check"/></td>
+                                        <td><input type="checkbox" name="ids[]" value="{{ $command->id }}" id="check" /></td>
                                         <td>{{ $command->number }}</td>
                                         <td>{{ $command->organized_by }}</td>
                                         <td>{{ $command->date }}</td>
                                         <td>{{ $command->responsible }}</td>
-                                        <td>{{ $command->truck->plate_number }}</td>
-                                        <td>{{ $command->driver->first_name.' '. $command->driver->last_name }}</td>
+                                        <td>{{ $command->truck->plate_number ?? ''}}</td>
+                                        <td>{{ $command->driver->first_name.' '. $command->driver->last_name ?? ''}}</td>
                                         <td>
                                             @foreach ($command->escort as $escort)
-                                            <br>
                                             <li>   {{ $escort->first_name .' '. $escort->last_name }} </li>
+                                            <br>
                                             @endforeach
                                         
                                         </td>
@@ -102,11 +102,12 @@
                                         <td>{{ $command->distance }}</td>
                                         <td>{{ $command->notes }}</td>
                                         <td>
+                                            @can('complete',$command)
 
                                             <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('commands.finish',$command->id) }}" class="btn btn-success btn-sm">
                                                 <i class="fa-regular fa-circle-check"></i> إنهاء
                                             </a>
-
+                                            @endcan
                                             @can('delete',$command)
 
                                             <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('commands.edit',$command->id) }}" class="btn btn-primary btn-sm">

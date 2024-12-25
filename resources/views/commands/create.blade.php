@@ -68,7 +68,6 @@
                                         @endforeach
                                     </select>
 
-
                                     <span class="text-danger" id="truck_id-error"></span>
                                 </div>
                             </div>

@@ -9,12 +9,13 @@ use App\Models\Driver;
 use App\Models\Escort;
 use App\Models\MovementCommand;
 use App\Models\Truck;
+use App\Services\MovementCommand\CompleteMovementCommands;
 use App\Services\MovementCommand\StoreMovementCommandService;
 use App\Services\MovementCommand\UpdateMovementCommandService;
 use App\Traits\CommandNumGen;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MovementCommandController extends Controller
@@ -22,13 +23,15 @@ class MovementCommandController extends Controller
     use CommandNumGen;
     protected $storemovementService;
     protected $updatemovementService;
-
+    protected $completemovementService;
     public function __construct(
         StoreMovementCommandService $storemovementService,
-        UpdateMovementCommandService $updatemovementService
+        UpdateMovementCommandService $updatemovementService,
+        CompleteMovementCommands $completemovementService
     ) {
         $this->storemovementService = $storemovementService;
         $this->updatemovementService = $updatemovementService;
+        $this->completemovementService = $completemovementService;
     }
     public function index()
     {
@@ -132,9 +135,9 @@ class MovementCommandController extends Controller
             if (request()->user()->cannot('MultiDelete', MovementCommand::class)) {
                 abort(403);
             }
-            Escort::whereIn('id', (array) $request['ids'])->delete();
+          
+            MovementCommand::whereIn('id', (array) $request['ids'])->delete();
             DB::table('movement_escorts')->whereIn('mov_command_id', (array) $request['ids'])->delete();
-
             return response()
                 ->json(['message' => 'تم حذف الحركات بنجاح', 'redirect' => route('commands.index')]);
         } catch (\Exception $e) {
@@ -169,6 +172,10 @@ class MovementCommandController extends Controller
 
     public function finish($id)
     {
+        $command = new MovementCommand();
+        if (request()->user()->cannot('complete', $command)) {
+            abort(403);
+        }
         $trucks = Truck::select('id', 'plate_number')->get();
         $escorts = Escort::select('first_name', 'last_name', 'id')->get();
         $drivers = Driver::select('first_name', 'last_name', 'id')->get();
@@ -182,5 +189,26 @@ class MovementCommandController extends Controller
             ])->render(),
             'row' => $row
         ]);
+    }
+
+    public function complete(MovementCommandRequest $request, $id)
+    {
+        try {
+            $command = new MovementCommand();
+            if (request()->user()->cannot('complete', $command)) {
+                abort(403);
+            }
+            $this->completemovementService->update($request->validated(), $id);
+            return response()->json([
+                'message' => 'تم انهاء الحركة بنجاح.',
+                'redirect' => route('commands.index')
+            ]);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return response()->json([
+                'message' => $e->getMessage(),
+                'redirect' => route('commands.index')
+            ]);
+        }
     }
 }

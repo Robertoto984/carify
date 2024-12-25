@@ -1,6 +1,5 @@
-<link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
 
-<form method="POST" id="edit" action="{{ route('commands.update',['id'=>$row->id]) }}" class="submit-form">
+<form method="POST" id="edit" action="{{ route('commands.update',$row->id) }}" class="submit-form edit">
     @csrf
     <div id="vehicle-forms-container">
         <div class="vehicle-form">
@@ -138,20 +137,47 @@
         </div>
     </div>
 </form>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
+
+
 <script>
-     $('.selectpicker').selectpicker('render');
+    $('.selectpicker').selectpicker('render');
 </script>
 <script>
-    $(document).ready(function(){
-        
-        var id = $(`#edit`).attr('action').split('/').indexOf('update')+1
-        $.ajax({
-        url: window.location.origin+`/commands/edit/${id}`,
+   $(document).on('click', '#modal', function (e) {
+   e.preventDefault()
+
+   var href = $(this).attr('href')
+   $.ajax({
+       url: href,
+       type: "GET",
+       dataType: "json",
+       success: function (response) {
+           var escorts = response.row.escort;
+           var ids = []
+           escorts.forEach(element => {
+               ids.push(element.id)
+               $('.selectpicker').val(ids);
+
+           });
+
+
+       },
+
+   })
+})
+
+</script>
+
+<script>
+    $(document).on('click', '#modal', function (e) {
+    e.preventDefault()
+
+    var href = $(this).attr('href')
+    $.ajax({
+        url: href,
         type: "GET",
         dataType: "json",
-        success: function (response,data) {
+        success: function (response) {
             var escorts = response.row.escort;
             var ids = []
             escorts.forEach(element => {
@@ -164,8 +190,7 @@
         },
 
     })
-    })
-   
+})
 
 </script>
 <script>
