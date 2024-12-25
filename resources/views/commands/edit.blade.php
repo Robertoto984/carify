@@ -84,7 +84,7 @@
                 <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label for="distance">المسافة المقطوعة</label>
-                        <input type="number" name="distance[]" value="{{ $row->distance }}" id="distance" class="form-control" readonly>
+                        <input type="number" name="distance[]" value="{{ $row->distance }}" id="distance" class="form-control">
                         <span class="text-danger" id="distance-error"></span>
                     </div>
                 </div>

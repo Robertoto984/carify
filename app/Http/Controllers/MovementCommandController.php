@@ -96,13 +96,13 @@ class MovementCommandController extends Controller
             if (request()->user()->cannot('update', $command)) {
                 abort(403);
             }
-            $data = $request->validated();
-            $this->updatemovementService->update($data, $id);
+            $this->updatemovementService->update($request->validated(), $id);
             return response()->json([
                 'message' => 'تم تعديل الحركة بنجاح.',
                 'redirect' => route('commands.index')
             ]);
         } catch (\Exception $e) {
+            Log::error($e->getMessage());
             return response()->json([
                 'message' => $e->getMessage(),
                 'redirect' => route('commands.index')
