@@ -10,11 +10,9 @@ class StoreMovementCommandService
 
     public function store(array $data)
     {
-        // Start a transaction to ensure atomicity
         DB::beginTransaction();
 
         try {
-            // First loop for creating MovementCommand records
             foreach ($data['number'] as $index => $value) {
                 $row = MovementCommand::create([
                     'organized_by' => auth()->user()->name,
@@ -33,7 +31,6 @@ class StoreMovementCommandService
                     'notes' => $data['notes'][$index],
                 ]);
 
-                // If 'escort_id' is provided, insert into the movement_escorts table
                 if (isset($data['escort_id']) && is_array($data['escort_id'])) {
                     foreach ($data['escort_id'] as $escort) {
                         DB::table('movement_escorts')->insert([
@@ -44,12 +41,9 @@ class StoreMovementCommandService
                 }
             }
 
-            // Commit the transaction if everything is successful
             DB::commit();
         } catch (\Exception $e) {
-            // Rollback the transaction if there's an error
             DB::rollBack();
-            // Optionally log the exception or rethrow
             throw $e;
         }
     }

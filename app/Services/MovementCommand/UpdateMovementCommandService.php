@@ -16,7 +16,7 @@ class UpdateMovementCommandService
 
         $row->update([
             'organized_by' => auth()->user()->name,
-            'number' => $request['number'][0], // Access the first element
+            'number' => $request['number'][0],
             'date' => $request['date'][0],
             'responsible' => $request['responsible'][0],
             'truck_id' => $request['truck_id'][0],
