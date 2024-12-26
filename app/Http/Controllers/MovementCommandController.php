@@ -9,7 +9,7 @@ use App\Models\Driver;
 use App\Models\Escort;
 use App\Models\MovementCommand;
 use App\Models\Truck;
-use App\Services\MovementCommand\CompleteMovementCommands;
+use App\Services\MovementCommand\CompleteMovementCommandsService;
 use App\Services\MovementCommand\StoreMovementCommandService;
 use App\Services\MovementCommand\UpdateMovementCommandService;
 use App\Traits\CommandNumGen;
@@ -27,7 +27,7 @@ class MovementCommandController extends Controller
     public function __construct(
         StoreMovementCommandService $storemovementService,
         UpdateMovementCommandService $updatemovementService,
-        CompleteMovementCommands $completemovementService
+        CompleteMovementCommandsService $completemovementService
     ) {
         $this->storemovementService = $storemovementService;
         $this->updatemovementService = $updatemovementService;
@@ -135,7 +135,7 @@ class MovementCommandController extends Controller
             if (request()->user()->cannot('MultiDelete', MovementCommand::class)) {
                 abort(403);
             }
-          
+
             MovementCommand::whereIn('id', (array) $request['ids'])->delete();
             DB::table('movement_escorts')->whereIn('mov_command_id', (array) $request['ids'])->delete();
             return response()

@@ -3,6 +3,8 @@
 namespace App\Services\MovementCommand;
 
 use App\Models\MovementCommand;
+use App\Models\Truck;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class UpdateMovementCommandService
@@ -10,7 +12,7 @@ class UpdateMovementCommandService
 
     public function update($request, $id)
     {
-        $row = MovementCommand::where('id', $id)->first();
+        $row = MovementCommand::findOrFail($id);
 
         $row->update([
             'organized_by' => auth()->user()->name,
@@ -28,14 +30,48 @@ class UpdateMovementCommandService
             'task' => $request['task'][0],
             'notes' => $request['notes'][0],
         ]);
-        if (isset($request['escort_id'][0])) {
 
-            foreach ($request['escort_id'] as $escort) {
+        Truck::whereId($request['truck_id'][0])->update(['kilometer_number' => $request['final_odometer_number'][0]]);
+
+        $currentEscorts = DB::table('movement_escorts')
+            ->where('mov_command_id', $row->id)
+            ->pluck('escort_id')
+            ->toArray();
+
+        if (isset($request['escort_id'][0])) {
+            $newEscorts = $request['escort_id'];
+            $escortsToRemove = array_diff($currentEscorts, $newEscorts);
+            $escortsToAdd = array_diff($newEscorts, $currentEscorts);
+
+            if (!empty($escortsToRemove)) {
                 DB::table('movement_escorts')
                     ->where('mov_command_id', $row->id)
-                    ->updateOrInsert([
+                    ->whereIn('escort_id', $escortsToRemove)
+                    ->delete();
+            }
+
+            if (!empty($escortsToAdd)) {
+                $dataToInsert = [];
+                $currentTimestamp = Carbon::now();
+                foreach ($escortsToAdd as $escort) {
+                    $dataToInsert[] = [
                         'mov_command_id' => $row->id,
-                        'escort_id' => $escort]);
+                        'escort_id' => $escort,
+                        'created_at' => $currentTimestamp,
+                        'updated_at' => $currentTimestamp,
+                    ];
+                }
+
+                DB::table('movement_escorts')->insert($dataToInsert);
+            }
+
+            if (!empty($escortsToRemove)) {
+                DB::table('movement_escorts')
+                    ->where('mov_command_id', $row->id)
+                    ->whereIn('escort_id', $escortsToRemove)
+                    ->update([
+                        'updated_at' => Carbon::now(),
+                    ]);
             }
         }
     }

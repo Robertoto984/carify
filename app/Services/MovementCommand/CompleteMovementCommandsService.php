@@ -1,15 +1,17 @@
 <?php
+
 namespace App\Services\MovementCommand;
 
+use App\Models\Truck;
 use App\Models\MovementCommand;
-use Illuminate\Support\Facades\DB;
 
-class CompleteMovementCommands
+class CompleteMovementCommandsService
 {
 
     public function update($request, $id)
     {
         $row = MovementCommand::where('id', $id)->first();
+        $truckId = $row->truck_id;
 
         $row->update([
             'task_end_time' => $request['task_end_time'][0],
@@ -17,5 +19,7 @@ class CompleteMovementCommands
             'distance' => $request['distance'][0],
             'notes' => $request['notes'][0],
         ]);
+
+        Truck::whereId($truckId)->update(['kilometer_number' => $request['final_odometer_number'][0]]);
     }
 }
