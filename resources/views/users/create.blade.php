@@ -56,7 +56,7 @@
                                 <button type="submit" class="btn btn-success rounded-btn">حفظ</button>
                                 <button type="button" id="add-form-btn" class="btn rounded-btn btn-primary">إضافة مستخدم
                                     اخر</button>
-                                <button type="button" class="btn btn-danger rounded-btn delete-form-btn">حذف هذه
+                                <button type="button" class="btn btn-danger rounded-btn delete-form-btn">إلغاء هذه
                                     المستخدم</button>
                             </div>
                         </div>
