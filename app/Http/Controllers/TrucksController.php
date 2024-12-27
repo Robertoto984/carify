@@ -32,7 +32,8 @@ class TrucksController extends Controller
         if (request()->user()->cannot('index', Truck::class)) {
             abort(403);
         }
-        $trucks = Truck::with('truckDeliverCards.driver')->get();
+
+        $trucks = Truck::with('truckDeliverCards.driver','movements')->get();
         return view('trucks.index', compact('trucks'));
     }
 

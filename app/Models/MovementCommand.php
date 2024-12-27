@@ -26,6 +26,24 @@ class MovementCommand extends Model
         return $this->belongsToMany(Escort::class, 'movement_escorts', 'mov_command_id', 'escort_id');
     }
 
+    public function statusButton()
+    {
+        return $this->status == 1 ?
+        '<a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="' . route('commands.finish', $this->id) . '" class="btn btn-success btn-sm">
+                                                <i class="fa-regular fa-circle-check"></i> إنهاء
+                                            </a>' :
+
+        '<span   href="" class="btn btn-warning btn-sm">
+                                            <i class="fa-regular fa-circle-check"></i> منتهية
+                                        </span>';
+    }
+
+    public function status()
+    {
+        return $this->status == 1 ? 'قيد التنفيذ':'منتهية';
+
+    }
+
     protected static function booted()
     {
         static::creating(function ($command) {

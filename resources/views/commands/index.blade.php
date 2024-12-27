@@ -59,6 +59,7 @@
                                     <th><input type="checkbox"  class="checkbox"  id='check_all'/></th>
                                     <th>الرقم</th>
                                     <th>منظم الأمر</th>
+                                    <th>الحالة</th>
                                     <th>التاريخ</th>
                                     <th>الجهة الطالبة</th>
                                     <th>رقم السيارة</th>
@@ -81,6 +82,7 @@
                                         <td><input type="checkbox" name="ids[]" value="{{ $command->id }}" id="check" /></td>
                                         <td>{{ $command->number }}</td>
                                         <td>{{ $command->organized_by }}</td>
+                                        <td>{{ $command->status() }}</td>
                                         <td>{{ $command->date }}</td>
                                         <td>{{ $command->responsible }}</td>
                                         <td>{{ $command->truck->plate_number ?? ''}}</td>
@@ -103,10 +105,7 @@
                                         <td>{{ $command->notes }}</td>
                                         <td>
                                             @can('complete',$command)
-
-                                            <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('commands.finish',$command->id) }}" class="btn btn-success btn-sm">
-                                                <i class="fa-regular fa-circle-check"></i> إنهاء
-                                            </a>
+                                                {!! $command->statusButton() !!}
                                             @endcan
                                             @can('delete',$command)
 

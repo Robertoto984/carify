@@ -14,6 +14,7 @@ class CompleteMovementCommandsService
         $truckId = $row->truck_id;
 
         $row->update([
+            'status'=>0,
             'task_end_time' => $request['task_end_time'][0],
             'final_odometer_number' => $request['final_odometer_number'][0],
             'distance' => $request['distance'][0],

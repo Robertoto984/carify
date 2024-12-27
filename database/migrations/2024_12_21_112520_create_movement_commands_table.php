@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('movement_commands', function (Blueprint $table) {
             $table->id();
             $table->string('organized_by');
+            $table->integer('status')->default(1);
             $table->string('number');
             $table->date('date');
             $table->string('responsible');

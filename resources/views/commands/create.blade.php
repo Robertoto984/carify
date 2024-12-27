@@ -64,7 +64,7 @@
                                         class="selectpicker form-control" data-live-search="true">
                                         <option value="" disabled selected>اختر السيارة</option>
                                         @foreach ($trucks as $truck)
-                                        <option value="{{ $truck->id }}">{{ $truck->plate_number }}</option>
+                                        <option value="{{ $truck->id }}" @if(request('truck_id')){{  $truck->id == request('truck_id') ? 'selected':'' }}@endif>{{ $truck->plate_number }}</option>
                                         @endforeach
                                     </select>
 
@@ -123,7 +123,7 @@
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
                                     <label for="initial_odometer_number">العداد عند البدء</label>
-                                    <input type="number" name="initial_odometer_number[]" id="initial_odometer_number"
+                                    <input type="number" value="{{(float)(Request::get('kilometer_number')) ?? ''}}" name="initial_odometer_number[]" id="initial_odometer_number"
                                         class="form-control initial_odometer_number_0">
                                     <span class="text-danger" id="initial_odometer_number-error"></span>
                                 </div>

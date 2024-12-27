@@ -83,7 +83,8 @@
                             </thead>
                             <tbody>
                                 @foreach($trucks as $truck)
-                                    <tr >
+                                  
+                                    <tr   @if(count($truck->movements) > 0)  @foreach ($truck->movements as $mov) style="background-color: {{ $mov->truck_id == $truck->id ? '#8FBC8F':'' }}" @endforeach @endif>
                                         <td><input type="checkbox" name="ids[]" value="{{ $truck->id }}" id="check"/></td>
                                         <td>{{ $truck->id }}</td>
                                         <td>{{ $truck->type }}</td>
@@ -122,23 +123,36 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @can('update',$truck)
+                                            <div class="btn-group dropright">
+                                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                  العمليات
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                 
+
+                                                  @can('update',$truck)
                                             
-                                            <a  href="{{ route('trucks.create-deliver-order',$truck->id)}}" class="btn btn-warning btn-sm deliver-order">
-                                                <i class="fa fa-ticket"></i> بطاقة تسليم
-                                            </a>
-
-                                            <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('trucks.edit',$truck->id) }}" class="btn btn-primary btn-sm">
-                                                <i class="fa fa-edit"></i> تعديل
-                                            </a>
-                                            @endcan
-                                            @can('delete',$truck)
-
-                                            <a href="{{ route('trucks.delete',$truck->id) }}" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="{{ $truck->id }}">
-                                                <i class="fa fa-trash"></i> حذف
-                                            </a>
-
-                                            @endcan
+                                                  <a  href="{{ route('trucks.create-deliver-order',$truck->id)}}" class="dropdown-item  deliver-order">
+                                                      <i class="fa fa-ticket"></i> بطاقة تسليم
+                                                  </a>
+      
+                                                  <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('trucks.edit',$truck->id) }}" class="dropdown-item ">
+                                                      <i class="fa fa-edit"></i> تعديل
+                                                  </a>
+                                                  @endcan
+                                                  @can('delete',$truck)
+      
+                                                  <a href="{{ route('trucks.delete',$truck->id) }}" id="destroy" class="dropdown-item  btn-sm delete-driver" data-id="{{ $truck->id }}">
+                                                      <i class="fa fa-trash"></i> حذف
+                                                  </a>
+      
+                                                  @endcan
+                                                  @can('create',\App\Models\MovementCommand::class)
+                                                  <a href="{{route('commands.create',['truck_id'=>$truck->id,'kilometer_number'=>$truck->kilometer_number])}}" class="dropdown-item "><i class="fa fa-plus"></i> أمر حركة</a>
+                                                  @endcan
+                                                </div>
+                                              </div>
+                                           
                                         </td>
                                     </tr>
                                 @endforeach      

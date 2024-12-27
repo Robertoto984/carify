@@ -14,9 +14,8 @@ trait CommandNumGen
         $lastCommand = MovementCommand::where('number', 'like', 'os' . $date . '%')
             ->orderBy('number', 'desc')
             ->first();
-
+      
         $increment = 1;
-
         if ($lastCommand) {
             $lastNumber = substr($lastCommand->number, 6);
             if (is_numeric($lastNumber)) {
