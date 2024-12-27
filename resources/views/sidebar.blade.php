@@ -1,6 +1,3 @@
-
-
-
 <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>
         <a href="#" class="btn collapseSidebar toggle-btn d-lg-none text-muted ml-2 mt-3" data-toggle="toggle">
           <i class="fe fe-x"><span class="sr-only"></span></i>
@@ -105,10 +102,10 @@
                 <li class="nav-item">
                   <a class="nav-link pl-3" href="{{route('trucks.create')}}"><span class="ml-1 item-text">بطاقة مركبة</span></a>
                 </li>
-                @can('create',\App\Models\Driver::class)
+                @can('create',\App\Models\Drver::class)
                 <li class="nav-item">
                   <a class="nav-link pl-3" href="{{route('drivers.create')}}"><span class="ml-1 item-text">بطاقة سائق</span></a>
-                </li>
+                </li>i
                 @endcan
                 @can('create',\App\Models\Escort::class)
                 <li class="nav-item">
@@ -128,6 +125,35 @@
           </ul>
           <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
+              <a href="#maintenance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <i class="fe fe-package fe-16"></i>
+                <span class="ml-3 item-main-text">الصيانة</span><span class="sr-only">(current)</span>
+              </a>
+              <ul class="collapse list-unstyled pl-4 w-100" id="maintenance">
+                <li class="nav-item">
+                <a class="nav-link pl-3" href="{{route('maintenance.index')}}"><span class="ml-1 item-text">أنواع الصيانة</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{{route('products.index')}}"><span class="ml-1 item-text">مواد الصيانة</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navbar-nav flex-fill w-100 mb-2">
+            <li class="nav-item dropdown">
+              <a href="#suppliers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <i class="fa-solid fa-parachute-box"></i>
+                <span class="ml-3 item-main-text">الموردين</span><span class="sr-only">(current)</span>
+              </a>
+              <ul class="collapse list-unstyled pl-4 w-100" id="suppliers">
+                <li class="nav-item">
+                <a class="nav-link pl-3" href="{{route('suppliers.index')}}"><span class="ml-1 item-text">قائمة المورّدين</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navbar-nav flex-fill w-100 mb-2">
+            <li class="nav-item dropdown">
               <a href="#orders" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                 <i class="fe fe-package fe-16"></i>
                 <span class="ml-3 item-main-text">الطلبات</span><span class="sr-only">(current)</span>
@@ -135,9 +161,6 @@
               <ul class="collapse list-unstyled pl-4 w-100" id="orders">
                 <li class="nav-item">
                 <a class="nav-link pl-3" href=""><span class="ml-1 item-text">قائمة الطلبات</span></a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link pl-3" href=""><span class="ml-1 item-text">طلب صيانة</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link pl-3" href=""><span class="ml-1 item-text">طلب شراء</span></a>
