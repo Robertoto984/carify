@@ -66,6 +66,9 @@ Route::group(['middleware' => 'redirect'], function () {
         Route::post('update/{id}', 'update')->name('products.update');
         Route::delete('delete/{id}', 'destroy')->name('products.delete');
         Route::delete('bulk-delete', 'MultiDelete')->name('products.bulk-delete');
+        Route::get('import_form', 'ImportForm')->name('products.import_form');
+        Route::get('export', 'export')->name('products.export');
+        Route::post('import', 'import')->name('products.import');
     });
 
     Route::prefix('maintenance-orders')->controller(MaintenanceOrderController::class)->group(function () {
@@ -81,6 +84,9 @@ Route::group(['middleware' => 'redirect'], function () {
         Route::post('update/{id}', 'update')->name('suppliers.update');
         Route::delete('delete/{id}', 'destroy')->name('suppliers.delete');
         Route::delete('bulk-delete', 'MultiDelete')->name('suppliers.bulk-delete');
+        Route::get('import_form', 'ImportForm')->name('suppliers.import_form');
+        Route::get('export', 'export')->name('suppliers.export');
+        Route::post('import', 'import')->name('suppliers.import');
     });
 
 

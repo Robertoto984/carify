@@ -15,8 +15,8 @@
         <a id="bulkDeleteBtn" href="{{ route('suppliers.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف المحدد</a>
         <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> المزيد </button>
         <div class="dropdown-menu" aria-labelledby="actionMenuButton">
-               <a class="dropdown-item more" href="{{route('maintenance.export')}}"><i class="fa fa-download mr-2"></i>تصدير</a>
-            <a class="dropdown-item more" href="{{route('maintenance.import_form')}}" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
+               <a class="dropdown-item more" href="{{route('suppliers.export')}}"><i class="fa fa-download mr-2"></i>تصدير</a>
+            <a class="dropdown-item more" href="{{route('suppliers.import_form')}}" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
         </div>
     </div>
 </div>
