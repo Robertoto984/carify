@@ -67,10 +67,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach($drivers as $driver) --}}
+                            @foreach($orders as $order)
                                 <tr>
                                     <td><input type="checkbox" name="ids[]" value="" id="check" /></td>
-                                    {{-- <td>{{ $driver->id }}</td> --}}
+                                    <td>{{ $order->id }}</td>
                                     
                                     <td>
                                         <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="" class="btn btn-primary btn-sm">
@@ -83,7 +83,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                            {{-- @endforeach --}}
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

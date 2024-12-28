@@ -74,6 +74,7 @@ Route::group(['middleware' => 'redirect'], function () {
     Route::prefix('maintenance-orders')->controller(MaintenanceOrderController::class)->group(function () {
         Route::get('index', 'index')->name('maintenance_orders.index');
         Route::get('create', 'create')->name('maintenance_orders.create');
+        Route::post('store', 'store')->name('maintenance_orders.store');
     });
 
     Route::prefix('supplier')->controller(SupplierController::class)->group(function () {
