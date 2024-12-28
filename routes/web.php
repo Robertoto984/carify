@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CardsController;
 use App\Http\Controllers\DriversController;
 use App\Http\Controllers\EscortController;
+use App\Http\Controllers\MaintenanceOrderController;
 use App\Http\Controllers\MaintenanceTypesController;
 use App\Http\Controllers\MovementCommandController;
 use App\Http\Controllers\ProductsController;
@@ -65,6 +66,11 @@ Route::group(['middleware' => 'redirect'], function () {
         Route::post('update/{id}', 'update')->name('products.update');
         Route::delete('delete/{id}', 'destroy')->name('products.delete');
         Route::delete('bulk-delete', 'MultiDelete')->name('products.bulk-delete');
+    });
+
+    Route::prefix('maintenance-orders')->controller(MaintenanceOrderController::class)->group(function () {
+        Route::get('index', 'index')->name('maintenance_orders.index');
+        Route::get('create', 'create')->name('maintenance_orders.create');
     });
 
     Route::prefix('supplier')->controller(SupplierController::class)->group(function () {

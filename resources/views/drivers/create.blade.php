@@ -131,7 +131,7 @@
     </div>
 </div>
 
-<script>
+{{-- <script>
     document.getElementById('add-form-btn').addEventListener('click', function () {
     const newForm = document.querySelector('.vehicle-form').cloneNode(true);
     const inputs = newForm.querySelectorAll('input');
@@ -169,6 +169,10 @@
         checkDeleteButtonVisibility();
     });
     
-</script>
+</script> --}}
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/form-repeater.js') }}"></script>
 @endsection

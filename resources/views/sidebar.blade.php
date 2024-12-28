@@ -131,6 +131,9 @@
               </a>
               <ul class="collapse list-unstyled pl-4 w-100" id="maintenance">
                 <li class="nav-item">
+                <a class="nav-link pl-3" href="{{route('maintenance_orders.index')}}"><span class="ml-1 item-text">طلبات الصيانة</span></a>
+                </li>
+                <li class="nav-item">
                 <a class="nav-link pl-3" href="{{route('maintenance.index')}}"><span class="ml-1 item-text">أنواع الصيانة</span></a>
                 </li>
                 <li class="nav-item">

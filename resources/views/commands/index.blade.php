@@ -57,6 +57,7 @@
                             <thead>
                                 <tr>
                                     <th><input type="checkbox"  class="checkbox"  id='check_all'/></th>
+                                    <th>#</th>
                                     <th>الرقم</th>
                                     <th>منظم الأمر</th>
                                     <th>الحالة</th>
@@ -80,6 +81,7 @@
                                 @foreach($commands as $command)
                                     <tr>
                                         <td><input type="checkbox" name="ids[]" value="{{ $command->id }}" id="check" /></td>
+                                        <td>{{ $command->id }}</td>
                                         <td>{{ $command->number }}</td>
                                         <td>{{ $command->organized_by }}</td>
                                         <td>{{ $command->status() }}</td>

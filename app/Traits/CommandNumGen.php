@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\MaintenanceOrder;
 use Carbon\Carbon;
 use App\Models\MovementCommand;
 
@@ -14,7 +15,7 @@ trait CommandNumGen
         $lastCommand = MovementCommand::where('number', 'like', 'os' . $date . '%')
             ->orderBy('number', 'desc')
             ->first();
-      
+
         $increment = 1;
         if ($lastCommand) {
             $lastNumber = substr($lastCommand->number, 6);
@@ -23,5 +24,23 @@ trait CommandNumGen
             }
         }
         return 'os' . $date . sprintf('%04d', $increment);
+    }
+
+    public function generateMaintenanceOrderNumber()
+    {
+        $date = Carbon::now()->format('dm');
+
+        $lastCommand = MaintenanceOrder::where('number', 'like', 'mo' . $date . '%')
+            ->orderBy('number', 'desc')
+            ->first();
+
+        $increment = 1;
+        if ($lastCommand) {
+            $lastNumber = substr($lastCommand->number, 6);
+            if (is_numeric($lastNumber)) {
+                $increment = (int)$lastNumber + 1;
+            }
+        }
+        return 'mo' . $date . sprintf('%04d', $increment);
     }
 }

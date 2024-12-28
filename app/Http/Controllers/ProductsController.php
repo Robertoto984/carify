@@ -66,10 +66,8 @@ class ProductsController extends Controller
 
     public function update(UpdateProductRequest $request, $id)
     {
-        Log::debug($request->all());
         try {
             $this->updateProductService->update($request->validated(), $id);
-            Log::debug($request->validated());
             return response()->json([
                 'message' => 'تم تعديل المادة بنجاح.',
                 'redirect' => route('products.index')
@@ -78,7 +76,7 @@ class ProductsController extends Controller
             Log::error($e->getMessage());
             return response()->json([
                 'message' => 'حدث خطأ أثناء تعديل المادة:',
-                // 'redirect' => route('products.index')
+                'redirect' => route('products.index')
             ]);
         }
     }

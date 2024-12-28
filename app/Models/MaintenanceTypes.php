@@ -24,4 +24,9 @@ class MaintenanceTypes extends Model
     {
         return Carbon::parse($this->updated_at);
     }
+
+    public function maintenanceOrders()
+    {
+        return $this->belongsToMany(MaintenanceOrder::class, 'maintenance_order_maintenance_type');
+    }
 }

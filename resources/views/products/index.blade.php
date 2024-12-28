@@ -57,6 +57,7 @@
                                 <th>الرمز</th>
                                 <th>الاسم</th>
                                 <th>الكمية</th>
+                                <th>السعر</th>
                                 <th>بلد المنشأ</th>
                                 <th>تاريخ الإنتاج</th>
                                 <th>تاريخ الإنتهاء</th>
@@ -74,6 +75,7 @@
                                     <td>{{$item->code}}</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->qty}}</td>
+                                    <td>{{$item->price}}</td>
                                     <td>{{$item->origin_country}}</td>
                                     <td>{{$item->production_date}}</td>
                                     <td>{{$item->expireation_date}}</td>

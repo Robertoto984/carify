@@ -21,9 +21,9 @@
                                 <span class="text-danger" id="qty-error"></span>
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label for="origin_country">بلد المنشأ</label>
-                                <input type="text" name="origin_country" id="origin_country" class="form-control" value="{{ old('origin_country', $row->origin_country) }}">
-                                <span class="text-danger" id="origin_country-error"></span>
+                                <label for="price">السعر</label>
+                                <input type="number" name="price" id="price" class="form-control" value="{{ old('price', $row->price) }}">
+                                <span class="text-danger" id="price-error"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -40,19 +40,26 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group mb-3">
-                            <label for="supplier_id">المورّد</label>
-                            <select class="form-control" id="supplier_id" name="supplier_id">
-                                <option value="" disabled {{ old('supplier_id') ? '' : 'selected' }}>اختر المورّد</option>
-                                @foreach($suppliers as $supp)
-                                    <option value="{{ $supp->id }}" 
-                                        {{ old('supplier_id', $row->supplier_id) == $supp->id ? 'selected' : '' }}>
-                                        {{ $supp->trade_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <span class="text-danger" id="supplier_id-error"></span>
+                                <label for="supplier_id">المورّد</label>
+                                <select class="form-control" id="supplier_id" name="supplier_id">
+                                    <option value="" disabled {{ old('supplier_id') ? '' : 'selected' }}>اختر المورّد</option>
+                                    @foreach($suppliers as $supp)
+                                        <option value="{{ $supp->id }}" 
+                                            {{ old('supplier_id', $row->supplier_id) == $supp->id ? 'selected' : '' }}>
+                                            {{ $supp->trade_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger" id="supplier_id-error"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="origin_country">بلد المنشأ</label>
+                                <input type="text" name="origin_country" id="origin_country" class="form-control" value="{{ old('origin_country', $row->origin_country) }}">
+                                <span class="text-danger" id="origin_country-error"></span>
+                            </div>
                         </div>
-                            <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group mb-3">
                                     <label for="notes">ملاحظات</label>
                                     <textarea class="form-control" id="notes" name="notes" rows="4" value="{{ old('notes', $row->notes) }}"></textarea>

@@ -12,4 +12,10 @@ class Product extends Model
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
     }
+
+    public function maintenanceOrders()
+    {
+        return $this->belongsToMany(MaintenanceOrder::class, 'product_maintenance_order')
+            ->withPivot('quantity', 'unit_price', 'total_price');
+    }
 }

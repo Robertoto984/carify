@@ -17,6 +17,7 @@ class UpdateProductRequest extends FormRequest
             'code' => 'required',
             'name' => 'required',
             'qty' => 'required|numeric',
+            'price' => 'required|numeric',
             'origin_country' => 'required',
             'prod_date' => 'nullable',
             'exp_date' => 'nullable',
@@ -31,8 +32,10 @@ class UpdateProductRequest extends FormRequest
             'code.required' => 'الرمز مطلوب',
             'name.required' => 'الاسم مطلوب',
             'qty.required' => 'الكمية مطلوبة',
+            'price.required' => 'الكمية مطلوبة',
             'origin_country.required' => 'بلد المنشأ مطلوب    ',
             'qty.float' => 'يجب أن تكون الكمية رقماَ',
+            'price.float' => 'يجب أن تكون الكمية رقماَ',
             'supplier_id.required' => 'المورّد مطلوب'
         ];
     }

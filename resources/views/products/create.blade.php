@@ -28,9 +28,9 @@
                                 <span class="text-danger" id="qty-error"></span>
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label for="origin_country">بلد المنشأ</label>
-                                <input type="text" name="origin_country[]" id="origin_country" class="form-control">
-                                <span class="text-danger" id="origin_country-error"></span>
+                                <label for="price">السعر</label>
+                                <input type="number" name="price[]" id="price" class="form-control">
+                                <span class="text-danger" id="price-error"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -56,7 +56,14 @@
                                 </select>
                                 <span class="text-danger" id="supplier_id-error"></span>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="origin_country">بلد المنشأ</label>
+                                <input type="text" name="origin_country[]" id="origin_country" class="form-control">
+                                <span class="text-danger" id="origin_country-error"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group mb-3">
                                     <label for="notes">ملاحظات</label>
                                     <textarea class="form-control" id="notes" name="notes[]" rows="4"></textarea>
@@ -64,7 +71,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="col mr-auto mb-5 mt-5">
                             <div class="dropdown">

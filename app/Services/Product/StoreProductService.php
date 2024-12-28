@@ -14,6 +14,7 @@ class StoreProductService
                 'code' => $value,
                 'name' => $products['name'][$key],
                 'qty' => $products['qty'][$key],
+                'price' => $products['price'][$key],
                 'origin_country' => $products['origin_country'][$key],
                 'production_date' => $products['prod_date'][$key],
                 'expireation_date' => $products['exp_date'][$key],

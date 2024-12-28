@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('code');
             $table->string('name');
             $table->float('qty');
+            $table->float('price');
             $table->string('origin_country');
             $table->date('production_date')->nullable();
             $table->date('expireation_date')->nullable();
