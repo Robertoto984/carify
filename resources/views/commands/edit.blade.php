@@ -105,9 +105,9 @@
             </div>
             <div class="form-group col-md-4 mb-3">
                 <label for="escort_id">المرافق</label>
-                <select class="selectpicker form-control" id="escort_id" name="escort_id[]" multiple data-live-search="true">
+                <select class="selectpicker select2 form-control" id="escort_id" name="escort_id[]" multiple data-live-search="true">
                     @foreach($escorts as $escort)
-                        <option value="{{ $escort->id }}" {{ $escort->id == $row->escort_id ? 'selected':'' }}>{{ $escort->first_name . ' '.  $escort->last_name }}</option>
+                        <option value="{{ $escort->id }}"  @if($escort->id == $row->escort_id) selected="selected" @endif>{{ $escort->first_name . ' '.  $escort->last_name }}</option>
                     @endforeach
                 </select>
                 <span class="text-danger" id="escort_id-error"></span>
@@ -137,12 +137,16 @@
         </div>
     </div>
 </form>
-
-
+{{-- 
 <script>
+    $(".select2").select2({  tags: true,
+    });
+</script>  --}}
+
+ <script>
     $('.selectpicker').selectpicker('render');
-</script>
-<script>
+</script>  
+  <script>
    $(document).on('click', '#modal', function (e) {
    e.preventDefault()
 
@@ -156,6 +160,8 @@
            var ids = []
            escorts.forEach(element => {
                ids.push(element.id)
+             
+             
                $('.selectpicker').val(ids);
 
            });
@@ -166,33 +172,9 @@
    })
 })
 
-</script>
-
-<script>
-    $(document).on('click', '#modal', function (e) {
-    e.preventDefault()
-
-    var href = $(this).attr('href')
-    $.ajax({
-        url: href,
-        type: "GET",
-        dataType: "json",
-        success: function (response) {
-            var escorts = response.row.escort;
-            var ids = []
-            escorts.forEach(element => {
-                ids.push(element.id)
-                $('.selectpicker').val(ids);
-
-            });
+</script> 
 
 
-        },
-
-    })
-})
-
-</script>
 <script>
     for(let i=0; i<=100; i++){
         $(document).on('input',`.final_odometer_number_${i}`,function(e){

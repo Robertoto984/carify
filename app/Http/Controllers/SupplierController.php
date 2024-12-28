@@ -110,4 +110,30 @@ class SupplierController extends Controller
             ]);
         }
     }
+
+    public function export()
+    {
+        return Excel::download(new SupplierExport, 'الموردين.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|max:2048',
+        ]);
+        try {
+
+            Excel::import(new SupplierImport, $request->file('file'));
+            return response()->json([
+                'message' => 'تم استيراد الموردين بنجاح',
+                'redirect' => route('suppliers.index')
+            ]);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return response()->json([
+                'message' => 'حدث خطأ أثناء استيراد الأنواع:',
+                'redirect' => route('suppliers.index')
+            ]);
+        }
+    }
 }

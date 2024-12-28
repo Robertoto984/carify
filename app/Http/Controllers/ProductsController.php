@@ -114,4 +114,30 @@ class ProductsController extends Controller
             ]);
         }
     }
+
+    public function export()
+    {
+        return Excel::download(new ProductExport, 'مواد الصيانه.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|max:2048',
+        ]);
+        try {
+
+            Excel::import(new ProductImport, $request->file('file'));
+            return response()->json([
+                'message' => 'تم استيراد المواد بنجاح',
+                'redirect' => route('products.index')
+            ]);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return response()->json([
+                'message' => 'حدث خطأ أثناء استيراد المواد:',
+                'redirect' => route('products.index')
+            ]);
+        }
+    }
 }
