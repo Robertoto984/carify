@@ -31,7 +31,11 @@ class UpdateMovementCommandService
             'notes' => $request['notes'][0],
         ]);
 
-        Truck::whereId($request['truck_id'][0])->update(['kilometer_number' => $request['final_odometer_number'][0]]);
+        if (!is_null($request['final_odometer_number'][0])) {
+            Truck::whereId($request['truck_id'][0])->update([
+                'kilometer_number' => $request['final_odometer_number'][0],
+            ]);
+        }
 
         $currentEscorts = DB::table('movement_escorts')
             ->where('mov_command_id', $row->id)

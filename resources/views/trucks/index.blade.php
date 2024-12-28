@@ -83,8 +83,13 @@
                             </thead>
                             <tbody>
                                 @foreach($trucks as $truck)
-                                  
-                                    <tr   @if(count($truck->movements) > 0)  @foreach ($truck->movements as $mov) style="background-color: {{ $mov->truck_id == $truck->id ? '#8FBC8F':'' }}" @endforeach @endif>
+                                   @php
+                                        $pending = $truck->movements->contains(function ($movement) {
+                                            return $movement->status == 1;
+                                        });
+                                    @endphp
+
+                                        <tr @if($pending) style="background-color: #FFA500;" @endif>
                                         <td><input type="checkbox" name="ids[]" value="{{ $truck->id }}" id="check"/></td>
                                         <td>{{ $truck->id }}</td>
                                         <td>{{ $truck->type }}</td>

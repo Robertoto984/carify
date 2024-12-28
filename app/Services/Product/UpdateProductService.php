@@ -11,14 +11,12 @@ class UpdateProductService
     {
         $row = Product::findOrFail($id);
 
-        // Ensure that 'code' is required and not null
         if (empty($data['code'])) {
-            // Handle error: code is required
             throw new \Exception("Code cannot be empty.");
         }
 
         $row->update([
-            'code' => $data['code'], // 'code' cannot be null
+            'code' => $data['code'],
             'name' => $data['name'] ?? null,
             'qty' => (float) ($data['qty'] ?? 0),
             'origin_country' => $data['origin_country'] ?? null,
