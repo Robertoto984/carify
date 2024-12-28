@@ -2,15 +2,14 @@
 
 namespace App\Policies;
 
-use App\Models\Escort;
+use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-class EscortPolicy
+class SupplierPolicy
 {
     use HandlesAuthorization;
-
     /**
      * Determine whether the user can view any models.
      */
@@ -19,19 +18,19 @@ class EscortPolicy
         return $user->role->name === 'مدير';
     }
 
+
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can create models.
      */
     public function create(User $user): bool
     {
         return $user->role->name === 'مدير';
     }
 
-
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Escort $escort): bool
+    public function update(User $user, Supplier $supplier): bool
     {
         return $user->role->name === 'مدير';
     }
@@ -39,7 +38,7 @@ class EscortPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Escort $escort): bool
+    public function delete(User $user, Supplier $supplier): bool
     {
         return $user->role->name === 'مدير';
     }
@@ -48,4 +47,6 @@ class EscortPolicy
     {
         return $user->role->name === 'مدير';
     }
+
+   
 }

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SupplierExport;
 use App\Http\Requests\Supplier\StoreSupplierRequest;
+use App\Imports\SupplierImport;
 use App\Models\Supplier;
 use App\Services\Supplier\StoreSupplierService;
 use App\Services\Supplier\UpdateSupplierService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SupplierController extends Controller
 {
@@ -24,18 +27,27 @@ class SupplierController extends Controller
 
     public function index()
     {
+        if (request()->user()->cannot('index', Supplier::class)) {
+            abort(403);
+        }
         $suppliers = Supplier::all();
         return view('suppliers.index', \compact('suppliers'));
     }
 
     public function create()
     {
+        if (request()->user()->cannot('create', Supplier::class)) {
+            abort(403);
+        }
         return view('suppliers.create');
     }
 
     public function store(StoreSupplierRequest $request)
     {
         try {
+            if (request()->user()->cannot('create', Supplier::class)) {
+                abort(403);
+            }
             $data = $request->validated();
             $this->storeSupplierService->store($data);
             return response()->json([
@@ -54,6 +66,10 @@ class SupplierController extends Controller
     public function update(StoreSupplierRequest $request, $id)
     {
         try {
+            $supplier = new Supplier();
+            if (request()->user()->cannot('update', $supplier)) {
+                abort(403);
+            }
             $this->updateSupplierService->update($request->validated(), $id);
             Log::debug($request->validated());
             return response()->json([
@@ -71,6 +87,10 @@ class SupplierController extends Controller
 
     public function edit($id)
     {
+        $supplier = new Supplier();
+        if (request()->user()->cannot('update', $supplier)) {
+            abort(403);
+        }
         $row = Supplier::findOrFail($id);
         return response()->json([
             'html' => view('suppliers.edit', ['row' => $row])->render(),
@@ -80,6 +100,10 @@ class SupplierController extends Controller
     public function destroy($id)
     {
         try {
+            $supplier = new Supplier();
+            if (request()->user()->cannot('delete', $supplier)) {
+                abort(403);
+            }
             Supplier::where('id', $id)->delete();
             return response()->json([
                 'message' => 'تم حذف المورّد بنجاح',
@@ -97,6 +121,9 @@ class SupplierController extends Controller
     public function MultiDelete(Request $request)
     {
         try {
+            if (request()->user()->cannot('MultiDelete', Supplier::class)) {
+                abort(403);
+            }
             Supplier::whereIn('id', (array) $request['ids'])->delete();
             return response()->json([
                 'message' => 'تم حذف الموردين بنجاح',

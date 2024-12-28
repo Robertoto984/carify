@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Escort;
+use App\Models\MaintenanceTypes;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-class EscortPolicy
+class MaintenanceTypePolicy
 {
     use HandlesAuthorization;
 
@@ -31,7 +31,7 @@ class EscortPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Escort $escort): bool
+    public function update(User $user, MaintenanceTypes $maintenance_types): bool
     {
         return $user->role->name === 'مدير';
     }
@@ -39,7 +39,7 @@ class EscortPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Escort $escort): bool
+    public function delete(User $user, MaintenanceTypes $maintenance_types): bool
     {
         return $user->role->name === 'مدير';
     }
