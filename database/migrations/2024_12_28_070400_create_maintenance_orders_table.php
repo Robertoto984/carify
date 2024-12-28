@@ -14,11 +14,11 @@ return new class extends Migration
             $table->date('date');
             $table->enum('type', \App\Enums\MaintenanceTypes::values());
             $table->string('created_by')->nullable();
-            $table->foreignId('maintenance_type_id')->on('maintenance_types')->cascadeOnUpdate()->nullable();
-            $table->foreignId('truck_id')->constrained('trucks')->onDelete('set null');
-            $table->foreignId('driver_id')->constrained('drivers')->onDelete('set null');
+            $table->foreignId('truck_id')->constrained('trucks');
+            $table->foreignId('driver_id')->constrained('drivers');
             $table->integer('odometer_number')->default('0');
             $table->string('notes')->nullable();
+            $table->float('total');
             $table->timestamps();
         });
     }
