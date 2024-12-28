@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('maintenance_order_maintenance_type', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('maintenance_order_id')->constrained('maintenance_orders')->onDelete('set null');
-            $table->foreignId('maintenance_type_id')->constrained('maintenance_types')->onDelete('set null');
+            $table->foreignId('maintenance_order_id')->constrained('maintenance_orders');
+            $table->foreignId('maintenance_type_id')->constrained('maintenance_types');
             $table->timestamps();
         });
     }

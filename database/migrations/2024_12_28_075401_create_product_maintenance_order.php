@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('product_maintenance_order', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('maintenance_order_id')->constrained('maintenance_orders')->onDelete('set null');
-            $table->foreignId('product_id')->constrained('products')->onDelete('set null');
+            $table->foreignId('maintenance_order_id')->constrained('maintenance_orders');
+            $table->foreignId('product_id')->constrained('products');
             $table->float('quantity');
             $table->float('unit_price');
             $table->float('total_price');

@@ -22,7 +22,7 @@
                 </ul>
             </div>
             @endif
-            <form method="POST" action="" class="submit-form">
+            <form method="POST" action="{{route('maintenance_orders.store')}}" class="submit-form">
                 @csrf
                 <div id="vehicle-forms-container">
                     <div class="vehicle-form">
@@ -30,7 +30,11 @@
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="number">الرقم</label>
+<<<<<<< HEAD
+                                    <input type="text" name="number[]" id="number" class="form-control number" value="{{ $number }}"
+=======
                                     <input type="text" name="number[]" id="number" class="form-control number" value="1"
+>>>>>>> 1bae286e6cce39d4a0c4849fbe4a4f1e448afd77
                                         readonly>
                                     <span class="text-danger" id="number-error"></span>
                                 </div>
@@ -53,10 +57,9 @@
                                 <label for="type">نوع الصيانة</label>
                                 <select class="form-control" id="type" name="type[]">
                                     <option value="" disabled selected>اختر النوع</option>
-                                    {{-- @foreach($drivers as $driver)
-                                    <option value="{{ $driver->id }}">{{ $driver->first_name . ' '. $driver->last_name
-                                        }}</option>
-                                    @endforeach --}}
+                                    @foreach($order_types as $ord_type)
+                                    <option value="{{ $ord_type }}">{{ $ord_type}}</option>
+                                    @endforeach
                                 </select>
                                 <span class="text-danger" id="type-error"></span>
                             </div>
@@ -66,10 +69,9 @@
                                 <label for="driver_id">السائق</label>
                                 <select class="form-control" id="driver_id" name="driver_id[]">
                                     <option value="" disabled selected>اختر السائق</option>
-                                    {{-- @foreach($drivers as $driver)
-                                    <option value="{{ $driver->id }}">{{ $driver->first_name . ' '. $driver->last_name
-                                        }}</option>
-                                    @endforeach --}}
+                                    @foreach($drivers as $driver)
+                                    <option value="{{ $driver->id }}">{{ $driver->first_name . ' '. $driver->last_name}}</option>
+                                    @endforeach
                                 </select>
                                 <span class="text-danger" id="driver_id-error"></span>
                             </div>
@@ -79,11 +81,9 @@
                                     <select name="truck_id[]" id="truck_id" class="selectpicker form-control"
                                         data-live-search="true">
                                         <option value="" disabled selected>اختر السيارة</option>
-                                        {{-- @foreach ($trucks as $truck)
-                                        <option value="{{ $truck->id }}" @if(request('truck_id')){{ $truck->id ==
-                                            request('truck_id') ? 'selected':'' }}@endif>{{ $truck->plate_number }}
-                                        </option>
-                                        @endforeach --}}
+                                        @foreach ($trucks as $truck)
+                                        <option value="{{ $truck->id }}"> {{ $truck->plate_number }}</option>
+                                        @endforeach
                                     </select>
                                     <span class="text-danger" id="truck_id-error"></span>
                                 </div>
@@ -104,6 +104,49 @@
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
+                        <div class="card-order" style="background-color: rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.125);">
+                            <div class="row" style="margin: 10px">
+                                <div class="form-group col-md-1 mb-3">
+                                    <input class="form-control" id="" name="[]" value="1" placeholder="الرقم" autocomplete="true">
+
+                                    <span class="text-danger" id="-error"></span>
+                                </div>
+                                <div class="form-group col-md-2 mb-3">
+                                    <select class="form-control" id="type" name="maintenance_order_id[]">
+                                        <option value=""  selected>الإجراء</option>
+                                            @foreach($types as $type)
+                                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                            @endforeach
+                                    </select>
+                                    <span class="text-danger" id="maintenance_order_id-error"></span>
+                                </div>
+                                <div class="form-group col-md-2 mb-3">
+                                    <select class="form-control" id="product_id" name="product_id[]">
+                                        <option value="" disabled selected>اختر المادة</option>
+                                        @foreach($products as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger" id="product_id-error"></span>
+                                </div>
+                                <div class="form-group col-md-2 mb-3">
+                                    <input class="form-control" id="quantity" name="quantity[]" placeholder="الكمية" autocomplete="true">
+
+                                    <span class="text-danger" id="quantity-error"></span>
+                                </div>
+                                <div class="form-group col-md-2 mb-3">
+                                    <input class="form-control" id="unit_price" name="unit_price[]" placeholder="السعر" autocomplete="true">
+                                    <span class="text-danger" id="unit_price-error"></span>
+                                </div>
+                                <div class="form-group col-md-2 mb-3">
+                                    <input class="form-control" id="total_price" name="total_price[]" placeholder="الإجمالي" autocomplete="true">
+                                    <span class="text-danger" id="total_price-error"></span>
+                                </div>
+                            </div>
+                            <button type="button" id="add-new"></button>
+                        </div>
+=======
                         <div class="card-form-order" onkeypress='createDive()'>
                             <div class="card card-order" style="background-color: rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.125);">
                                 <div class="row" style="margin: 10px">
@@ -149,21 +192,17 @@
                                 </div>
                         </div>
 
+>>>>>>> 1bae286e6cce39d4a0c4849fbe4a4f1e448afd77
                         <div class="row">
                             <div class="form-group col-md-6 mb-3">
                                 <label for="parts_description">الملاحظات</label>
                                 <textarea class="form-control" id="notes" name="notes[]" rows="4"></textarea>
-
                                 <span class="text-danger" id="notes-error"></span>
-
-
                             </div>
                             <div class="form-group col-md-6 mb-3">
-                                <label for="parts_description">الإجمالي</label>
-                                <input class="form-control" id="" name="" />
-                                <span class="text-danger" id="-error"></span>
-
-
+                                <label for="total">الإجمالي</label>
+                                <input class="form-control" id="total" name="total[]" />
+                                <span class="text-danger" id="total-error"></span>
                             </div>
                         </div>
 

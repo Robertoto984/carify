@@ -74,7 +74,6 @@ function checkDeleteButtonVisibility() {
     });
 }
 
-
 // $(document).ready(function () {
 //     $('#add-form-btn').click(function () {
        
