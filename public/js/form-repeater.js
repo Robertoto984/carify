@@ -12,6 +12,18 @@ $(document).on('click','#add-form-btn',function(){
      count++
 
 })
+
+function createDive(){
+   
+    var lastRepeatingGroup = $('.card-order').last();
+    lastRepeatingGroup.clone().insertAfter(lastRepeatingGroup);
+        var $originalSelect = $(lastRepeatingGroup).find('.selectpicker');
+        $originalSelect.next().addClass('d-none')
+        $originalSelect.selectpicker('render');
+        reorderForms1()
+     checkDeleteButtonVisibility();
+     count++
+}
 function myFunction() {
     let num = document.getElementsByName("howmany")[0].value;
     while (num-- > 0) {
@@ -32,6 +44,20 @@ function reorderForms() {
     let perfix = value.replace(number, '');
 
    $.each($(document).find('.vehicle-form'), function() {
+        $(this).find('.number').val(`${perfix}${number}`);
+        number ++;
+   });
+
+}
+
+let order_number1 = $(document).find('.card-order input.number:first').val();
+function reorderForms1() {
+    // Reorder the number inputs after deletion
+    let value = order_number;
+    let number = Number( value.replace(/\D/g, '') );
+    let perfix = value.replace(number, '');
+
+   $.each($(document).find('.card-order'), function() {
         $(this).find('.number').val(`${perfix}${number}`);
         number ++;
    });
