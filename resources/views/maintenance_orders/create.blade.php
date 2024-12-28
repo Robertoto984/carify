@@ -30,7 +30,11 @@
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="number">الرقم</label>
+<<<<<<< HEAD
                                     <input type="text" name="number[]" id="number" class="form-control number" value="{{ $number }}"
+=======
+                                    <input type="text" name="number[]" id="number" class="form-control number" value="1"
+>>>>>>> 1bae286e6cce39d4a0c4849fbe4a4f1e448afd77
                                         readonly>
                                     <span class="text-danger" id="number-error"></span>
                                 </div>
@@ -100,6 +104,7 @@
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
                         <div class="card-order" style="background-color: rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.125);">
                             <div class="row" style="margin: 10px">
                                 <div class="form-group col-md-1 mb-3">
@@ -141,6 +146,53 @@
                             </div>
                             <button type="button" id="add-new"></button>
                         </div>
+=======
+                        <div class="card-form-order" onkeypress='createDive()'>
+                            <div class="card card-order" style="background-color: rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.125);">
+                                <div class="row" style="margin: 10px">
+                                    <div class="form-group col-md-2 mb-3">
+                                        <input class="form-control number" id="" name="[]" value="1" placeholder="الرقم" autocomplete="true">
+        
+                                        <span class="text-danger" id="-error"></span>
+                                    </div>
+                                    <div class="form-group col-md-2 mb-3">
+                                        <select class="form-control" id="type" name="maintenance_order_id[]">
+                                            <option value="" disabled selected>اختر نوع الصيانة</option>
+                                            <option>داخلي</option>
+                                            <option>خارجي</option>
+                                        </select>
+                                        <span class="text-danger" id="maintenance_order_id-error"></span>
+                                    </div>
+                                    <div class="form-group col-md-2 mb-3">
+                                        <select class="form-control" id="product_id" name="product_id[]">
+                                            <option value="" disabled selected>اختر المادة</option>
+                                            {{-- @foreach($drivers as $driver)
+                                            <option value="{{ $driver->id }}">{{ $driver->first_name . ' '. $driver->last_name
+                                                }}</option>
+                                            @endforeach --}}
+                                        </select>
+                                        <span class="text-danger" id="product_id-error"></span>
+                                    </div>
+                                    <div class="form-group col-md-2 mb-3">
+                                        <input class="form-control" id="quantity" name="quantity[]" placeholder="الكمية" autocomplete="true">
+        
+                                        <span class="text-danger" id="quantity-error"></span>
+                                    </div>
+                                    <div class="form-group col-md-2 mb-3">
+                                        <input class="form-control" id="unit_price" name="unit_price[]" placeholder="السعر" autocomplete="true">
+        
+                                        <span class="text-danger" id="unit_price-error"></span>
+                                    </div>
+                                    <div class="form-group col-md-2 mb-3">
+                                        <input class="form-control" id="total_price" name="total_price[]" placeholder="الإجمالي" autocomplete="true">
+        
+                                        <span class="text-danger" id="total_price-error"></span>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+
+>>>>>>> 1bae286e6cce39d4a0c4849fbe4a4f1e448afd77
                         <div class="row">
                             <div class="form-group col-md-6 mb-3">
                                 <label for="parts_description">الملاحظات</label>
