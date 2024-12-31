@@ -7,10 +7,14 @@
 
 <div class="col ml-auto">
     <div class="dropdown float-right">
+         @can('create',\App\Models\MaintenanceRequest::class)
             <a href="{{route('maintenance_orders.create')}}" class="btn rounded-btn btn-primary">+ طلب صيانة</a>
+             @endcan
+          @can('MultiDelete',\App\Models\MaintenanceRequest::class)
             <a id="bulkDeleteBtn" href="" class="btn rounded-btn btn-danger ml-auto">
                 حذف المحدد
             </a>
+             @endcan
         <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             المزيد
         </button>

@@ -29,7 +29,7 @@ class StoreMaintenanceRequestService
             if (isset($orders['product_id']) && is_array($orders['product_id'])) {
                 foreach ($orders['product_id'] as $prod) {
                     DB::table('request_product')->insert([
-                        'request_id' => $row->id,  // Use the inserted ID
+                        'request_id' => $row->id,
                         'procedure_id' => $orders['procedure_id'][$key],
                         'product_id' => $prod,
                         'quantity' => $orders['quantity'][$key],

@@ -13,17 +13,26 @@ class MaintenanceTypesController extends Controller
 {
     public function index()
     {
+        if (request()->user()->cannot('index', MaintenanceTypes::class)) {
+            abort(403);
+        }
         $types = MaintenanceTypes::all();
         return view('maintenance.index', \compact('types'));
     }
 
     public function create()
     {
+        if (request()->user()->cannot('create', MaintenanceTypes::class)) {
+            abort(403);
+        }
         return view('maintenance.create');
     }
 
     public function store()
     {
+        if (request()->user()->cannot('create', MaintenanceTypes::class)) {
+            abort(403);
+        }
         $validated = request()->validate([
             'name' => 'required|array',
             'name.*' => 'required|string|max:255',
@@ -58,6 +67,10 @@ class MaintenanceTypesController extends Controller
 
     public function edit($id)
     {
+        $maintenance_types = new MaintenanceTypes();
+        if (request()->user()->cannot('update', $maintenance_types)) {
+            abort(403);
+        }
         $row = MaintenanceTypes::findOrFail($id);
         return response()->json([
             'html' => view(
@@ -71,6 +84,11 @@ class MaintenanceTypesController extends Controller
 
     public function update($id)
     {
+        $maintenance_types = new MaintenanceTypes();
+        if (request()->user()->cannot('update', $maintenance_types)) {
+            abort(403);
+        }
+
         $type = MaintenanceTypes::whereId($id)->first();
 
         if ($type) {
@@ -91,6 +109,11 @@ class MaintenanceTypesController extends Controller
     public function destroy($id)
     {
         try {
+            $maintenance_types = new MaintenanceTypes();
+            if (request()->user()->cannot('delete', $maintenance_types)) {
+                abort(403);
+            }
+
             MaintenanceTypes::whereId($id)->delete();
             return response()->json([
                 'message' => 'تم حذف النوع بنجاح',
@@ -108,6 +131,9 @@ class MaintenanceTypesController extends Controller
     public function MultiDelete(Request $request)
     {
         try {
+            if (request()->user()->cannot('MultiDelete', MaintenanceTypes::class)) {
+                abort(403);
+            }
             MaintenanceTypes::whereIn('id', (array)$request['ids'])->delete();
             return response()->json([
                 'message' => 'تم حذف الأنواع بنجاح',

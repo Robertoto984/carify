@@ -32,12 +32,19 @@ class MaintenanceRequestController extends Controller
 
     public function index()
     {
+        if (request()->user()->cannot('index', MaintenanceRequest::class)) {
+            abort(403);
+        }
         $requests = MaintenanceRequest::with(['truck', 'driver'])->get();
         return view('maintenance_orders.index', \compact('requests'));
     }
 
     public function create()
     {
+        if (request()->user()->cannot('create', MaintenanceRequest::class)) {
+            abort(403);
+        }
+
         $trucks = Truck::select('id', 'plate_number')->get();
         $drivers = Driver::select('first_name', 'last_name', 'id')->get();
         $order_types = MaintenanceTypes::values();
@@ -95,10 +102,8 @@ class MaintenanceRequestController extends Controller
 
     public function update(UpdateMaintenanceOrderRequest $request, $id)
     {
-        // Log::debug(['request' => $request->all()]);
         try {
             $data = $request->validated();
-            // Log::debug(['validated request' => $data]);
             $this->updateMaintenanceRequest->update($data, $id);
             return response()->json([
                 'message' => 'تم تعديل الطلب بنجاح.',
@@ -109,7 +114,7 @@ class MaintenanceRequestController extends Controller
             Log::error('Stack trace: ' . $e->getTraceAsString());
             return response()->json([
                 'message' => 'حدث خطأ أثناء تعديل الطلب:',
-                // 'redirect' => route('maintenance_orders.index')
+                'redirect' => route('maintenance_orders.index')
             ]);
         }
     }

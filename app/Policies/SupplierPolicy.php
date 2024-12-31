@@ -2,13 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Escort;
+use App\Models\Supplier;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-
-class EscortPolicy
+class SupplierPolicy
 {
     use HandlesAuthorization;
 
@@ -17,23 +15,20 @@ class EscortPolicy
         return $user->role->name === 'مدير';
     }
 
-
     public function create(User $user): bool
     {
         return $user->role->name === 'مدير';
     }
 
-
-    public function update(User $user, Escort $escort): bool
+    public function update(User $user, Supplier $supplier): bool
     {
         return $user->role->name === 'مدير';
     }
 
-    public function delete(User $user, Escort $escort): bool
+    public function delete(User $user, Supplier $supplier): bool
     {
         return $user->role->name === 'مدير';
     }
-
     public function MultiDelete(User $user): bool
     {
         return $user->role->name === 'مدير';

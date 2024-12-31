@@ -9,10 +9,12 @@
 
 <div class="col ml-auto">
     <div class="dropdown float-right">
-
+          @can('create',\App\Models\Supplier::class)
         <a href="{{route('suppliers.create')}}" class="btn btn-primary rounded-btn ml-10"> + بطاقة مورّد</a>
-
+         @endcan
+        @can('MultiDelete',\App\Models\Supplier::class)
         <a id="bulkDeleteBtn" href="{{ route('suppliers.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف المحدد</a>
+         @endcan
         <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> المزيد </button>
         <div class="dropdown-menu" aria-labelledby="actionMenuButton">
                <a class="dropdown-item more" href="{{route('suppliers.export')}}"><i class="fa fa-download mr-2"></i>تصدير</a>
@@ -78,13 +80,16 @@
                                     <td>{{$supp->notes}}</td>
                         
                                     <td>
+                                         @can('update',$supp)
                                         <a id="modal" type="button" data-toggle="modal" title="تعديل" data-target="#exampleModal" href="{{route('suppliers.edit',$supp->id)}}" class="btn btn-primary btn-sm">
                                             <i class="fa fa-edit"></i> 
                                         </a>
-
+                                         @endcan
+                                        @can('delete',$supp)
                                         <a href="{{route('suppliers.delete', $supp->id)}}" title="حذف" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="{{$supp->id}}">
                                             <i class="fa fa-trash"></i> 
                                         </a>
+                                        @endcan
                                     </td>
                                    
                                 </tr>
