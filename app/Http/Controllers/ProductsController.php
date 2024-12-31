@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ProductExport;
-use App\Imports\ProductImport;
-use App\Models\Product;
-use App\Models\Supplier;
 use Illuminate\Support\Facades\Log;
 use App\Services\Product\StoreProductService;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
+use App\Imports\ProductImport;
+use App\Models\Product;
+use App\Models\Supplier;
 use App\Services\Product\UpdateProductService;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;

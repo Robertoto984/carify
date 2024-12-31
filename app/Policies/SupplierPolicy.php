@@ -9,7 +9,6 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class SupplierPolicy
 {
     use HandlesAuthorization;
-
     public function index(User $user): bool
     {
         return $user->role->name === 'مدير';

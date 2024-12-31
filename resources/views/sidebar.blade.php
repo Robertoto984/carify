@@ -91,18 +91,20 @@
     </ul>
     <ul class="navbar-nav flex-fill w-100 mb-2">
       <li class="nav-item dropdown">
-        <a href="#cards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+        <a href="#cards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link" style="{{ request()->segment(1) ==  ('cards' || 'trucks' || 'drivers' || 'users') ? 'color:#1b68ff':''}}">
           <i class="fe fe-plus-square fe-16"></i>
           <span class="ml-3 item-main-text">البطاقات</span><span class="sr-only">(current)</span>
         </a>
-        <ul class="collapse list-unstyled pl-4 w-100" id="cards">
+        <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == ('cards' || 'trucks' || 'drivers' || 'users') ? 'show':''}}" id="cards">
           <li class="nav-item">
             <a class="nav-link pl-3" href="{{route('cards.index')}}"><span class="ml-1 item-text">قائمة البطاقات</span></a>
           </li>
+          @can('create',App\Models\Truck::class)
           <li class="nav-item">
             <a class="nav-link pl-3" href="{{route('trucks.create')}}"><span class="ml-1 item-text">بطاقة مركبة</span></a>
           </li>
-          @can('create',\App\Models\Drver::class)
+          @endcan
+          @can('create',\App\Models\Driver::class)
           <li class="nav-item">
             <a class="nav-link pl-3" href="{{route('drivers.create')}}"><span class="ml-1 item-text">بطاقة سائق</span></a>
           </li>i
@@ -125,33 +127,41 @@
     </ul>
     <ul class="navbar-nav flex-fill w-100 mb-2">
       <li class="nav-item dropdown">
-        <a href="#maintenance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+        <a href="#maintenance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link" style="{{ request()->segment(1) ==  ('maintenance_orders' || 'maintenance' || 'products') ? 'color:#1b68ff':''}}">
           <i class="fe fe-package fe-16"></i>
           <span class="ml-3 item-main-text">الصيانة</span><span class="sr-only">(current)</span>
         </a>
-        <ul class="collapse list-unstyled pl-4 w-100" id="maintenance">
+        <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == ('maintenance_orders' || 'maintenance' || 'products') ? 'show':''}}" id="maintenance">
+          @can('index',\App\Models\MaintenanceOrder::class)
           <li class="nav-item">
           <a class="nav-link pl-3" href="{{route('maintenance_orders.index')}}"><span class="ml-1 item-text">طلبات الصيانة</span></a>
           </li>
+          @endcan
+          @can('index',\App\Models\MaintenanceTypes::class)
           <li class="nav-item">
           <a class="nav-link pl-3" href="{{route('maintenance.index')}}"><span class="ml-1 item-text">أنواع الصيانة</span></a>
           </li>
+          @endcan
+          @can('index',\App\Models\Product::class)
           <li class="nav-item">
             <a class="nav-link pl-3" href="{{route('products.index')}}"><span class="ml-1 item-text">مواد الصيانة</span></a>
           </li>
+          @endcan
         </ul>
       </li>
     </ul>
     <ul class="navbar-nav flex-fill w-100 mb-2">
       <li class="nav-item dropdown">
-        <a href="#suppliers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+        <a href="#suppliers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link" style="{{ request()->segment(1) ==  ('suppliers') ? 'color:#1b68ff':''}}">
           <i class="fa-solid fa-parachute-box"></i>
           <span class="ml-3 item-main-text">الموردين</span><span class="sr-only">(current)</span>
         </a>
-        <ul class="collapse list-unstyled pl-4 w-100" id="suppliers">
+        <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == ('suppliers') ? 'show':''}}" id="suppliers">
+          @can('index',\App\Models\Supplier::class)
           <li class="nav-item">
           <a class="nav-link pl-3" href="{{route('suppliers.index')}}"><span class="ml-1 item-text">قائمة المورّدين</span></a>
           </li>
+          @endcan
         </ul>
       </li>
     </ul>

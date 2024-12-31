@@ -88,7 +88,6 @@ class MaintenanceTypesController extends Controller
         if (request()->user()->cannot('update', $maintenance_types)) {
             abort(403);
         }
-
         $type = MaintenanceTypes::whereId($id)->first();
 
         if ($type) {
@@ -113,7 +112,6 @@ class MaintenanceTypesController extends Controller
             if (request()->user()->cannot('delete', $maintenance_types)) {
                 abort(403);
             }
-
             MaintenanceTypes::whereId($id)->delete();
             return response()->json([
                 'message' => 'تم حذف النوع بنجاح',
