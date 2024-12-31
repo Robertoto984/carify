@@ -53,33 +53,39 @@
                                 <th>#</th>
                                 <th>الرقم</th>
                                 <th>النوع</th>
-                                <th>الإجراء</th>
                                 <th>السائق</th>
                                 <th>رقم السيارة</th>
                                 <th>رقم العداد</th>
-                                <th>المادة</th>
-                                <th>الكمية</th>
-                                <th>السعر</th>
                                 <th>القيمة</th>
                                 <th>القائم بالصيانة</th>
-                                <th>القائم ملاحظات</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($orders as $order)
+                            @foreach($requests as $req)
                                 <tr>
                                     <td><input type="checkbox" name="ids[]" value="" id="check" /></td>
-                                    <td>{{ $order->id }}</td>
+                                    <td>{{ $req->id }}</td>
+                                    <td>{{ $req->number }}</td>
+                                    <td>{{ $req->type }}</td>
+                                    <td>{{ $req->driver->first_name.' '.$req->driver->last_name }}</td>
+                                    <td>{{ $req->truck->plate_number }}</td>
+                                    <td>{{ $req->odometer_number }}</td>
+                                    <td>{{ $req->total }}</td>
+                                    <td>{{ $req->created_by }}</td>
                                     
                                     <td>
-                                        <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-edit"></i> 
-                                            تعديل
+                                        <a id="modal" type="button" data-toggle="modal" title="عرض" data-target="#exampleModal" href="" class="btn btn-success btn-sm">
+                                            <i class="fa fa-eye" aria-hidden="true"></i> 
+                                            {{-- عرض --}}
                                         </a>
-                                        <a href="" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="">
+                                        <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" title="تعديل" href="{{ route('maintenance_orders.edit',$req->id) }}" class="btn btn-primary btn-sm" >
+                                            <i class="fa fa-edit"></i> 
+                                            {{-- تعديل --}}
+                                        </a>
+                                        <a href="" id="destroy" title="حذف" class="btn btn-danger btn-sm delete-driver" data-id="">
                                             <i class="fa fa-trash"></i>
-                                            حذف
+                                            {{-- حذف --}}
                                         </a>
                                     </td>
                                 </tr>

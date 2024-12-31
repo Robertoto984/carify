@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CardsController;
 use App\Http\Controllers\DriversController;
 use App\Http\Controllers\EscortController;
-use App\Http\Controllers\MaintenanceOrderController;
+use App\Http\Controllers\MaintenanceRequestController;
 use App\Http\Controllers\MaintenanceTypesController;
 use App\Http\Controllers\MovementCommandController;
 use App\Http\Controllers\ProductsController;
@@ -71,10 +71,12 @@ Route::group(['middleware' => 'redirect'], function () {
         Route::post('import', 'import')->name('products.import');
     });
 
-    Route::prefix('maintenance-orders')->controller(MaintenanceOrderController::class)->group(function () {
+    Route::prefix('maintenance-orders')->controller(MaintenanceRequestController::class)->group(function () {
         Route::get('index', 'index')->name('maintenance_orders.index');
         Route::get('create', 'create')->name('maintenance_orders.create');
         Route::post('store', 'store')->name('maintenance_orders.store');
+        Route::get('edit/{id}', 'edit')->name('maintenance_orders.edit');
+        Route::post('update/{id}', 'update')->name('maintenance_orders.update');
     });
 
     Route::prefix('supplier')->controller(SupplierController::class)->group(function () {

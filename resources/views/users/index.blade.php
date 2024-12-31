@@ -77,14 +77,14 @@
                                     <td>
                                         @can('update',\App\Models\User::class)
 
-                                        <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('users.edit',$user->id) }}" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-edit"></i> تعديل
+                                        <a id="modal" type="button" data-toggle="modal" title="تعديل" data-target="#exampleModal" href="{{ route('users.edit',$user->id) }}" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-edit"></i> 
                                         </a>
                                         @endcan
                                         @can('delete',\App\Models\User::class)
 
-                                        <a href="{{ route('users.delete',$user->id) }}" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="{{ $user->id }}">
-                                            <i class="fa fa-trash"></i> حذف
+                                        <a href="{{ route('users.delete',$user->id) }}" title="حذف" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="{{ $user->id }}">
+                                            <i class="fa fa-trash"></i> 
                                         </a>
                                         @endcan
                                     </td>

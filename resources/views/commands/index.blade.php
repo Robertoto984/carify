@@ -111,14 +111,14 @@
                                             @endcan
                                             @can('delete',$command)
 
-                                            <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('commands.edit',$command->id) }}" class="btn btn-primary btn-sm">
-                                                <i class="fa fa-edit"></i> تعديل
+                                            <a id="modal" type="button" data-toggle="modal" title="تعديل" data-target="#exampleModal" href="{{ route('commands.edit',$command->id) }}" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-edit"></i> 
                                             </a>
                                             @endcan
                                             @can('update',$command)
 
-                                            <a href="{{ route('commands.delete',$command->id) }}" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="">
-                                                <i class="fa fa-trash"></i> حذف
+                                            <a href="{{ route('commands.delete',$command->id) }}" title="حذف" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="">
+                                                <i class="fa fa-trash"></i>
                                             </a>
                                             @endcan
                                         </td>

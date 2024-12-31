@@ -13,9 +13,8 @@ class Product extends Model
         return $this->belongsTo(Supplier::class, 'supplier_id');
     }
 
-    public function maintenanceOrders()
+    public function request()
     {
-        return $this->belongsToMany(MaintenanceOrder::class, 'product_maintenance_order')
-            ->withPivot('quantity', 'unit_price', 'total_price');
+        return $this->belongsToMany(MaintenanceRequest::class, 'request_product', 'product_id', 'request_id');
     }
 }

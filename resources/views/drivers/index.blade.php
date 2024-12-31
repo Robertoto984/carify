@@ -79,15 +79,15 @@
                                     <td>{{ $driver->license_expiration_date }}</td>
                                     <td>
                                         @can('update',$driver)
-                                            <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('drivers.edit',$driver->id) }}" class="btn btn-primary btn-sm">
+                                            <a id="modal" type="button" data-toggle="modal" title="تعديل" data-target="#exampleModal" href="{{ route('drivers.edit',$driver->id) }}" class="btn btn-primary btn-sm">
                                                 <i class="fa fa-edit"></i> 
-                                                تعديل
+                                            
                                             </a>
                                         @endcan
                                         @can('delete',$driver)
-                                            <a href="{{ route('drivers.delete',$driver->id) }}" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="{{ $driver->id }}">
+                                            <a href="{{ route('drivers.delete',$driver->id) }}" title="حذف" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="{{ $driver->id }}">
                                                 <i class="fa fa-trash"></i>
-                                                حذف
+                                                
                                             </a>
                                         @endcan
                                     </td>

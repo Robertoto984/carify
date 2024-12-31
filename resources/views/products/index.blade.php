@@ -83,12 +83,12 @@
                                     <td>{{$item->notes}}</td>
                         
                                     <td>
-                                        <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" href="{{ route('products.edit',$item->id) }}" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-edit"></i> تعديل
+                                        <a id="modal" type="button" data-toggle="modal" title="تعديل" data-target="#exampleModal" href="{{ route('products.edit',$item->id) }}" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-edit"></i> 
                                         </a>
 
-                                        <a href="{{route('products.delete', $item->id)}}" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="{{$item->id}}">
-                                            <i class="fa fa-trash"></i> حذف
+                                        <a href="{{route('products.delete', $item->id)}}" title="حذف" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="{{$item->id}}">
+                                            <i class="fa fa-trash"></i> 
                                         </a>
                                     </td>
                                    

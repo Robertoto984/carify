@@ -19,14 +19,13 @@ class MaintenanceTypes extends Model
         return Carbon::parse($this->created_at);
     }
 
-
     public function getUpdatedAtFormattedAttribute()
     {
         return Carbon::parse($this->updated_at);
     }
 
-    public function maintenanceOrders()
+    public function request()
     {
-        return $this->belongsToMany(MaintenanceOrder::class, 'maintenance_order_maintenance_type');
+        return $this->belongsToMany(MaintenanceRequest::class, 'request_procedure', 'procedure_id', 'request_id');
     }
 }

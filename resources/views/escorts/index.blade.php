@@ -85,15 +85,15 @@
                                     @can('update',$escort)
 
                                     <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal"
-                                        href="{{ route('escorts.edit',$escort->id) }}" class="btn btn-primary btn-sm">
-                                        <i class="fa fa-edit"></i> تعديل
+                                        href="{{ route('escorts.edit',$escort->id) }}" title="تعديل" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-edit"></i> 
                                     </a>
                                     @endcan
                                     @can('delete',$escort)
 
-                                    <a href="{{ route('escorts.delete',$escort->id) }}" id="destroy"
+                                    <a href="{{ route('escorts.delete',$escort->id) }}"  title="حذف"id="destroy"
                                         class="btn btn-danger btn-sm delete-driver" data-id="">
-                                        <i class="fa fa-trash"></i> حذف
+                                        <i class="fa fa-trash"></i> 
                                     </a>
                                     @endcan
                                 </td>

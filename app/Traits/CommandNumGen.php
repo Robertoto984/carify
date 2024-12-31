@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\MaintenanceOrder;
+use App\Models\MaintenanceRequest;
 use Carbon\Carbon;
 use App\Models\MovementCommand;
 
@@ -30,7 +31,7 @@ trait CommandNumGen
     {
         $date = Carbon::now()->format('dm');
 
-        $lastCommand = MaintenanceOrder::where('number', 'like', 'mo' . $date . '%')
+        $lastCommand = MaintenanceRequest::where('number', 'like', 'mo' . $date . '%')
             ->orderBy('number', 'desc')
             ->first();
 
