@@ -79,6 +79,32 @@ class MaintenanceRequestController extends Controller
         }
     }
 
+    public function show($id)
+    {
+       
+        $row = MaintenanceRequest::with([
+            'product' => function ($query) {
+                $query->withPivot('procedure_id', 'quantity', 'unit_price', 'total_price');
+            },
+            'driver',
+            'truck'
+        ])
+            ->where('id', $id)
+            ->first();
+
+        $procedures = ModelsMaintenanceTypes::select('id', 'name')->get();
+        $drivers = Driver::select('id', 'first_name', 'last_name')->get();
+        $trucks = Truck::select('id', 'plate_number')->get();
+        $products = Product::select('id', 'name')->get();
+        $types = MaintenanceTypes::values();
+
+        return response()->json([
+            'html' => view(
+                'maintenance_orders.show',
+                compact('row', 'procedures', 'drivers', 'trucks', 'products', 'types')
+            )->render(),
+        ]);
+    }
     public function edit($id)
     {
         $m = new MaintenanceRequest();

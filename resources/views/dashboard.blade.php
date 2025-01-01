@@ -294,6 +294,7 @@
       gtag('js', new Date());
       gtag('config', 'UA-56159088-1');
     </script>
+     
     <!-- Latest compiled and minified JavaScript -->
     <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
 

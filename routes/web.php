@@ -31,6 +31,7 @@ Route::group(['middleware' => 'redirect'], function () {
         Route::get('create', 'create')->name('trucks.create');
         Route::post('store', 'store')->name('trucks.store');
         Route::get('edit/{id}', 'edit')->name('trucks.edit');
+        Route::get('show/{id}', 'show')->name('trucks.show');
         Route::post('update/{id}', 'update')->name('trucks.update');
         Route::delete('bulk-delete', 'MultiDelete')->name('trucks.bulk-delete');
         Route::delete('delete/{id}', 'destroy')->name('trucks.delete');
@@ -76,6 +77,8 @@ Route::group(['middleware' => 'redirect'], function () {
         Route::get('create', 'create')->name('maintenance_orders.create');
         Route::post('store', 'store')->name('maintenance_orders.store');
         Route::get('edit/{id}', 'edit')->name('maintenance_orders.edit');
+        Route::get('show/{id}', 'show')->name('maintenance_orders.show');
+
         Route::post('update/{id}', 'update')->name('maintenance_orders.update');
         Route::delete('bulk-delete', 'MultiDelete')->name('maintenance_orders.bulk-delete');
         Route::delete('delete/{id}', 'destroy')->name('maintenance_orders.delete');

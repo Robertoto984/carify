@@ -78,7 +78,7 @@
                                     
                                     <td>
                                         
-                                        <a id="modal" type="button" data-toggle="modal" title="عرض" data-target="#exampleModal" href="" class="btn btn-success btn-sm">
+                                        <a id="modal" type="button" data-toggle="modal" title="عرض" data-target="#exampleModal" href="{{ route('maintenance_orders.show',$req->id) }}" class="btn btn-success btn-sm">
                                             <i class="fa fa-eye" aria-hidden="true"></i> 
                                             {{-- عرض --}}
                                         </a>

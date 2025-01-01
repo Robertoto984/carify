@@ -48,6 +48,15 @@ class TrucksController extends Controller
         return view('trucks.create', compact('colors', 'fuelTypes','drivers'));
     }
 
+    public function show($id)
+    {
+        $row = Truck::findOrFail($id);
+        $colors = Color::values();
+        $fuelTypes = FuelTypes::values();
+        return response()->json([
+            'html' => view('trucks.show', ['row' => $row,'colors'=>$colors,'fuelTypes'=>$fuelTypes])->render(),
+        ]);
+    }
     
     public function edit($id)
     {
