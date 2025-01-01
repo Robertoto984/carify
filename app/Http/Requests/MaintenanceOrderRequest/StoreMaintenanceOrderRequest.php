@@ -23,6 +23,7 @@ class StoreMaintenanceOrderRequest extends FormRequest
             'notes.*' => 'nullable',
             'odometer_number.*' => 'required',
             'total.*' => 'required',
+            
             'procedure_id.*' => 'required',
             'product_id.*' => 'required',
             'unit_price.*' => 'required',

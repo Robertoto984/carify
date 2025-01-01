@@ -10,6 +10,7 @@ class StoreMaintenanceRequestService
 {
     public function store(array $orders)
     {
+        
         DB::beginTransaction();
         try {
             foreach ($orders['number'] as $key => $value) {
@@ -27,14 +28,14 @@ class StoreMaintenanceRequestService
             }
 
             if (isset($orders['product_id']) && is_array($orders['product_id'])) {
-                foreach ($orders['product_id'] as $prod) {
+                foreach ($orders['product_id'] as $k=>$prod) {
                     DB::table('request_product')->insert([
                         'request_id' => $row->id,
-                        'procedure_id' => $orders['procedure_id'][$key],
+                        'procedure_id' => $orders['procedure_id'][$k],
                         'product_id' => $prod,
-                        'quantity' => $orders['quantity'][$key],
-                        'unit_price' => $orders['unit_price'][$key],
-                        'total_price' => $orders['total_price'][$key],
+                        'quantity' => $orders['quantity'][$k],
+                        'unit_price' => $orders['unit_price'][$k],
+                        'total_price' => $orders['total_price'][$k],
                         'created_at' => Carbon::now(),
                     ]);
                 }
@@ -42,6 +43,7 @@ class StoreMaintenanceRequestService
 
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
             throw $e;
         }

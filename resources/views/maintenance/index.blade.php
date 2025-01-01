@@ -81,14 +81,15 @@
                                         {{ $type->updated_at_formatted->format('H:i') }}
                                     </td>
 
-                                      @can('update',$types)
                         
                                     <td>
+                                        @can('update',$type)
+                                            
                                         <a id="modal" type="button" data-toggle="modal" title="تعديل" data-target="#exampleModal" href="{{ route('maintenance.edit',$type->id) }}" class="btn btn-primary btn-sm">
                                             <i class="fa fa-edit"></i> 
                                         </a>
                                        @endcan
-                                        @can('delete',$types)
+                                        @can('delete',$type)
                                         <a href="{{route('maintenance.delete', $type->id)}}" title="حذف" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="{{$type->id}}">
                                             <i class="fa fa-trash"></i> حذف
                                         </a>

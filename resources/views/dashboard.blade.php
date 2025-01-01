@@ -80,6 +80,7 @@
       $('.select2').select2(
       {
         theme: 'bootstrap4',
+        
       });
       $('.select2-multi').select2(
       {

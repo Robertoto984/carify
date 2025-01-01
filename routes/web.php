@@ -77,6 +77,11 @@ Route::group(['middleware' => 'redirect'], function () {
         Route::post('store', 'store')->name('maintenance_orders.store');
         Route::get('edit/{id}', 'edit')->name('maintenance_orders.edit');
         Route::post('update/{id}', 'update')->name('maintenance_orders.update');
+        Route::delete('bulk-delete', 'MultiDelete')->name('maintenance_orders.bulk-delete');
+        Route::delete('delete/{id}', 'destroy')->name('maintenance_orders.delete');
+        Route::get('import_form', 'ImportForm')->name('maintenance_orders.import_form');
+        Route::get('export', 'export')->name('maintenance_orders.export');
+        Route::post('import', 'import')->name('maintenance_orders.import');
     });
 
     Route::prefix('supplier')->controller(SupplierController::class)->group(function () {

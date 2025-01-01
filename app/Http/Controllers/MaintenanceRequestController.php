@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Truck;
-use App\Models\Driver;
-use App\Models\Product;
-use App\Traits\CommandNumGen;
 use App\Enums\MaintenanceTypes;
-use Illuminate\Support\Facades\Log;
-use App\Models\MaintenanceTypes as ModelsMaintenanceTypes;
-use App\Services\MaintenanceRequest\StoreMaintenanceRequestService;
+use App\Exports\MaintenanceRequestExport;
 use App\Http\Requests\MaintenanceOrderRequest\StoreMaintenanceOrderRequest;
 use App\Http\Requests\MaintenanceOrderRequest\UpdateMaintenanceOrderRequest;
+use App\Imports\MaintenanceRequestImport;
+use App\Models\Driver;
 use App\Models\MaintenanceRequest;
+use App\Models\MaintenanceTypes as ModelsMaintenanceTypes;
+use App\Models\Product;
+use App\Models\Truck;
+use App\Services\MaintenanceRequest\StoreMaintenanceRequestService;
 use App\Services\MaintenanceRequest\UpdateMaintenanceRequestService;
+use App\Traits\CommandNumGen;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MaintenanceRequestController extends Controller
 {
@@ -76,6 +81,10 @@ class MaintenanceRequestController extends Controller
 
     public function edit($id)
     {
+        $m = new MaintenanceRequest();
+        if (request()->user()->cannot('update', $m)) {
+            abort(403);
+        }
         $row = MaintenanceRequest::with([
             'product' => function ($query) {
                 $query->withPivot('procedure_id', 'quantity', 'unit_price', 'total_price');
@@ -103,6 +112,10 @@ class MaintenanceRequestController extends Controller
     public function update(UpdateMaintenanceOrderRequest $request, $id)
     {
         try {
+            $m = new MaintenanceRequest();
+            if (request()->user()->cannot('update', $m)) {
+                abort(403);
+            }
             $data = $request->validated();
             $this->updateMaintenanceRequest->update($data, $id);
             return response()->json([
@@ -117,5 +130,70 @@ class MaintenanceRequestController extends Controller
                 'redirect' => route('maintenance_orders.index')
             ]);
         }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $m = new MaintenanceRequest();
+            if (request()->user()->cannot('delete', $m)) {
+                abort(403);
+            }
+            MaintenanceRequest::where('id', $id)->delete();
+            DB::table('request_product')->where('request_id', $id)->delete();
+
+            return response()
+                ->json(['message' => 'تم حذف الطلبات بنجاح', 'redirect' => route('maintenance_orders.index')]);
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function MultiDelete(Request $request)
+    {
+        
+        try {
+            if (request()->user()->cannot('MultiDelete', MaintenanceRequest::class)) {
+                abort(403);
+            }
+            DB::table('request_product')->whereIn('request_id', (array) $request['ids'])->delete();
+            MaintenanceRequest::whereIn('id', (array) $request['ids'])->delete();
+            return response()
+                ->json(['message' => 'تم حذف الطلبات بنجاح', 'redirect' => route('maintenance_orders.index')]);
+
+        } catch (\Exception $e) {
+            
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function ImportForm()
+    {
+        return response()->json([
+            'html' => view('maintenance_orders.import')->render(),
+        ]);
+    }
+
+    public function export() 
+    {
+        return Excel::download(new MaintenanceRequestExport, 'طلبات الصيانه.xlsx');
+    }
+
+    public function import(Request $request) 
+    {
+        try{
+            $request->validate([
+                'file' => 'required|max:2048',
+            ]);
+      
+            Excel::import(new MaintenanceRequestImport, $request->file('file'));
+            
+         
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', $e->getMessage());
+
+        }
+        
     }
 }

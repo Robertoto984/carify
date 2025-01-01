@@ -3,10 +3,12 @@ var count=0;
 $(document).on('click','#add-form-btn',function(){
     
     var lastRepeatingGroup = $('.vehicle-form').last();
+   
     lastRepeatingGroup.clone().insertAfter(lastRepeatingGroup);
         var $originalSelect = $(lastRepeatingGroup).find('.selectpicker');
-        $originalSelect.next().addClass('d-none')
-        $originalSelect.selectpicker('render');
+        // $originalSelect.next().addClass('d-none')
+        $originalSelect.next().selectpicker('render');
+
         reorderForms()
      checkDeleteButtonVisibility();
      count++
@@ -24,12 +26,7 @@ function createDive(){
      checkDeleteButtonVisibility();
      count++
 }
-function myFunction() {
-    let num = document.getElementsByName("howmany")[0].value;
-    while (num-- > 0) {
-      subFunction();
-    }
-}
+
 $(document).on('click', '.delete-form-btn', function () {
     $(this).closest('.vehicle-form').remove();
     reorderForms();
@@ -53,7 +50,7 @@ function reorderForms() {
 let order_number1 = $(document).find('.card-order input.number:first').val();
 function reorderForms1() {
     // Reorder the number inputs after deletion
-    let value = order_number;
+    let value = order_number1;
     let number = Number( value.replace(/\D/g, '') );
     let perfix = value.replace(number, '');
 

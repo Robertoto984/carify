@@ -129,21 +129,21 @@ class MovementCommandController extends Controller
         }
     }
 
-    public function MultiDelete(Request $request)
-    {
-        try {
-            if (request()->user()->cannot('MultiDelete', MovementCommand::class)) {
-                abort(403);
-            }
+    // public function MultiDelete(Request $request)
+    // {
+    //     try {
+    //         if (request()->user()->cannot('MultiDelete', MovementCommand::class)) {
+    //             abort(403);
+    //         }
 
-            MovementCommand::whereIn('id', (array) $request['ids'])->delete();
-            DB::table('movement_escorts')->whereIn('mov_command_id', (array) $request['ids'])->delete();
-            return response()
-                ->json(['message' => 'تم حذف الحركات بنجاح', 'redirect' => route('commands.index')]);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
-    }
+    //         MovementCommand::whereIn('id', (array) $request['ids'])->delete();
+    //         DB::table('movement_escorts')->whereIn('mov_command_id', (array) $request['ids'])->delete();
+    //         return response()
+    //             ->json(['message' => 'تم حذف الحركات بنجاح', 'redirect' => route('commands.index')]);
+    //     } catch (\Exception $e) {
+    //         return redirect()->back()->with('error', $e->getMessage());
+    //     }
+    // }
 
     public function ImportForm()
     {

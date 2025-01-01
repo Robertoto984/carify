@@ -21,22 +21,40 @@
           <i class="fe fe-truck fe-16"></i>
           <span class="ml-3 item-main-text">المركبات</span><span class="sr-only">(current)</span>
         </a>
-        <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == ('trucks' || 'commands') ? 'show':''}}" id="vehicles">
+        <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == ('trucks') ? 'show':''}}" id="vehicles">
           @can('index',\App\Models\Truck::class)
 
           <li class="nav-item active">
             <a class="nav-link pl-3" href="{{route('trucks.index')}}"><span class="ml-1 item-text">قائمة المركبات</span></a>
           </li>
           @endcan
-          @can('index',\App\Models\MovementCommand::class)
-
+          @can('create',App\Models\Truck::class)
           <li class="nav-item">
-            <a class="nav-link pl-3" href="{{route('commands.index')}}"><span class="ml-1 item-text">أمر حركة</span></a>
+            <a class="nav-link pl-3" href="{{route('trucks.create')}}"><span class="ml-1 item-text">بطاقة مركبة</span></a>
           </li>
           @endcan
+        
           <li class="nav-item">
             <a class="nav-link pl-3" href=""><span class="ml-1 item-text">تعبئة وقود</span></a>
           </li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item dropdown">
+        <a href="#commands" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link" style="{{ request()->segment(1) == 'commands' ? 'color:#1b68ff':''}}">
+          <i class="fe fe-truck fe-16"></i>
+          <span class="ml-3 item-main-text">أمر الحركة</span><span class="sr-only">(current)</span>
+        </a>
+        <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == ('commands') ? 'show':''}}" id="commands">
+        
+          @can('index',\App\Models\MovementCommand::class)
+
+          <li class="nav-item">
+            <a class="nav-link pl-3" href="{{route('commands.index')}}"><span class="ml-1 item-text"> قائمة أوامر الحركة</span></a>
+          </li>
+          @endcan
+         
         </ul>
       </li>
     </ul>
@@ -53,6 +71,11 @@
             <a class="nav-link pl-3" href="{{route('drivers.index')}}"><span class="ml-1 item-text">قائمة السائقين</span></a>
           </li>
           @endcan
+          @can('create',\App\Models\Driver::class)
+          <li class="nav-item">
+            <a class="nav-link pl-3" href="{{route('drivers.create')}}"><span class="ml-1 item-text">بطاقة سائق</span></a>
+          </li>i
+          @endcan
         </ul>
       </li>
     </ul>
@@ -67,6 +90,11 @@
 
           <li class="nav-item active">
             <a class="nav-link pl-3" href="{{route('escorts.index')}}"><span class="ml-1 item-text">قائمة المرافقين</span></a>
+          </li>
+          @endcan
+          @can('create',\App\Models\Escort::class)
+          <li class="nav-item">
+            <a class="nav-link pl-3" href="{{ route('escorts.create') }}"><span class="ml-1 item-text">بطاقة مرافق</span></a>
           </li>
           @endcan
         </ul>
@@ -85,46 +113,15 @@
             <a class="nav-link pl-3" href="{{ route('users.index') }}"><span class="ml-1 item-text">قائمة المستخدمين</span></a>
           </li>
           @endcan
-          
-        </ul>
-      </li>
-    </ul>
-    <ul class="navbar-nav flex-fill w-100 mb-2">
-      <li class="nav-item dropdown">
-        <a href="#cards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link" style="{{ request()->segment(1) ==  ('cards' || 'trucks' || 'drivers' || 'users') ? 'color:#1b68ff':''}}">
-          <i class="fe fe-plus-square fe-16"></i>
-          <span class="ml-3 item-main-text">البطاقات</span><span class="sr-only">(current)</span>
-        </a>
-        <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == ('cards' || 'trucks' || 'drivers' || 'users') ? 'show':''}}" id="cards">
-          <li class="nav-item">
-            <a class="nav-link pl-3" href="{{route('cards.index')}}"><span class="ml-1 item-text">قائمة البطاقات</span></a>
-          </li>
-          @can('create',App\Models\Truck::class)
-          <li class="nav-item">
-            <a class="nav-link pl-3" href="{{route('trucks.create')}}"><span class="ml-1 item-text">بطاقة مركبة</span></a>
-          </li>
-          @endcan
-          @can('create',\App\Models\Driver::class)
-          <li class="nav-item">
-            <a class="nav-link pl-3" href="{{route('drivers.create')}}"><span class="ml-1 item-text">بطاقة سائق</span></a>
-          </li>i
-          @endcan
-          @can('create',\App\Models\Escort::class)
-          <li class="nav-item">
-            <a class="nav-link pl-3" href=""><span class="ml-1 item-text">بطاقة مرافق</span></a>
-          </li>
-          @endcan
           @can('create',\App\Models\User::class)
           <li class="nav-item">
             <a class="nav-link pl-3" href="{{ route('users.create') }}"><span class="ml-1 item-text">بطاقة مستخدم</span></a>
           </li>
           @endcan
-          <li class="nav-item">
-            <a class="nav-link pl-3" href=""><span class="ml-1 item-text">بطاقة تسليم مركبة</span></a>
-          </li>
         </ul>
       </li>
     </ul>
+   
     <ul class="navbar-nav flex-fill w-100 mb-2">
       <li class="nav-item dropdown">
         <a href="#maintenance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link" style="{{ request()->segment(1) ==  ('maintenance_orders' || 'maintenance' || 'products') ? 'color:#1b68ff':''}}">
@@ -132,7 +129,7 @@
           <span class="ml-3 item-main-text">الصيانة</span><span class="sr-only">(current)</span>
         </a>
         <ul class="collapse list-unstyled pl-4 w-100 {{ request()->segment(1) == ('maintenance_orders' || 'maintenance' || 'products') ? 'show':''}}" id="maintenance">
-          @can('index',\App\Models\MaintenanceOrder::class)
+          @can('index',\App\Models\MaintenanceRequest::class)
           <li class="nav-item">
           <a class="nav-link pl-3" href="{{route('maintenance_orders.index')}}"><span class="ml-1 item-text">طلبات الصيانة</span></a>
           </li>

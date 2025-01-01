@@ -74,9 +74,9 @@
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
                                     <label for="truck_id">رقم السيارة</label>
-                                    <select name="truck_id[]" id="truck_id" class="selectpicker form-control"
-                                        data-live-search="true">
-                                        <option value="" disabled selected>اختر السيارة</option>
+                                    <select name="truck_id[]" id="truck_id" multiple class="selectpicker show-tick form-control"
+                                        >
+                                        <option value="" disabled>اختر السيارة</option>
                                         @foreach ($trucks as $truck)
                                         <option value="{{ $truck->id }}"> {{ $truck->plate_number }}</option>
                                         @endforeach
@@ -84,6 +84,7 @@
                                     <span class="text-danger" id="truck_id-error"></span>
                                 </div>
                             </div>
+                        
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
                                     <label for="odometer_number">رقم العداد</label>
@@ -100,10 +101,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-order" style="background-color: rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.125);">
+                        <div class="card-order" onkeyup="createDive()" style="background-color: rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.125);">
                             <div class="row" style="margin: 10px">
                                 <div class="form-group col-md-1 mb-3">
-                                    <input class="form-control" id="" name="[]" value="1" placeholder="الرقم" autocomplete="true">
+                                    <input class="form-control" id="" name="[]" value="1" placeholder="الرقم" autocomplete="true" readonly>
 
                                     <span class="text-danger" id="-error"></span>
                                 </div>
@@ -126,20 +127,19 @@
                                     <span class="text-danger" id="product_id-error"></span>
                                 </div>
                                 <div class="form-group col-md-2 mb-3">
-                                    <input class="form-control" id="quantity" name="quantity[]" placeholder="الكمية" autocomplete="true">
+                                    <input type="number" class="form-control" id="quantity" name="quantity[]" placeholder="الكمية" autocomplete="true">
 
                                     <span class="text-danger" id="quantity-error"></span>
                                 </div>
                                 <div class="form-group col-md-2 mb-3">
-                                    <input class="form-control" id="unit_price" name="unit_price[]" placeholder="السعر" autocomplete="true">
+                                    <input type="number" class="form-control" id="unit_price" name="unit_price[]" placeholder="السعر" autocomplete="true">
                                     <span class="text-danger" id="unit_price-error"></span>
                                 </div>
                                 <div class="form-group col-md-2 mb-3">
-                                    <input class="form-control" id="total_price" name="total_price[]" placeholder="الإجمالي" autocomplete="true">
+                                    <input type="number" class="form-control" id="total_price" name="total_price[]" placeholder="الإجمالي" autocomplete="true">
                                     <span class="text-danger" id="total_price-error"></span>
                                 </div>
                             </div>
-                            <button type="button" id="add-new"></button>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6 mb-3">
@@ -149,7 +149,7 @@
                             </div>
                             <div class="form-group col-md-6 mb-3">
                                 <label for="total">الإجمالي</label>
-                                <input class="form-control" id="total" name="total[]" />
+                                <input type="number" class="form-control" id="total" name="total[]" />
                                 <span class="text-danger" id="total-error"></span>
                             </div>
                         </div>

@@ -6,7 +6,7 @@ use App\Models\MaintenanceTypes;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class MaintenanceTypePolicy
+class MaintenanceTypesPolicy
 {
     use HandlesAuthorization;
 

@@ -58,25 +58,15 @@
                                     <th><input type="checkbox"  class="checkbox"  id='check_all'/></th>
                                     <th>#</th>
                                     <th>النوع</th>
-                                    <th>الصانع</th>
-                                    <th>السنة</th>
-                                    <th>التسجيل</th>
-                                    <th>الموديل</th>
+                                 
                                     <th>رقم اللوحة</th>
-                                    <th>رقم الشاسيه</th>
-                                    <th>رقم المحرك</th>
-                                    <th>رقم رخصة السير</th>
+                                 
                                     <th>تاريخ الترسيم</th>
                                     <th>اللون</th>
-                                    <th>نوع الوقود</th>
-                                    <th>عدد الركاب</th>
-                                    <th>الوزن القائم</th>
-                                    <th>الوزن الفارغ</th>
+                                  
                                     <th>الحمولة</th>
                                     <th>رقم العداد</th>
-                                    <th>الحالة الفنية</th>
-                                    <th>الحالة القانونية</th>
-                                    <th>توصيفات القطع</th>
+                                  
                                     <th>السائق</th>
                                     <th></th>
                                 </tr>
@@ -93,25 +83,13 @@
                                         <td><input type="checkbox" name="ids[]" value="{{ $truck->id }}" id="check"/></td>
                                         <td>{{ $truck->id }}</td>
                                         <td>{{ $truck->type }}</td>
-                                        <td>{{ $truck->manufacturer }}</td>
-                                        <td>{{ $truck->year }}</td>
-                                        <td>{{ $truck->register }}</td>
-                                        <td>{{ $truck->model }}</td>
                                         <td>{{ $truck->plate_number }}</td>
-                                        <td>{{ $truck->chassis_number }}</td>
-                                        <td>{{ $truck->engine_number }}</td>
-                                        <td>{{ $truck->traffic_license_number }}</td>
                                         <td>{{ $truck->demarcation_date }}</td>
                                         <td>{{ $truck->color }}</td>
-                                        <td>{{ $truck->fuel_type }}</td>
-                                        <td>{{ $truck->passengers_number }}</td>
-                                        <td>{{ $truck->gross_weight }}</td>
-                                        <td>{{ $truck->empty_weight }}</td>
+                                       
                                         <td>{{ $truck->load }}</td>
                                         <td>{{ $truck->kilometer_number }}</td>
-                                        <td>{{ $truck->technical_status }}</td>
-                                        <td>{{ $truck->legal_status }}</td>
-                                        <td class="td" >{{ $truck->parts_description }}</td>
+                                      
                                         <td class="td">
                                             @php
                                                 $drivers = $truck->truckDeliverCards->map(function($deliverCard) {
@@ -132,7 +110,7 @@
                                                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                   العمليات
                                                 </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style=" max-height: 280px; overflow-y: auto;">
                                                  
 
                                                   @can('update',$truck)
@@ -155,6 +133,9 @@
                                                   @can('create',\App\Models\MovementCommand::class)
                                                   <a href="{{route('commands.create',['truck_id'=>$truck->id,'kilometer_number'=>$truck->kilometer_number])}}" class="dropdown-item "><i class="fa fa-plus"></i> أمر حركة</a>
                                                   @endcan
+                                                  <a id="modal" type="button" data-toggle="modal" title="عرض" data-target="#exampleModal" href="" class="dropdown-item "><i class="fa fa-eye" aria-hidden="true"></i> عرض</a>
+                                                    
+                                                
                                                 </div>
                                               </div>
                                            

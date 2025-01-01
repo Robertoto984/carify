@@ -11,16 +11,14 @@
             <a href="{{route('maintenance_orders.create')}}" class="btn rounded-btn btn-primary">+ طلب صيانة</a>
              @endcan
           @can('MultiDelete',\App\Models\MaintenanceRequest::class)
-            <a id="bulkDeleteBtn" href="" class="btn rounded-btn btn-danger ml-auto">
-                حذف المحدد
-            </a>
+            <a id="bulkDeleteBtn" href="{{ route('maintenance_orders.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف المحدد </a>
              @endcan
         <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             المزيد
         </button>
         <div class="dropdown-menu" aria-labelledby="actionMenuButton">
-            <a class="dropdown-item more" href=""><i class="fa fa-download mr-2"></i>تصدير</a>
-            <a class="dropdown-item more" href="" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
+            <a class="dropdown-item more" href="{{ route('maintenance_orders.export') }}"><i class="fa fa-download mr-2"></i>تصدير</a>
+            <a class="dropdown-item more" href="{{ route('maintenance_orders.import_form') }}" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
         </div>
     </div>
 </div>
@@ -53,7 +51,7 @@
                     <table class="table datatables" id="dataTable-1">
                         <thead>
                             <tr>
-                                <th><input type="checkbox" class="checkbox" id='check_all' /></th>
+                                <th><input type="checkbox"  class="checkbox" id='check_all' /></th>
                                 <th>#</th>
                                 <th>الرقم</th>
                                 <th>النوع</th>
@@ -68,7 +66,7 @@
                         <tbody>
                             @foreach($requests as $req)
                                 <tr>
-                                    <td><input type="checkbox" name="ids[]" value="" id="check" /></td>
+                                    <td><input type="checkbox" name="ids[]" value="{{ $req->id }}" id="check" /></td>
                                     <td>{{ $req->id }}</td>
                                     <td>{{ $req->number }}</td>
                                     <td>{{ $req->type }}</td>
@@ -79,18 +77,24 @@
                                     <td>{{ $req->created_by }}</td>
                                     
                                     <td>
+                                        
                                         <a id="modal" type="button" data-toggle="modal" title="عرض" data-target="#exampleModal" href="" class="btn btn-success btn-sm">
                                             <i class="fa fa-eye" aria-hidden="true"></i> 
                                             {{-- عرض --}}
                                         </a>
+                                       
+                                        @can('update',$req)
                                         <a id="modal" type="button" data-toggle="modal" data-target="#exampleModal" title="تعديل" href="{{ route('maintenance_orders.edit',$req->id) }}" class="btn btn-primary btn-sm" >
                                             <i class="fa fa-edit"></i> 
                                             {{-- تعديل --}}
                                         </a>
-                                        <a href="" id="destroy" title="حذف" class="btn btn-danger btn-sm delete-driver" data-id="">
+                                        @endcan
+                                        @can('delete',$req)
+                                        <a href="{{ route('maintenance_orders.delete',$req->id) }}" id="destroy" title="حذف" class="btn btn-danger btn-sm delete-driver" data-id="">
                                             <i class="fa fa-trash"></i>
                                             {{-- حذف --}}
                                         </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

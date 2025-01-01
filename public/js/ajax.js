@@ -99,7 +99,7 @@ $(document).on('click', '#bulkDeleteBtn', function (e) {
                             position: 'top-start',
 
                         }).then(function() {
-                            window.location = response.redirect;
+                          return  window.location = response.redirect;
                         });
                         
 
