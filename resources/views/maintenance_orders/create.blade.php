@@ -1,4 +1,5 @@
 @extends('dashboard')
+
 @section('content')
 
 <div class="col-12">
@@ -51,7 +52,7 @@
                             </div>
                             <div class="form-group col-md-4 mb-3">
                                 <label for="type">نوع الصيانة</label>
-                                <select class="form-control" id="type" name="type[]">
+                                <select class=" form-control" id="type" name="type[]">
                                     <option value="" disabled selected>اختر النوع</option>
                                     @foreach($order_types as $ord_type)
                                     <option value="{{ $ord_type }}">{{ $ord_type}}</option>
@@ -63,7 +64,7 @@
                         <div class="row">
                             <div class="form-group col-md-3 mb-3">
                                 <label for="driver_id">السائق</label>
-                                <select class="form-control" id="driver_id" name="driver_id[]">
+                                <select class=" form-control" id="driver_id" name="driver_id[]">
                                     <option value="" disabled selected>اختر السائق</option>
                                     @foreach($drivers as $driver)
                                     <option value="{{ $driver->id }}">{{ $driver->first_name . ' '. $driver->last_name}}</option>
@@ -74,7 +75,7 @@
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
                                     <label for="truck_id">رقم السيارة</label>
-                                    <select name="truck_id[]" id="truck_id" multiple class="selectpicker show-tick form-control"
+                                    <select name="truck_id[]" id="truck_id"  class=" show-tick form-control"
                                         >
                                         <option value="" disabled>اختر السيارة</option>
                                         @foreach ($trucks as $truck)
@@ -118,7 +119,7 @@
                                     <span class="text-danger" id="procedure_id-error"></span>
                                 </div>
                                 <div class="form-group col-md-2 mb-3">
-                                    <select class="form-control" id="product_id" name="product_id[]">
+                                    <select class=" form-control" id="product_id" name="product_id[]">
                                         <option value="" disabled selected>اختر المادة</option>
                                         @foreach($products as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -153,7 +154,8 @@
                                 <span class="text-danger" id="total-error"></span>
                             </div>
                         </div>
-
+                      
+                        
                         <div class="col mr-auto mb-5 mt-5">
                             <div class="ml-auto">
                             </div>
@@ -175,8 +177,16 @@
     </div>
 </div>
 
+
+<!-- Multi-Select Dropdown -->
+
+
+
+
+
 @endsection
 
 @section('scripts')
 <script src="{{ asset('js/form-repeater.js') }}"></script>
+
 @endsection

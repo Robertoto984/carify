@@ -51,7 +51,7 @@
                 <div class="col-md-3">
                     <div class="form-group mb-3">
                         <label for="truck_id">رقم السيارة</label>
-                        <select name="truck_id" id="truck_id" class=" form-control" data-live-search="true">
+                        <select name="truck_id" id="truck_id" class="form-control" >
                             <option value="" disabled selected>اختر السيارة</option>
                             @foreach($trucks as $truck)
                             <option value="{{ $truck->id }}" {{ $truck->id == $row->truck_id ? 'selected' : '' }}>
@@ -103,7 +103,7 @@
                         </div>
 
                         <div class="form-group col-md-2 mb-3">
-                            <select class="form-control" name="product_id[]">
+                            <select class=" form-control" name="product_id[]">
                                 <option value="" disabled selected>اختر المادة</option>
                                 @foreach($products as $item)
                                 <option value="{{ $item->id }}" {{ $item->id == $product->id ? 'selected' : '' }}>
@@ -170,9 +170,7 @@
   var after= lastRepeatingGroup.clone().insertAfter(lastRepeatingGroup);
   $(after).find('input').val('')
   $(after).find('select option:selected').removeAttr('selected');
-       var $originalSelect = $(lastRepeatingGroup).find('.selectpicker');
-       $originalSelect.next().addClass('d-none')
-       $originalSelect.selectpicker('render');
+       
        reorderForms1()
     count++
     })

@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group col-md-4 mb-3">
                     <label for="type">نوع الصيانة</label>
-                    <select class="form-control" id="type" name="type" readonly>
+                    <select class=" form-control" id="type" name="type" readonly>
                         <option value="" disabled selected>اختر النوع</option>
                         @foreach($types as $type)
                         <option value="{{ $type }}" {{ $row->type == $type ? 'selected' : '' }}>{{ $type }}</option>
@@ -51,7 +51,7 @@
                 <div class="col-md-3">
                     <div class="form-group mb-3">
                         <label for="truck_id">رقم السيارة</label>
-                        <select name="truck_id" id="truck_id" class=" form-control" data-live-search="true" readonly>
+                        <select name="truck_id" id="truck_id" class=" form-control"  readonly>
                             <option value="" disabled selected>اختر السيارة</option>
                             @foreach($trucks as $truck)
                             <option value="{{ $truck->id }}" {{ $truck->id == $row->truck_id ? 'selected' : '' }}>
@@ -103,7 +103,7 @@
                         </div>
 
                         <div class="form-group col-md-2 mb-3">
-                            <select class="form-control" name="product_id[]" readonly>
+                            <select class=" form-control" name="product_id[]" readonly>
                                 <option value="" disabled selected>اختر المادة</option>
                                 @foreach($products as $item)
                                 <option value="{{ $item->id }}" {{ $item->id == $product->id ? 'selected' : '' }}>

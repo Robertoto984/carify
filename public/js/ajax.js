@@ -121,6 +121,7 @@ $(document).on('click', '#modal', function (e) {
         type: "GET",
         dataType: "json",
         success: function (response) {
+            
             $('#load-form').html(' ')
             $('#load-form').append(response.html);
 
@@ -171,7 +172,7 @@ $('body').on('submit', 'form.submit-form', function (e) {
             $.each(errors, function (key, value) {
                 for(let i =0; i<=100; i++)
                 {
-                    $('#' + key.replace(`.${i}`,'') + '-error').text(value[0])
+                   $('#' + key.replace(`.${i}`,'') + '-error').text(value[0])
                 }
             });
         },

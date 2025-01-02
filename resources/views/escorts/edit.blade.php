@@ -99,26 +99,3 @@
         </div>
     </div>
 </form>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-<script>
-          $('.drgpicker').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            minYear: 2000,
-            maxYear: parseInt(moment().format('YYYY'), 10),
-            locale: {
-                format: 'YYYY-MM-DD' // Format to display
-            }
-        }, function(start, end, label) {
-            // Optional: You can handle any actions after a date is selected
-            if (!start.isValid()) {
-                alert("Please select a valid date!");
-            } else {
-                var years = moment().diff(start, 'years');
-                console.log("You are " + years + " years old!");
-            }
-        });
-</script>

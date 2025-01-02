@@ -4,16 +4,37 @@ $(document).on('click','#add-form-btn',function(){
     
     var lastRepeatingGroup = $('.vehicle-form').last();
    
-    lastRepeatingGroup.clone().insertAfter(lastRepeatingGroup);
-        var $originalSelect = $(lastRepeatingGroup).find('.selectpicker');
+   var dd= lastRepeatingGroup.clone().insertAfter(lastRepeatingGroup);
+        // var $originalSelect = $(lastRepeatingGroup).find('.selectpicker');
         // $originalSelect.next().addClass('d-none')
-        $originalSelect.next().selectpicker('render');
-
+        // $originalSelect.selectpicker('refresh');
+        $(dd).find('input').val(' ')
+        $(dd).find('textarea').text(' ')
+        $(dd).find('select option:selected').removeAttr('selected');
+        $('.select2-container').remove();
+        $('.filter-form').select2({
+          placeholder: "Placeholder text",
+          allowClear: true,
+          multiple:true
+        });
+        $('.select2-container').css('width','100%');
+     
+       
         reorderForms()
      checkDeleteButtonVisibility();
      count++
 
 })
+$(document).ready(function(){
+    // $(document).find('select').select2()
+    $('.filter-form').select2({
+        theme:'bootstrap4',
+        placeholder: "Placeholder text",
+        allowClear: true,
+        multiple:true
+    });
+})
+
 
 function createDive(){
    

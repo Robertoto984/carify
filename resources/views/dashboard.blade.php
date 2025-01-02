@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="{{asset('css/custom.css')}}">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
-
+@yield('style')
 </head>
 
 <body class="vertical  light rtl ">
@@ -79,13 +79,13 @@
     <script>
       $('.select2').select2(
       {
-        theme: 'bootstrap4',
+        theme: 'bootstrap5',
         
       });
       $('.select2-multi').select2(
       {
         multiple: true,
-        theme: 'bootstrap4',
+        theme: 'bootstrap5',
       });
       $('.drgpicker').daterangepicker(
       {
